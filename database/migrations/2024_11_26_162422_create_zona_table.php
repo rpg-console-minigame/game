@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean('down_door');
             $table->boolean('left_door');
             $table->boolean('right_door');
+            $table->integer('coord_x');
+            $table->integer('coord_y');
             $table->timestamps();
         });
     }

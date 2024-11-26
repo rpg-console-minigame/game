@@ -20,7 +20,9 @@ class Zona extends Model
         'up_door',
         'down_door',
         'left_door',
-        'right_door'
+        'right_door',
+        'coord_x',
+        'coord_y'
     ];
     public function Zona(){
         return $this->hasOne('zona');

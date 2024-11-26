@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('objeto', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('zona_ID');
+            $table->unsignedBigInteger('zona_ID')->nullable();
             $table->foreign('zona_ID')->references('id')->on('zona');
             $table->string('nombre');
             $table->integer('durabilidad');
