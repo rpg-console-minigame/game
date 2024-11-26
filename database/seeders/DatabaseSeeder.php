@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Zona;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,10 +16,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $contador = 0;
+        for ($x = 0; $x <= 2; $x++) {
+            for ($y = 0; $y <= 2; $y++) {
+                $contador++;
+                Zona::factory()->create([
+                    'nombre' => 'Sala ' . $contador,
+                    'descripcion' => 'Sala ' . $contador,
+                    'down_door' => true,
+                    'left_door' => true,
+                    'right_door' => true,
+                    'up_door' => true,
+                    'coord_x' => $x,
+                    'coord_y' => $y,
+                ]);
+            }
+        }
     }
 }
