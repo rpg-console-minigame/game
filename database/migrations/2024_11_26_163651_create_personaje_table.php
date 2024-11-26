@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('HP');
-            $table->integer('Max HP');
+            $table->integer('Max_HP');
             $table->unsignedBigInteger('users_ID');
             $table->foreign('users_ID')->references('id')->on('users');
-            $table->integer('Dinero');
+            $table->integer('dinero');
             $table->unsignedBigInteger('zona_ID');
             $table->foreign('zona_ID')->references('id')->on('zona');
 

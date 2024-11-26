@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('zona_ID');
             $table->foreign('zona_ID')->references('id')->on('zona');
             $table->string('nombre');
+            $table->integer('durabilidad');
             $table->string('function_name');
             $table->timestamps();
         });
