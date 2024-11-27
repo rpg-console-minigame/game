@@ -19,3 +19,5 @@ Route::get('/map',  [MapController::class,'index']);
 Route::get('/map/create',  [MapController::class,'create'])->name('create');
 Route::get('/map/delete',  [MapController::class,'delete'])->name('delete');
 Route::get('/map/update',  [MapController::class,'update'])->name('update');
+Route::get('/register', function () {return view('/register');});
+Route::get('/login', function () {return view('/login');});
