@@ -15,21 +15,13 @@ class MapController extends Controller
         $zone = new  \App\Models\Zona;
         $zone->coord_x = request("coord_x");
         $zone->coord_y = request("coord_y");
-        // $zone->nombre = request("nombre");
-        // $zone->ruta_IMG = request("ruta_IMG");
-        // $zone->descripcion = request("descripcion");
-        // $zone->up_door = request("up_door");
-        // $zone->down_door = request("down_door");
-        // $zone->left_door = request("left_door");
-        // $zone->right_door = request("right_door");
-
-        $zone->nombre = "sala por form";
-        $zone->descripcion = "sala por form";
-        $zone->up_door = true;
-        $zone->down_door = true;
-        $zone->left_door = true;
-        $zone->right_door = true;
-
+        $zone->nombre = request("nombre");
+        $zone->ruta_IMG = request("ruta_IMG");
+        $zone->descripcion = request("descripcion");
+        $zone->up_door = request("up_door") ? 0 : 1;
+        $zone->down_door = request("down_door") ? 0 : 1;
+        $zone->left_door = request("left_door") ? 0 : 1;
+        $zone->right_door = request("right_door") ? 0 : 1;
         $zone->save();
         return redirect("/map")->with("success",true);
     }
@@ -37,6 +29,22 @@ class MapController extends Controller
         // borrar una entrada de la base de datos
         $zone = \App\Models\Zona::all()->where("coord_x", $request->coord_x)->where("coord_y", $request->coord_y)->first();
         $zone->delete();
+        return redirect("/map")->with("success",true);
+    }
+    function update(Request $request){
+        // actualizar una entrada de la base de datos
+        // dd($request);
+        $zone = \App\Models\Zona::all()->where("coord_x", $request->coord_x)->where("coord_y", $request->coord_y)->first();
+        $zone->coord_x = request("coord_x");
+        $zone->coord_y = request("coord_y");
+        $zone->nombre = request("nombre");
+        // $zone->ruta_IMG = request("ruta_IMG");
+        $zone->descripcion = request("descripcion");
+        $zone->up_door = request("up_door") ? 0 : 1;
+        $zone->down_door = request("down_door") ? 0 : 1;
+        $zone->left_door = request("left_door") ? 0 : 1;
+        $zone->right_door = request("right_door") ? 0 : 1;
+        $zone->save();
         return redirect("/map")->with("success",true);
     }
 }
