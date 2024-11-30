@@ -62,8 +62,8 @@
                         <div class="modal" id="modalEdit{{ $i }}-{{ $j }}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="{{ route('update') }}" method="GET">
-
+                                    <form action="{{ route('update') }}" method="POST">
+                                        @csrf
                                         <!-- Modal Header -->
                                         <div class="modal-header">
                                             <h4 class="modal-title">Modal Heading</h4>
@@ -96,70 +96,74 @@
                                             <input type="hidden" name="coord_x" value="{{ $i }}">
                                             <input type="hidden" name="coord_y" value="{{ $j }}">
                                             {{-- <a href="?coord_x={{$i}}&coord_y={{$j}}" class="btn btn-primary">Create</a> --}}
-                                            <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}"
-                                                class="btn btn-danger">Delete</a>
                                             <button type="submit" class="btn btn-primary">Update</button>
-                                        </div>
-
+                                    </form>
+                                    <form action="{{ route('delete') }}" method="POST">
+                                        <input type="hidden" name="coord_x" value="{{ $i }}">
+                                        <input type="hidden" name="coord_y" value="{{ $j }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                @elseif (
-                    $map->where('coord_x', $i + 1)->where('coord_y', $j)->count() == 1 ||
-                        $map->where('coord_x', $i - 1)->where('coord_y', $j)->count() == 1 ||
-                        $map->where('coord_x', $i)->where('coord_y', $j + 1)->count() == 1 ||
-                        $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
-                    <div class="col" style="height: 50px; width: 50px; background-color: green;">
-                        {{-- <a href="{{ route('create', ['coord_x' => $i, 'coord_y' => $j]) }}">Create</a> --}}
-                        <p type="button" data-toggle="modal"
-                            data-target="#modalCreate{{ $i }}-{{ $j }}">Create</p>
-                        <!-- The Modal -->
-                        <div class="modal" id="modalCreate{{ $i }}-{{ $j }}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="{{ route('create') }}" method="GET">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Modal Heading</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <input type="text" name="nombre" placeholder="Nombre">
-                                            {{-- <input type="text" name="ruta_IMG" placeholder="Ruta IMG"> --}}
-                                            <input type="text" name="descripcion" placeholder="Descripcion">
-                                            <label for="up_door">¿Muro arriba?</label>
-                                            <input type="checkbox" name="up_door" value="1">
-                                            <label for="down_door">¿Muro abajo?</label>
-                                            <input type="checkbox" name="down_door" value="1">
-                                            <label for="left_door">¿Muro a la izquierda?</label>
-                                            <input type="checkbox" name="left_door" value="1">
-                                            <label for="right_door">¿Muro a la derecha?</label>
-                                            <input type="checkbox" name="right_door" value="1">
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <input type="hidden" name="coord_x" value="{{ $i }}">
-                                            <input type="hidden" name="coord_y" value="{{ $j }}">
-                                            {{-- <a href="?coord_x={{$i}}&coord_y={{$j}}" class="btn btn-primary">Create</a> --}}
-                                            <button type="submit" class="btn btn-primary">Create</button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <div class="col" style="height: 50px; width: 50px; background-color: blue;"></div>
-                @endif
-            @endfor
         </div>
+    @elseif (
+        $map->where('coord_x', $i + 1)->where('coord_y', $j)->count() == 1 ||
+            $map->where('coord_x', $i - 1)->where('coord_y', $j)->count() == 1 ||
+            $map->where('coord_x', $i)->where('coord_y', $j + 1)->count() == 1 ||
+            $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
+        <div class="col" style="height: 50px; width: 50px; background-color: green;">
+            {{-- <a href="{{ route('create', ['coord_x' => $i, 'coord_y' => $j]) }}">Create</a> --}}
+            <p type="button" data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
+                Create</p>
+            <!-- The Modal -->
+            <div class="modal" id="modalCreate{{ $i }}-{{ $j }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="{{ route('create') }}" method="POST">
+                            @csrf
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modal Heading</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <input type="text" name="nombre" placeholder="Nombre">
+                                {{-- <input type="text" name="ruta_IMG" placeholder="Ruta IMG"> --}}
+                                <input type="text" name="descripcion" placeholder="Descripcion">
+                                <label for="up_door">¿Muro arriba?</label>
+                                <input type="checkbox" name="up_door" value="1">
+                                <label for="down_door">¿Muro abajo?</label>
+                                <input type="checkbox" name="down_door" value="1">
+                                <label for="left_door">¿Muro a la izquierda?</label>
+                                <input type="checkbox" name="left_door" value="1">
+                                <label for="right_door">¿Muro a la derecha?</label>
+                                <input type="checkbox" name="right_door" value="1">
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="hidden" name="coord_x" value="{{ $i }}">
+                                <input type="hidden" name="coord_y" value="{{ $j }}">
+                                {{-- <a href="?coord_x={{$i}}&coord_y={{$j}}" class="btn btn-primary">Create</a> --}}
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @else
+        <div class="col" style="height: 50px; width: 50px; background-color: blue;"></div>
+    @endif
+    @endfor
+    </div>
     @endfor
 </body>
 
