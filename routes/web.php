@@ -16,6 +16,6 @@ use App\Http\Controllers\MapController;
 
 Route::get('/', function () {return view('welcome');});
 Route::get('/map',  [MapController::class,'index']);
-Route::get('/map/create',  [MapController::class,'create'])->name('create');
-Route::get('/map/delete',  [MapController::class,'delete'])->name('delete');
-Route::get('/map/update',  [MapController::class,'update'])->name('update');
+Route::post('/map/create',  [MapController::class,'create'])->name('create');
+Route::post('/map/delete',  [MapController::class,'delete'])->name('delete');
+Route::post('/map/update',  [MapController::class,'update'])->name('update');
