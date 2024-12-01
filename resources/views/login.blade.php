@@ -62,7 +62,7 @@
     <div class=" border border-radius p-2 w-full max-w-max bg-dark">
         
         <div class=" d-flex justify-content-between align-items-center mb-3">
-            <h5 class="text-light">Registro</h5>
+            <h5 class="text-light">Incio de Sesión</h5>
             <div class="console-controls w-25 h-25 d-inline-block">
                 <span class="yellow w-0 h-0 d-inline-block"></span>
                 <span class="green w-0 h-0 d-inline-block"></span>
@@ -75,20 +75,14 @@
                 <span class="separar verde bg-transparent ">user@Name:~$</span>
                 <input type="text" class=" border border-0 grisClaro" placeholder="Username">
             </div>
-            <div class="separar border-0 bg-transparent mb-3">
-                <span class="separar verde bg-transparent">user@email:~$</span>
-                <input type="email" class="border border-0 grisClaro" placeholder="Email">
-            </div>
+            
             <div class="separar bg-transparent mb-3">
                 <span class="separar verde bg-transparent">user@password:~$</span>
                 <input type="password" class="border border-0 grisClaro" placeholder="Contraseña">
             </div>
-            <div class="separar bg-transparent mb-3">
-                <span class="separar verde bg-transparent">user@cpassword:~$</span>
-                <input type="password" class="border border-0 grisClaro" placeholder="Confirmar contraseña">
-            </div>
             
-            <button type="submit" class="btn btn-success w-100">Enviar</button>
+            
+            <button type="submit" class="btn btn-success w-100">Acceder</button>
         </form>
     </div>
 
