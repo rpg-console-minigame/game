@@ -70,15 +70,16 @@
             </div>
         </div>
 
-        <form>
+        <form action="{{ route('loginEnter') }}" method="POST">
+            @csrf
             <div class="separar bg-transparent mb-3">
                 <span class="separar verde bg-transparent ">user@Name:~$</span>
-                <input type="text" class=" border border-0 grisClaro" placeholder="Username">
+                <input type="text" class=" border border-0 grisClaro" placeholder="Username" name="name">
             </div>
             
             <div class="separar bg-transparent mb-3">
                 <span class="separar verde bg-transparent">user@password:~$</span>
-                <input type="password" class="border border-0 grisClaro" placeholder="Contraseña">
+                <input type="password" class="border border-0 grisClaro" placeholder="Contraseña" name="password">
             </div>
             
             

@@ -70,22 +70,23 @@
             </div>
         </div>
 
-        <form>
+        <form action="{{ route('registerEnter') }}" method="POST">
+            @csrf
             <div class="separar bg-transparent mb-3">
                 <span class="separar verde bg-transparent ">user@Name:~$</span>
-                <input type="text" class=" border border-0 grisClaro" placeholder="Username">
+                <input type="text" class=" border border-0 grisClaro" placeholder="Username" name="username">
             </div>
             <div class="separar border-0 bg-transparent mb-3">
                 <span class="separar verde bg-transparent">user@email:~$</span>
-                <input type="email" class="border border-0 grisClaro" placeholder="Email">
+                <input type="email" class="border border-0 grisClaro" placeholder="Email" name="email">
             </div>
             <div class="separar bg-transparent mb-3">
                 <span class="separar verde bg-transparent">user@password:~$</span>
-                <input type="password" class="border border-0 grisClaro" placeholder="Contraseña">
+                <input type="password" class="border border-0 grisClaro" placeholder="Contraseña" name="password">
             </div>
             <div class="separar bg-transparent mb-3">
                 <span class="separar verde bg-transparent">user@cpassword:~$</span>
-                <input type="password" class="border border-0 grisClaro" placeholder="Confirmar contraseña">
+                <input type="password" class="border border-0 grisClaro" placeholder="Confirmar contraseña" name="password_confirmation">
             </div>
             
             <button type="submit" class="btn btn-success w-100">Enviar</button>
