@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('right_door');
             $table->integer('coord_x');
             $table->integer('coord_y');
+            $table->boolean('isSpawn')->default('0');
             $table->timestamps();
         });
     }

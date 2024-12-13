@@ -16,7 +16,9 @@ class Enemigo extends Model
     protected $fillable = [
         'nombre',
         'ataque',
-        '%soltar'
+        '%soltar',
+        'objeto_ID',
+        'zona_ID'
     ];
     
     public function Objeto(){

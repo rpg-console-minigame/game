@@ -16,7 +16,8 @@ class Objeto extends Model
     protected $fillable = [
         'nombre',
         'function_name',
-        'durabilidad'
+        'durabilidad',
+        'zona_ID'
     ];
     public function Zona(){
         return $this->hasOne('zona');

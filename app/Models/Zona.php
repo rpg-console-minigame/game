@@ -22,7 +22,8 @@ class Zona extends Model
         'left_door',
         'right_door',
         'coord_x',
-        'coord_y'
+        'coord_y',
+        'isSpawn'
     ];
     public function Zona(){
         return $this->hasOne('zona');
