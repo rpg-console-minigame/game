@@ -89,6 +89,9 @@
                                             <label for="right_door">¿Muro a la derecha?</label>
                                             <input type="checkbox" name="right_door" value="1"
                                                 @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->right_door != 1) checked @endif>
+                                            <label for="isSpawn">¿Es Spawn?</label>
+                                            <input type="checkbox" name="isSpawn" value="1"
+                                                @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->isSpawn == 1) checked @endif>
                                         </div>
 
                                         <!-- Modal footer -->
@@ -144,6 +147,8 @@
                                 <input type="checkbox" name="left_door" value="1">
                                 <label for="right_door">¿Muro a la derecha?</label>
                                 <input type="checkbox" name="right_door" value="1">
+                                <label for="isSpawn">¿Es Spawn?</label>
+                                <input type="checkbox" name="isSpawn" value="1">
                             </div>
 
                             <!-- Modal footer -->
