@@ -18,6 +18,8 @@ class Personaje extends Model
         'HP',
         'Max_HP',
         'dinero',
+        'users_ID',
+        'zona_ID'
     ];
     public function Users(){
         return $this->hasOne('users');
