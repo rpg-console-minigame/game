@@ -400,8 +400,17 @@
         <div>
             @if (session()->has('user'))
                 <p>Welcome {{ session('user')['name'] }}</p>
+                @if (isset($personajes))
+                    <p>Personajes:</p>
+                    <ul>
+                        @foreach ($personajes as $personaje)
+                            <li>{{ $personaje->nombre }}</li>
+                        @endforeach
+                    </ul>
+                @endif
                 {{-- modal formulario creacion de pj --}}
                 <p type="button" data-toggle="modal" data-target="#a">Edit</p>
+                <a href="{{ route('logout') }}">Logout</a>
                 <div class="modal" id="a">
                     <div class="modal-dialog">
                         <div class="modal-content">
