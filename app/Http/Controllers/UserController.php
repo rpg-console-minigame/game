@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Personaje;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -46,5 +47,20 @@ class UserController extends Controller
             return redirect()->route('welcome')->with('success', 'User logged in successfully');
         }
         else return redirect()->route('login')->with('error', 'Invalid credentials');
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('user');
+        return redirect()->route('welcome')->with('success', 'User logged out successfully');
+    }
+    public function wellcomeWithData(){
+        session_start();
+        try {
+            $user = session('user');
+            $personajes = Personaje::where('users_ID', '=', $user->getKey())->get();
+            return view('welcome', ['personajes' => $personajes]);
+        } catch (\Throwable $th) {
+            return view('welcome');
+        }
     }
 }
