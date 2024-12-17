@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Zona;
 use App\Models\Personaje;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,8 +31,15 @@ class PersonajeController extends Controller
             ],
             []
         );
+        $pjsWithThatName = Personaje::where("nombre", $request->nombre)->all();
+        $todosLosPJConEsteUser= Personaje::where("users_ID", $_SESSION['users_ID']->id)->all();
+        $comprobarUsuarioExiste = User::where("id", $_SESSION['users_ID']->id)->all();
+        $validarZonaExiste = Zona::where("id", $_SESSION['zona_ID']->id)->all();
+        $validarSpawn = Zona::where("id", $_SESSION['zona_ID']->id)->first();
 
-        if ($validator->passes()) {
+        
+        if ($validator->passes() && !isset($pjsWithThatName) && isset($comprobarUsuarioExiste) 
+        && count($todosLosPJConEsteUser) < 5 && isset($validarZonaExiste) && $validarSpawn) {
 
             $personaje = new Personaje();
             // comprobar que el nombre no está vacío y no exista un personaje con ese nombre
