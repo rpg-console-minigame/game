@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Personaje;
+use App\Models\Zona;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -58,7 +59,8 @@ class UserController extends Controller
         try {
             $user = session('user');
             $personajes = Personaje::where('users_ID', '=', $user->getKey())->get();
-            return view('welcome', ['personajes' => $personajes]);
+            $spawns = Zona::where('isSpawn', '=' , 1)->get();
+            return view('welcome', [ 'personajes' => $personajes, 'spawns' => $spawns]);
         } catch (\Throwable $th) {
             return view('welcome');
         }

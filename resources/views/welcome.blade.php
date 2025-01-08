@@ -407,6 +407,42 @@
                             <li>{{ $personaje->nombre }}</li>
                         @endforeach
                     </ul>
+                    {{-- modal crear pj --}}
+                    <p type="button" data-toggle="modal" data-target="#b">Create</p>
+                    <div class="modal" id="b">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="{{route('createPj')}}" method="POST">
+                                    @csrf
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal Heading</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="zona_ID">Spawn:</label>
+                                            {{-- foreach todas las zonas de spawn --}}
+                                            <select name="zona_ID" id="zona_ID">
+                                                @foreach ($spawns as $zona)
+                                                    <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 @endif
                 {{-- modal formulario creacion de pj --}}
                 <p type="button" data-toggle="modal" data-target="#a">Edit</p>
