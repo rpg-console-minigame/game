@@ -444,31 +444,6 @@
                         </div>
                     </div>
                 @endif
-                {{-- modal formulario creacion de pj --}}
-                <p type="button" data-toggle="modal" data-target="#a">Edit</p>
-                <a href="{{ route('logout') }}">Logout</a>
-                <div class="modal" id="a">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form action="" method="POST">
-                                @csrf
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Modal Heading</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
             @else
                 <a href="/login">Login</a><br>
                 <a href="/register">Register</a>
