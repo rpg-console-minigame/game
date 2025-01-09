@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <style>
@@ -385,11 +386,85 @@
                 color: rgb(107 114 128 / var(--tw-text-opacity))
             }
         }
-    </style>
 
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
+
+        /* modales */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .console-container {
+            border: 4px solid #bbb;
+            background-color: #222;
+            color: #ddd;
+            font-family: "Source Code Pro", monospace;
+        }
+
+        .console-header {
+            background-color: #bbb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            border-bottom: 4px solid #bbb;
+        }
+
+        .console-header h5 {
+            margin: 0;
+            color: #222;
+            font-weight: bold;
+        }
+
+        .console-controls span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 4px;
+        }
+
+        .yellow {
+            background-color: #ffc107;
+        }
+
+        .green {
+            background-color: #28a745;
+        }
+
+        .red {
+            background-color: #dc3545;
+        }
+
+        .console-body {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group span {
+            color: lightgreen;
+            margin-bottom: 5px;
+            display: inline-block;
+            margin-right: 1%;
+        }
+
+        .form-control {
+            background-color: darkgray;
+            border: none;
+            color: #222;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .btn {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -446,8 +521,79 @@
                     </div>
                 @endif
             @else
-                <a href="/login">Login</a><br>
-                <a href="/register">Register</a>
+                <div class="btn-container">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Registrarse</button>
+                </div>
+            
+                <!-- Modal Inicio de Sesión -->
+                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content console-container">
+                            <div class="console-header">
+                                <h5 id="loginModalLabel">Inicio de Sesión</h5>
+                                <div class="console-controls">
+                                    <span class="yellow"></span>
+                                    <span class="green"></span>
+                                    <span class="red"></span>
+                                </div>
+                            </div>
+                            <div class="console-body">
+                                <form action="{{ route('loginEnter') }}" method="POST">
+                                    @csrf
+                                    <div class="input-group">
+                                        <span>user@Name:~$</span>
+                                        <input type="text" class="form-control" placeholder="Username" name="name">
+                                    </div>
+                                    <div class="input-group">
+                                        <span>user@password:~$</span>
+                                        <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                                    </div>
+                                    <button type="submit" class="btn btn-success w-100">Acceder</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Modal Registro -->
+                <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content console-container">
+                            <div class="console-header">
+                                <h5 id="registerModalLabel">Registro</h5>
+                                <div class="console-controls">
+                                    <span class="yellow"></span>
+                                    <span class="green"></span>
+                                    <span class="red"></span>
+                                </div>
+                            </div>
+                            <div class="console-body">
+                                <form action="{{ route('registerEnter') }}" method="POST">
+                                    @csrf
+                                    <div class="input-group">
+                                        <span>user@Name:~$</span>
+                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                    </div>
+                                    <div class="input-group">
+                                        <span>user@email:~$</span>
+                                        <input type="email" class="form-control" placeholder="Email" name="email">
+                                    </div>
+                                    <div class="input-group">
+                                        <span>user@password:~$</span>
+                                        <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                                    </div>
+                                    <div class="input-group">
+                                        <span>user@cpassword:~$</span>
+                                        <input type="password" class="form-control" placeholder="Confirmar contraseña" name="password_confirmation">
+                                    </div>
+                                    <button type="submit" class="btn btn-success w-100">Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             @endif
         </div>
 
