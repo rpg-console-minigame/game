@@ -19,8 +19,6 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [UserController::class, 'wellcomeWithData'])->name('welcome');
 Route::get('/map',  [MapController::class,'index']);
-Route::get('/register', function () {return view('register');})->name('register');
-Route::get('/login', function () {return view('login');})->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/map/create',  [MapController::class,'create'])->name('create');
 Route::post('/map/delete',  [MapController::class,'delete'])->name('delete');
