@@ -400,6 +400,7 @@
         <div>
             @if (session()->has('user'))
                 <p>Welcome {{ session('user')['name'] }}</p>
+                <a href="/logout">Logout</a>
                 @if (isset($personajes))
                     <p>Personajes:</p>
                     <ul>
