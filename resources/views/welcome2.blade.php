@@ -7,7 +7,6 @@
     <title>Modelo Ajustado</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Asegurando que la página ocupe todo el espacio disponible */
         html,
         body {
             height: 100%;
@@ -17,7 +16,6 @@
             font-family: "Source Code Pro", monospace;
         }
 
-        /* Contenedor que se ajusta al 100% del alto y ancho de la pantalla */
         .d-flex {
             height: 100%;
         }
@@ -84,7 +82,7 @@
         }
 
         .form-container {
-            width: 400px;
+            width: 50%;
             margin: auto;
             border: 4px solid #bbb;
             border-radius: 8px;
@@ -104,75 +102,22 @@
             margin-top: 4px;
         }
 
-        .w-75 {
-            height: 100%;
-        }
-
-        .life-bar-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-            /* Ajuste para separar el nombre y la barra */
-        }
-
-        .life-bar {
-            width: 25%;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .life-bar .bg-success {
-            width: 90%;
-            height: 20px;
-        }
-
-        .life-bar .bg-danger {
-            width: 10%;
-            height: 20px;
-        }
-
-        .life-text {
-            margin-top: 5px;
-            font-size: 14px;
-        }
-
-        .gold-text {
-            margin-left: 3%;
-            font-size: 14px;
-            color: #ddd;
-        }
-
-        .gold-text {
-            padding-top: 5%;
-            margin-left: 3%;
-            font-size: 14px;
-            color: #ddd;
-            display: flex;
-            /* Usa flexbox para controlar alineación */
-            align-items: center;
-        }
-
-        .gold-unit {
-            margin-left: 0.1rem;
-            vertical-align: baseline;
-        }
-
         .info-box {
             max-height: 355px;
-            /* Ajusta la altura máxima según lo que necesites */
             overflow-y: auto;
             padding: 10px;
             background-color: #444;
-            /* Opcional: un fondo diferente para mayor contraste */
             border-radius: 5px;
-            /* Opcional: bordes redondeados */
             border: 1px solid #555;
-            /* Opcional: borde para separar visualmente */
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -192,9 +137,36 @@
             <div class="console-header">
                 <!-- Nombre centrado -->
                 <h4 class="m-0">Crear</h4>
-                
             </div>
-            
+
+            <!-- Formulario -->
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="name" class="input-label">Nombre</label>
+                        <input type="text" id="name" class="form-control" placeholder="Introduce tu nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zones" class="input-label">Zonas del Videojuego</label>
+                        <select id="zones" class="form-control">
+                            <option value="">Selecciona una zona</option>
+                            <option value="zona1">Zona 1</option>
+                            <option value="zona2">Zona 2</option>
+                            <option value="zona3">Zona 3</option>
+                            <option value="zona4">Zona 4</option>
+                            <option value="zona5">Zona 5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="options" class="input-label">Opciones</label>
+                        <input type="text" id="options" class="form-control" placeholder="Introduce tus opciones">
+                    </div>
+
+                    <button type="submit" class="btn-submit">Crear</button>
+                </form>
+            </div>
         </div>
     </div>
 
