@@ -6,7 +6,6 @@
   <title>Modelo Ajustado</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Aplicando los estilos del modal */
     html, body {
       height: 100%;
       margin: 0;
@@ -15,13 +14,9 @@
       font-family: "Source Code Pro", monospace;
     }
 
-    .full-height {
-      height: 100%;
-    }
-
     .console-container {
       border: 4px solid #bbb;
-      background-color: #222;
+      background-color: #333;
       color: #ddd;
     }
 
@@ -40,24 +35,51 @@
       font-weight: bold;
     }
 
-    .btn-outline-light {
+    .form-control {
+      background-color: #444;
       color: #ddd;
-      border-color: #ddd;
+      border: none;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-family: "Source Code Pro", monospace;
     }
 
-    .btn-outline-light:hover {
-      background-color: #bbb;
+    .form-control:focus {
+      background-color: #555;
+      color: #fff;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .btn-submit {
+      background-color: lightgreen;
       color: #222;
-    }
-
-    .border {
-      border-color: #bbb !important;
-    }
-
-    .btn-jugar {
       font-weight: bold;
-      width: 40vw;
-      max-width: 200px;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      padding: 10px;
+      font-family: "Source Code Pro", monospace;
+    }
+
+    .btn-submit:hover {
+      background-color: #32cd32;
+    }
+
+    .input-label {
+      color: #ddd;
+      margin-bottom: 5px;
+      font-family: "Source Code Pro", monospace;
+    }
+
+    .form-container {
+      width: 400px;
+      margin: auto;
+      border: 4px solid #bbb;
+      border-radius: 8px;
+      background-color: #333;
+      padding: 20px;
+      margin-top: 50px;
     }
 
     .fixed-button {
@@ -65,24 +87,6 @@
       bottom: 20px;
       right: 20px;
       z-index: 9999;
-    }
-
-    .bg-success {
-      background-color: lightgreen !important;
-    }
-
-    .bg-danger {
-      background-color: red !important;
-    }
-
-    .hp-info {
-      text-align: center;
-    }
-
-    .info-box {
-      border: 4px solid #bbb;
-      padding: 15px;
-      margin-top: 15px;
     }
   </style>
 </head>
@@ -100,18 +104,9 @@
     <div class="w-75 console-container mx-auto">
       <div class="console-header">
         <h4>Nombre</h4>
-        <div class="bg-success mx-2" style="height: 20px; width: 9%;"></div>
-        <div class="bg-danger" style="height: 20px; width: 1%;"></div>
       </div>
-      <div class="hp-info">
-        <p>90/100 HP</p>
-        <p>99999 G</p>
-      </div>
-      <hr class="border">
-      <h5 class="text-center">Zona 1</h5>
-      <p class="text-center">Nivel 1</p>
-      <div class="info-box">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed quis distinctio.
+      <div class="form-container">
+        
       </div>
     </div>
   </div>
