@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [UserController::class, 'wellcomeWithData'])->name('welcome');
+Route::get('/sesion',function(){return view('welcome1');})->name('sesion');
 Route::get('/map',  [MapController::class,'index']);
 Route::get('/register', function () {return view('register');})->name('register');
 Route::get('/login', function () {return view('login');})->name('login');
