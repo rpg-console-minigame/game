@@ -186,7 +186,13 @@
                         data-index="{{ $index }}">{{ $personaje->nombre }}</button>
                 @endforeach
             @endif
-            <button class="btn btn-outline-light w-100 crear">CREAR</button>
+            <button class="btn btn-outline-light mb-3 w-100 crear">CREAR</button>
+            <!-- Botón de logout -->
+            <a href="{{ route('logout') }}" class="text-white text-decoration-none">
+                <button class="btn btn-danger mb-3 w-100 ">
+                    LOGOUT
+                </button>
+            </a>
         </div>
 
         <!-- Contenido principal -->
@@ -203,12 +209,12 @@
 
 </html>
 @if (isset($personajes))
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const botonesPJ = document.querySelectorAll('.botonPJ');
-        const personajes = @json($personajes); // Convierte la colección de personajes en un objeto JS
-        document.querySelector('.crear').addEventListener('click', function() {
-            document.querySelector('.principal').innerHTML = `
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonesPJ = document.querySelectorAll('.botonPJ');
+            const personajes = @json($personajes); // Convierte la colección de personajes en un objeto JS
+            document.querySelector('.crear').addEventListener('click', function() {
+                document.querySelector('.principal').innerHTML = `
             <div class="console-header"> <h4 class="m-0">Crear</h4>
                 </div>
                 <div class="form-container">
@@ -232,26 +238,26 @@
                 </form>
             </div>
         `;
-        document.querySelector('.jugar').innerHTML = "";
-        });
-        botonesPJ.forEach(boton => {
-            boton.addEventListener('click', function() {
-                document.querySelector('.principal').innerHTML = `
+                document.querySelector('.jugar').innerHTML = "";
+            });
+            botonesPJ.forEach(boton => {
+                boton.addEventListener('click', function() {
+                    document.querySelector('.principal').innerHTML = `
                 <div class="console-header">
                 </div>
                 <h5 class="text-center pt-3 pb-3 zoneName"></h5>
                 <div class="info-box">
                 </div>
             `;
-                document.querySelector('.jugar').innerHTML = `
+                    document.querySelector('.jugar').innerHTML = `
                 <button class="btn btn-success btn-jugar">JUGAR</button>
             `;
-                const index = boton.getAttribute('data-index');
-                const personaje = personajes[index]; // Obtiene el personaje correspondiente
+                    const index = boton.getAttribute('data-index');
+                    const personaje = personajes[index]; // Obtiene el personaje correspondiente
 
-                // Actualiza la cabecera de la consola
-                const consoleHeader = document.querySelector('.console-header');
-                consoleHeader.innerHTML = `
+                    // Actualiza la cabecera de la consola
+                    const consoleHeader = document.querySelector('.console-header');
+                    consoleHeader.innerHTML = `
                 <h4 class="m-0">${personaje.nombre}</h4>
                 <div class="life-bar-container">
                     <div class="life-bar d-flex justify-content-between align-items-center">
@@ -269,17 +275,17 @@
                 </div>
             `;
 
-                // Actualiza el nombre de la zona
-                const zoneName = document.querySelector('.zoneName');
-                zoneName.textContent = personaje.zona.nombre;
+                    // Actualiza el nombre de la zona
+                    const zoneName = document.querySelector('.zoneName');
+                    zoneName.textContent = personaje.zona.nombre;
 
-                // Actualiza la descripción de la zona
-                const infoBox = document.querySelector('.info-box');
-                infoBox.innerHTML = `
+                    // Actualiza la descripción de la zona
+                    const infoBox = document.querySelector('.info-box');
+                    infoBox.innerHTML = `
                 <p>${personaje.zona.descripcion}</p>
             `;
+                });
             });
         });
-    });
-</script>
+    </script>
 @endif

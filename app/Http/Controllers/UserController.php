@@ -59,26 +59,13 @@ class UserController extends Controller
         try {
             $user = session('user');
             $personajes = Personaje::where('users_ID', '=', $user->getKey())->get();
-            $spawns = Zona::where('isSpawn', '=' , 1)->get();
-            return view('welcome', [ 'personajes' => $personajes, 'spawns' => $spawns]);
-        } catch (\Throwable $th) {
-            return view('welcome');
-        }
-    }
-
-
-    public function prueba(){
-        session_start();
-        try {
-            $user = session('user');
-            $personajes = Personaje::where('users_ID', '=', $user->getKey())->get();
             foreach ($personajes as $personaje) {
                 $personaje->zona = Zona::where('ID', '=', $personaje->zona_ID)->first();
             }
             $spawns = Zona::where('isSpawn', '=' , 1)->get();
             return view('welcome1', [ 'personajes' => $personajes, 'spawns' => $spawns]);
         } catch (\Throwable $th) {
-            return view('welcome1');
+            return view('welcome');
         }
     }
 }

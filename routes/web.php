@@ -28,6 +28,6 @@ Route::post('/login', [UserController::class,'login'])->name('loginEnter');
 Route::post('/register', [UserController::class,'register'])->name('registerEnter');
 Route::post('createPj', [PersonajeController::class, 'create'])->name('createPj');
 
-
-// en un futuro: pasar a post y llamarlo por formulario en un modal en welcome.blade.php
-Route::get('/a', [PersonajeController::class, 'create']);
+Route::get("/a", function(){
+    return view('welcome2');
+});
