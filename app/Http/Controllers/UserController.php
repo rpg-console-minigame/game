@@ -21,7 +21,7 @@ class UserController extends Controller
         if($request->password != $request->password_confirmation)
         {
             // Route::get('/register', function () {return view('register');})->name('register');
-            return redirect()->route('register');
+            return redirect()->route('welcome');
         }
         else {
             $user = new User();
@@ -47,7 +47,7 @@ class UserController extends Controller
             $request->session()->put('user', $user);
             return redirect()->route('welcome')->with('success', 'User logged in successfully');
         }
-        else return redirect()->route('login')->with('error', 'Invalid credentials');
+        else return redirect()->route('welcome')->with('error', 'Invalid credentials');
     }
     public function logout(Request $request)
     {
@@ -59,8 +59,11 @@ class UserController extends Controller
         try {
             $user = session('user');
             $personajes = Personaje::where('users_ID', '=', $user->getKey())->get();
+            foreach ($personajes as $personaje) {
+                $personaje->zona = Zona::where('ID', '=', $personaje->zona_ID)->first();
+            }
             $spawns = Zona::where('isSpawn', '=' , 1)->get();
-            return view('welcome', [ 'personajes' => $personajes, 'spawns' => $spawns]);
+            return view('welcome1', [ 'personajes' => $personajes, 'spawns' => $spawns]);
         } catch (\Throwable $th) {
             return view('welcome');
         }
