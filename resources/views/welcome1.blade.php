@@ -161,7 +161,7 @@
         }
 
         .info-box {
-            height: 70%;
+            height: 60%;
             margin: 2%;
             /* Ajusta la altura máxima según lo que necesites */
             overflow-y: auto;
@@ -202,6 +202,7 @@
 </body>
 
 </html>
+@if (isset($personajes))
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const botonesPJ = document.querySelectorAll('.botonPJ');
@@ -211,21 +212,19 @@
             <div class="console-header"> <h4 class="m-0">Crear</h4>
                 </div>
                 <div class="form-container">
-                <form>
+                <form action="{{ route('createPj') }}" method="POST">
+                    @csrf
                     <div class="form-group">
-                        <label for="name" class="input-label">Nombre</label>
-                        <input type="text" id="name" class="form-control" placeholder="Introduce tu nombre">
+                        <label for="nombre" class="input-label">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Introduce tu nombre">
                     </div>
 
                     <div class="form-group">
-                        <label for="zones" class="input-label">Zonas del Videojuego</label>
-                        <select id="zones" class="form-control">
-                            <option value="">Selecciona una zona</option>
-                            <option value="zona1">Zona 1</option>
-                            <option value="zona2">Zona 2</option>
-                            <option value="zona3">Zona 3</option>
-                            <option value="zona4">Zona 4</option>
-                            <option value="zona5">Zona 5</option>
+                        <label for="zona_ID" class="input-label">Zonas del Videojuego</label>
+                        <select name="zona_ID" id="zona_ID" class="form-control">
+                            @foreach ($spawns as $zona)
+                                <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -283,3 +282,4 @@
         });
     });
 </script>
+@endif
