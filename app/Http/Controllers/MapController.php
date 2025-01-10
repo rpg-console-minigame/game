@@ -12,7 +12,6 @@ class MapController extends Controller
         return view("mapEditor", ["map" => $map]);
     }
     function create(Request $request) {
-
         $data =[
             'nombre' => $request['nombre'],
             'descripcion' => $request['descripcion']
@@ -35,8 +34,8 @@ class MapController extends Controller
             $zone->up_door = request("up_door") ? 0 : 1;
             $zone->down_door = request("down_door") ? 0 : 1;
             $zone->left_door = request("left_door") ? 0 : 1;
-            $zone->right_door = request(key: "right_door") ? 0 : 1;
-            $zone->isSpawn = request("isSpawn") ? 0 : 1;
+            $zone->right_door = request( "right_door") ? 0 : 1;
+            $zone->isSpawn = request("isSpawn") ? 1 : 0;
             $zone->save();
             return redirect("/map")->with("success",true);
         }else{
@@ -77,7 +76,7 @@ class MapController extends Controller
         $zone->down_door = request("down_door") ? 0 : 1;
         $zone->left_door = request("left_door") ? 0 : 1;
         $zone->right_door = request("right_door") ? 0 : 1;
-        $zone->isSpawn = request("isSpawn") ? 0 : 1;
+        $zone->isSpawn = request("isSpawn") ? 1 : 0;
         $zone->save();
         return redirect("/map")->with("success",true);
         }
