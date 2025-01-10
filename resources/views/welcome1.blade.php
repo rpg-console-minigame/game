@@ -127,12 +127,10 @@
         }
 
         .life-bar .bg-success {
-            width: 90%;
             height: 20px;
         }
 
         .life-bar .bg-danger {
-            width: 10%;
             height: 20px;
         }
 
@@ -163,7 +161,7 @@
         }
 
         .info-box {
-            max-height: 355px;
+            height: 70%;
             /* Ajusta la altura máxima según lo que necesites */
             overflow-y: auto;
             padding: 10px;
@@ -181,98 +179,21 @@
     <div class="d-flex">
         <!-- Barra lateral -->
         <div class="w-25 console-container p-3">
-            <button class="btn btn-outline-light mb-3 w-100">PJ1</button>
-            <button class="btn btn-outline-light mb-3 w-100">PJ2</button>
-            <button class="btn btn-outline-light mb-3 w-100">PJ3</button>
+            @if (isset($personajes))
+                @foreach ($personajes as $personaje)
+                    <button class="btn btn-outline-light mb-3 w-100 botonPJ">{{ $personaje->nombre }}</button>
+                @endforeach
+            @endif
             <button class="btn btn-outline-light w-100">CREAR</button>
         </div>
 
         <!-- Contenido principal -->
         <div class="w-75 console-container mx-auto">
             <div class="console-header">
-                <!-- Nombre centrado -->
-                <h4 class="m-0">Nombre</h4>
-                <div class="life-bar-container">
-                    <!-- Barra de vida -->
-                    <div class="life-bar d-flex justify-content-between align-items-center">
-                        <div class="d-flex" style="width: 100%; height: 20px; justify-content: center;">
-                            <div class="bg-success"></div>
-                            <div class="bg-danger"></div>
-                        </div>
-                        <!-- Cantidad de oro -->
-                        <p class="gold-text text-dark">
-                            99999 <span class="gold-unit">G</span>
-                        </p>
-                    </div>
-                    <!-- Texto de vida -->
-                    <p class="life-text text-dark">90/100 HP</p>
-                </div>
+
             </div>
-            <h5 class="text-center pt-3 pb-3">Zona 1</h5>
+            <h5 class="text-center pt-3 pb-3 zoneName"></h5>
             <div class="info-box">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
                 provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
                 quis distinctio.
@@ -289,3 +210,56 @@
 </body>
 
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const botonesPJ = document.querySelectorAll('.botonPJ');
+        {{ $contador = 0 }}
+        botonesPJ.forEach(boton => {
+            boton.addEventListener('click', function() {
+                //     <div class="console-header">
+                //     <!-- Nombre centrado -->
+                //     <h4 class="m-0">Nombre</h4>
+                //     <div class="life-bar-container">
+                //         <!-- Barra de vida -->
+                //         <div class="life-bar d-flex justify-content-between align-items-center">
+                //             <div class="d-flex" style="width: 100%; height: 20px; justify-content: center;">
+                //                 <div class="bg-success"></div>
+                //                 <div class="bg-danger"></div>
+                //             </div>
+                //             <!-- Cantidad de oro -->
+                //             <p class="gold-text text-dark">
+                //                 99999 <span class="gold-unit">G</span>
+                //             </p>
+                //         </div>
+                //         <!-- Texto de vida -->
+                //         <p class="life-text text-dark">90/100 HP</p>
+                //     </div>
+                // </div>
+                const consoleHeader = document.querySelector('.console-header');
+                consoleHeader.innerHTML = `
+                    <h4 class="m-0">{{ $personajes[$contador]->nombre }}</h4>
+                    <div class="life-bar-container">
+                        <div class="life-bar d-flex justify-content-between align-items-center">
+                            <div class="d-flex" style="width: 100%; height: 20px; justify-content: center;">
+                                <div class="bg-success" style="width:{{ ($personajes[$contador]->HP / $personajes[$contador]->Max_HP) * 100 }}%
+                                "></div>
+                                <div class="bg-danger" style="width:{{ (($personajes[$contador]->Max_HP - $personajes[$contador]->HP) / $personajes[$contador]->Max_HP) * 100 }}%"></div>
+                            </div>
+                            <p class="gold-text text-dark">
+                                99999 <span class="gold-unit">G</span>
+                            </p>
+                        </div>
+                        <p class="life-text text-dark">
+                            {{ $personajes[$contador]->HP }}/{{ $personajes[$contador]->Max_HP }} HP
+                        </p>
+                    </div>
+                `;
+                // <h5 class="text-center pt-3 pb-3 zoneName">Zona 1</h5>
+                const zoneName = document.querySelector('.zoneName');
+                zoneName.textContent = "{{ $personajes[$contador]->zona->nombre }}";
+
+                {{ $contador++ }}
+            });
+        });
+    });
+</script>

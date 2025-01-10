@@ -13,7 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
     <!-- Styles -->
     <style>
@@ -483,51 +485,54 @@
                             <li>{{ $personaje->nombre }}</li>
                         @endforeach
                     </ul>
-                    {{-- modal crear pj --}}
-                    <p type="button" data-toggle="modal" data-target="#b">Create</p>
-                    <div class="modal" id="b">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="{{route('createPj')}}" method="POST">
-                                    @csrf
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                @endif
+                {{-- modal crear pj --}}
+                <p type="button" data-toggle="modal" data-target="#b">Create</p>
+                <div class="modal" id="b">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="{{ route('createPj') }}" method="POST">
+                                @csrf
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modal Heading</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre:</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre">
                                     </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="nombre">Nombre:</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="zona_ID">Spawn:</label>
-                                            {{-- foreach todas las zonas de spawn --}}
-                                            <select name="zona_ID" id="zona_ID">
-                                                @foreach ($spawns as $zona)
-                                                    <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="zona_ID">Spawn:</label>
+                                        {{-- foreach todas las zonas de spawn --}}
+                                        <select name="zona_ID" id="zona_ID">
+                                            @foreach ($spawns as $zona)
+                                                <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Create</button>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                @endif
+                </div>
             @else
                 <div class="btn-container">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
-                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Registrarse</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar
+                        Sesión</button>
+                    <button class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">Registrarse</button>
                 </div>
-            
+
                 <!-- Modal Inicio de Sesión -->
-                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content console-container">
                             <div class="console-header">
@@ -543,11 +548,13 @@
                                     @csrf
                                     <div class="input-group">
                                         <span>user@Name:~$</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="name">
+                                        <input type="text" class="form-control" placeholder="Username"
+                                            name="name">
                                     </div>
                                     <div class="input-group">
                                         <span>user@password:~$</span>
-                                        <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                                        <input type="password" class="form-control" placeholder="Contraseña"
+                                            name="password">
                                     </div>
                                     <button type="submit" class="btn btn-success w-100">Acceder</button>
                                 </form>
@@ -555,9 +562,10 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <!-- Modal Registro -->
-                <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+                <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content console-container">
                             <div class="console-header">
@@ -573,7 +581,8 @@
                                     @csrf
                                     <div class="input-group">
                                         <span>user@Name:~$</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                        <input type="text" class="form-control" placeholder="Username"
+                                            name="username">
                                     </div>
                                     <div class="input-group">
                                         <span>user@email:~$</span>
@@ -581,11 +590,13 @@
                                     </div>
                                     <div class="input-group">
                                         <span>user@password:~$</span>
-                                        <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                                        <input type="password" class="form-control" placeholder="Contraseña"
+                                            name="password">
                                     </div>
                                     <div class="input-group">
                                         <span>user@cpassword:~$</span>
-                                        <input type="password" class="form-control" placeholder="Confirmar contraseña" name="password_confirmation">
+                                        <input type="password" class="form-control"
+                                            placeholder="Confirmar contraseña" name="password_confirmation">
                                     </div>
                                     <button type="submit" class="btn btn-success w-100">Enviar</button>
                                 </form>

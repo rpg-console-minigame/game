@@ -18,7 +18,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [UserController::class, 'wellcomeWithData'])->name('welcome');
-Route::get('/sesion',function(){return view('welcome1');})->name('sesion');
+Route::get('/sesion',[UserController::class, 'prueba'])->name('sesion');
 Route::get('/sesion1',function(){return view('welcome2');})->name('sesion');
 
 Route::get('/map',  [MapController::class,'index']);
@@ -26,8 +26,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/map/create',  [MapController::class,'create'])->name('create');
 Route::post('/map/delete',  [MapController::class,'delete'])->name('delete');
 Route::post('/map/update',  [MapController::class,'update'])->name('update');
-Route::post('/login/enter', [UserController::class,'login'])->name('loginEnter');
-Route::post('/register/enter', [UserController::class,'register'])->name('registerEnter');
+Route::post('/login', [UserController::class,'login'])->name('loginEnter');
+Route::post('/register', [UserController::class,'register'])->name('registerEnter');
 Route::post('createPj', [PersonajeController::class, 'create'])->name('createPj');
 
 
