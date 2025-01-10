@@ -180,8 +180,9 @@
         <!-- Barra lateral -->
         <div class="w-25 console-container p-3">
             @if (isset($personajes))
-                @foreach ($personajes as $personaje)
-                    <button class="btn btn-outline-light mb-3 w-100 botonPJ">{{ $personaje->nombre }}</button>
+                @foreach ($personajes as $index => $personaje)
+                    <button class="btn btn-outline-light mb-3 w-100 botonPJ"
+                        data-index="{{ $index }}">{{ $personaje->nombre }}</button>
                 @endforeach
             @endif
             <button class="btn btn-outline-light w-100">CREAR</button>
@@ -194,9 +195,7 @@
             </div>
             <h5 class="text-center pt-3 pb-3 zoneName"></h5>
             <div class="info-box">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum pariatur ducimus atque delectus iusto
-                provident beatae tenetur dolor odit quod? Nam inventore aliquid aspernatur magni consectetur. Harum sed
-                quis distinctio.
+
             </div>
         </div>
     </div>
@@ -212,54 +211,45 @@
 </html>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const botonesPJ = document.querySelectorAll('.botonPJ');
-        {{ $contador = 0 }}
-        botonesPJ.forEach(boton => {
-            boton.addEventListener('click', function() {
-                //     <div class="console-header">
-                //     <!-- Nombre centrado -->
-                //     <h4 class="m-0">Nombre</h4>
-                //     <div class="life-bar-container">
-                //         <!-- Barra de vida -->
-                //         <div class="life-bar d-flex justify-content-between align-items-center">
-                //             <div class="d-flex" style="width: 100%; height: 20px; justify-content: center;">
-                //                 <div class="bg-success"></div>
-                //                 <div class="bg-danger"></div>
-                //             </div>
-                //             <!-- Cantidad de oro -->
-                //             <p class="gold-text text-dark">
-                //                 99999 <span class="gold-unit">G</span>
-                //             </p>
-                //         </div>
-                //         <!-- Texto de vida -->
-                //         <p class="life-text text-dark">90/100 HP</p>
-                //     </div>
-                // </div>
-                const consoleHeader = document.querySelector('.console-header');
-                consoleHeader.innerHTML = `
-                    <h4 class="m-0">{{ $personajes[$contador]->nombre }}</h4>
-                    <div class="life-bar-container">
-                        <div class="life-bar d-flex justify-content-between align-items-center">
-                            <div class="d-flex" style="width: 100%; height: 20px; justify-content: center;">
-                                <div class="bg-success" style="width:{{ ($personajes[$contador]->HP / $personajes[$contador]->Max_HP) * 100 }}%
-                                "></div>
-                                <div class="bg-danger" style="width:{{ (($personajes[$contador]->Max_HP - $personajes[$contador]->HP) / $personajes[$contador]->Max_HP) * 100 }}%"></div>
-                            </div>
-                            <p class="gold-text text-dark">
-                                99999 <span class="gold-unit">G</span>
-                            </p>
+    const botonesPJ = document.querySelectorAll('.botonPJ');
+    const personajes = @json($personajes); // Convierte la colección de personajes en un objeto JS
+
+    botonesPJ.forEach(boton => {
+        boton.addEventListener('click', function() {
+            const index = boton.getAttribute('data-index');
+            const personaje = personajes[index]; // Obtiene el personaje correspondiente
+
+            // Actualiza la cabecera de la consola
+            const consoleHeader = document.querySelector('.console-header');
+            consoleHeader.innerHTML = `
+                <h4 class="m-0">${personaje.nombre}</h4>
+                <div class="life-bar-container">
+                    <div class="life-bar d-flex justify-content-between align-items-center">
+                        <div class="d-flex" style="width: 100%; height: 20px; justify-content: center;">
+                            <div class="bg-success" style="width:${(personaje.HP / personaje.Max_HP) * 100}%"></div>
+                            <div class="bg-danger" style="width:${((personaje.Max_HP - personaje.HP) / personaje.Max_HP) * 100}%"></div>
                         </div>
-                        <p class="life-text text-dark">
-                            {{ $personajes[$contador]->HP }}/{{ $personajes[$contador]->Max_HP }} HP
+                        <p class="gold-text text-dark">
+                            ${personaje.oro} <span class="gold-unit">G</span>
                         </p>
                     </div>
-                `;
-                // <h5 class="text-center pt-3 pb-3 zoneName">Zona 1</h5>
-                const zoneName = document.querySelector('.zoneName');
-                zoneName.textContent = "{{ $personajes[$contador]->zona->nombre }}";
+                    <p class="life-text text-dark">
+                        ${personaje.HP}/${personaje.Max_HP} HP
+                    </p>
+                </div>
+            `;
 
-                {{ $contador++ }}
-            });
+            // Actualiza el nombre de la zona
+            const zoneName = document.querySelector('.zoneName');
+            zoneName.textContent = personaje.zona.nombre;
+
+            // Actualiza la descripción de la zona
+            const infoBox = document.querySelector('.info-box');
+            infoBox.innerHTML = `
+                <p>${personaje.zona.descripcion}</p>
+            `;
         });
     });
+});
+
 </script>
