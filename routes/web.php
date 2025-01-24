@@ -27,6 +27,4 @@ Route::post('/login', [UserController::class,'login'])->name('loginEnter');
 Route::post('/register', [UserController::class,'register'])->name('registerEnter');
 Route::post('createPj', [PersonajeController::class, 'create'])->name('createPj');
 
-Route::get("/react", function(){
-    return view("react");
-});
+Route::post("/play", [UserController::class, 'play'])->name('play');

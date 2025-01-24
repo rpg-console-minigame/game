@@ -250,7 +250,11 @@
                 </div>
             `;
                     document.querySelector('.jugar').innerHTML = `
-                <button class="btn btn-success btn-jugar">JUGAR</button>
+                    <form action="{{route("play")}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="pj" value="{{ $personaje->id }}">
+                        <button type="submit" class="btn btn-success btn-jugar">JUGAR</button>
+                    </form>
             `;
                     const index = boton.getAttribute('data-index');
                     const personaje = personajes[index]; // Obtiene el personaje correspondiente
