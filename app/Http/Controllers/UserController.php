@@ -68,4 +68,10 @@ class UserController extends Controller
             return view('welcome');
         }
     }
+    public function play(Request $request){
+        session_start();
+        $character = Personaje::where('Id', '=', $request->pj)->first();
+        session(['character' => $character]);
+        return view('react');
+    }
 }

@@ -211,6 +211,7 @@
 @if (isset($personajes))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            let pj = null;
             const botonesPJ = document.querySelectorAll('.botonPJ');
             const personajes = @json($personajes); // Convierte la colección de personajes en un objeto JS
             document.querySelector('.crear').addEventListener('click', function() {
@@ -248,12 +249,16 @@
                 <h5 class="text-center pt-3 pb-3 zoneName"></h5>
                 <div class="info-box">
                 </div>
-            `;
+                `;
+                const index = boton.getAttribute('data-index');
+                const personaje = personajes[index]; // Obtiene el personaje correspondiente
                     document.querySelector('.jugar').innerHTML = `
-                <button class="btn btn-success btn-jugar">JUGAR</button>
+                    <form action="{{route("play")}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="personaje" value="${personaje.id}">
+                        <button type="submit" class="btn btn-success btn-jugar">JUGAR</button>
+                    </form>
             `;
-                    const index = boton.getAttribute('data-index');
-                    const personaje = personajes[index]; // Obtiene el personaje correspondiente
 
                     // Actualiza la cabecera de la consola
                     const consoleHeader = document.querySelector('.console-header');
