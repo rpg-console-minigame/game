@@ -1,32 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+"use client"
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useState } from "react"
+import { DndContext } from "@dnd-kit/core"
+import DraggableFrame from "./components/DraggableFrame"
+import DraggableContent from "./components/DraggableContent"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+const App = () => {
+  const colors = ["danger", "primary", "success", "warning"]
+  const [positions, setPositions] = useState(() => {
+    const savedPositions = {}
+    colors.forEach((color) => {
+      const saved = localStorage.getItem(color)
+      savedPositions[color] = saved ? JSON.parse(saved) : { x: 0, y: 0 }
+    })
+    return savedPositions
+  })
+
+  const handleDragEnd = (event) => {
+    const { active, delta } = event
+    setPositions((prev) => {
+      const newPositions = {
+        ...prev,
+        [active.id]: {
+          x: prev[active.id].x + delta.x,
+          y: prev[active.id].y + delta.y,
+        },
+      }
+      localStorage.setItem(active.id, JSON.stringify(newPositions[active.id]))
+      return newPositions
+    })
+  }
 
   return (
-    <>
-    <h1>Quintero xupala</h1>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <DndContext onDragEnd={handleDragEnd}>
+      <div className="position-relative vh-100 vw-100 bg-light">
+        {colors.map((color) => (
+          <DraggableFrame key={color} id={color} initialPosition={positions[color]}>
+            <DraggableContent color={color} />
+          </DraggableFrame>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </DndContext>
   )
 }
 
 export default App
+
