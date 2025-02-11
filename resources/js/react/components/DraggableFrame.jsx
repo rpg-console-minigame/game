@@ -35,7 +35,9 @@ const DraggableFrame = ({ id, children, initialPosition }) => {
     return (
         <div ref={setNodeRef} className="container-fluid p-0" style={style} {...listeners} {...attributes}>
             <div className="d-flex justify-content-between align-items-center" style={titleBarStyle}>
-                <span>Console</span>
+                <span>
+                    {id}
+                </span>
                 <div>
                     <button className="btn btn-success mx-1" style={{ width: 30, height: 30 }}></button>
                     <button className="btn btn-warning mx-1" style={{ width: 30, height: 30 }}></button>

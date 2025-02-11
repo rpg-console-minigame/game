@@ -5,11 +5,12 @@ import { DndContext } from "@dnd-kit/core"
 import DraggableFrame from "./components/DraggableFrame"
 import DescripcionDraggableContent from "./components/DescripcionDraggableContent"
 import MapDraggableContent from "./components/MapDraggableContent"
+import ConsoleDraggableContent from "./components/ConsoleDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
-  const cuadros = ["descripcion","mapa"]
-  const componentes = [DescripcionDraggableContent,MapDraggableContent]
+  const cuadros = ["Descripcion","Mapa","Consola"]
+  const componentes = [DescripcionDraggableContent,MapDraggableContent,ConsoleDraggableContent]
 
   const [positions, setPositions] = useState(() => {
     const savedPositions = {}
