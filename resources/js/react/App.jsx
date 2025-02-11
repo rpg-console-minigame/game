@@ -37,7 +37,7 @@ const App = () => {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <div className="position-relative vh-100 vw-100 bg-light">
+      <div className="position-relative vh-100 vw-100">
         {cuadros.map((cuadro, index) => {
           const Componente = componentes[index] // Obtiene el componente correcto
           return (
