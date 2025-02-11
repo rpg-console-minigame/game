@@ -3,16 +3,19 @@
 import { useState } from "react"
 import { DndContext } from "@dnd-kit/core"
 import DraggableFrame from "./components/DraggableFrame"
-import DraggableContent from "./components/DraggableContent"
+import DescripcionDraggableContent from "./components/DescripcionDraggableContent"
+import MapDraggableContent from "./components/MapDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
-  const colors = ["danger", "primary", "success", "warning"]
+  const cuadros = ["descripcion","mapa"]
+  const componentes = [DescripcionDraggableContent,MapDraggableContent]
+
   const [positions, setPositions] = useState(() => {
     const savedPositions = {}
-    colors.forEach((color) => {
-      const saved = localStorage.getItem(color)
-      savedPositions[color] = saved ? JSON.parse(saved) : { x: 0, y: 0 }
+    cuadros.forEach((cuadro) => {
+      const saved = localStorage.getItem(cuadro)
+      savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 0, y: 0 }
     })
     return savedPositions
   })
@@ -35,15 +38,17 @@ const App = () => {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="position-relative vh-100 vw-100 bg-light">
-        {colors.map((color) => (
-          <DraggableFrame key={color} id={color} initialPosition={positions[color]}>
-            <DraggableContent color={color} />
-          </DraggableFrame>
-        ))}
+        {cuadros.map((cuadro, index) => {
+          const Componente = componentes[index] // Obtiene el componente correcto
+          return (
+            <DraggableFrame key={cuadro} id={cuadro} initialPosition={positions[cuadro]}>
+              <Componente /> {/* Renderiza el componente JSX */}
+            </DraggableFrame>
+          )
+        })}
       </div>
     </DndContext>
   )
 }
 
 export default App
-
