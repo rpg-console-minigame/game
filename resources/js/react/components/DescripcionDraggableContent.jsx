@@ -4,7 +4,7 @@ const DescripcionDraggableContent = ({ cuadro }) => {
     maxHeight: "70vh",
     overflowY: "auto",
   }}>
-    <h1 style={{ textAlign: "center" }}>El Bosque Encantado</h1>
+    <h1 style={{ textAlign: "center" }}>El Bosque Encantado [1-1]</h1>
     <p style={{ textAlign: "center" }}>
       -----------,@@@@@@,---------------<br />
       ---,,,.---,@@@@@@/@@,--.oo8888o.--<br />
