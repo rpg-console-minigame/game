@@ -29,22 +29,24 @@ const DraggableFrame = ({ id, children, initialPosition }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        cursor: "grab" // Indica que es arrastrable
     }
 
     return (
-        <div ref={setNodeRef} className="container-fluid p-0" style={style} {...listeners} {...attributes}>
-            <div className="d-flex justify-content-between align-items-center" style={titleBarStyle}>
-                <span>
-                    {id}
-                </span>
+        <div className="container-fluid p-0" style={style}>
+            {/* Solo la barra de título es arrastrable */}
+            <div ref={setNodeRef} {...listeners} {...attributes} className="d-flex justify-content-between align-items-center" style={titleBarStyle}>
+                <span>{id}</span>
                 <div>
                     <button className="btn btn-success mx-1" style={{ width: 30, height: 30 }}></button>
                     <button className="btn btn-warning mx-1" style={{ width: 30, height: 30 }}></button>
                     <button className="btn btn-danger mx-1" style={{ width: 30, height: 30 }}></button>
                 </div>
             </div>
-            <div className="p-2 bg-dark" style={{ minHeight: "100px" }}>{children}</div>
+            <div className="p-2 bg-dark" style={{ minHeight: "100px" }}>
+                {children}
+            </div>
         </div>
     )
 }
