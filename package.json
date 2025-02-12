@@ -10,12 +10,13 @@
         "lint": "eslint ."
     },
     "dependencies": {
+        "@dnd-kit/core": "^6.3.1",
         "axios": "^1.1.2",
+        "bootstrap": "^5.3.3",
         "laravel-vite-plugin": "^0.7.2",
         "lodash": "^4.17.19",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "vite-laravel-project": "file:"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.17.0",

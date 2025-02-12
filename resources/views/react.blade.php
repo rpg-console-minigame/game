@@ -6,7 +6,7 @@
     <title>Vite + React</title>
     @Vite(['resources/js/react/main.jsx'])
   </head>
-  <body>
+  <body  style= "background-color: #647994">
     <div id="root"></div>
   </body>
 </html>
