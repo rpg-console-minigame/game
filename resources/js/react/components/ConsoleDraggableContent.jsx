@@ -1,38 +1,56 @@
-import React from 'react';
+"use client"
 
-const ConsoleDraggableContent = ({ cuadro }) => {
+import { useState } from "react"
+
+const ConsoleDraggableContent = ({ onOpenMap }) => {
+  const [input, setInput] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (input.toLowerCase() === "mapa") {
+      onOpenMap()
+      setInput("")
+    }
+  }
+
   return (
-    <div id={`${cuadro}-content`} className="console-container">
-      <form action="">
-        <div className="form-group" style={{ display: 'flex', alignItems: 'center' }}>
-          <label htmlFor="console-input" className="console-label" style={{ marginRight: '10px' }}>
+    <div id="Consola-content" className="console-container">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
+          <label htmlFor="console-input" className="console-label" style={{ marginRight: "10px" }}>
             user@PC:~$
           </label>
           <input
             type="text"
             className="console-input"
             id="console-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             autoComplete="off"
             autoFocus
             style={{
-              flex: 1, // Hace que el input ocupe el espacio restante
-              padding: '8px', // Espacio interno para que se vea bien
-              backgroundColor: '#222', // Fondo oscuro como la consola
-              color: '#fff', // Texto blanco
-              borderRadius: '4px', // Bordes redondeados para suavizar el estilo
+              flex: 1,
+              padding: "8px",
+              backgroundColor: "#222",
+              color: "#fff",
+              borderRadius: "4px",
             }}
           />
         </div>
       </form>
-      <p style={{
-        color: '#ccc', 
-        fontSize: '0.85em', 
-        marginTop: '10px' // Espacio entre el input y el texto de ayuda
-      }}>
-        Escribe un comando y presiona Enter para ejecutarlo. Usa 'help' para más información.
+      <p
+        style={{
+          color: "#ccc",
+          fontSize: "0.85em",
+          marginTop: "10px",
+        }}
+      >
+        Escribe un comando y presiona Enter para ejecutarlo. Usa 'help' para más información. Escribe 'mapa' y presiona
+        Enter para abrir el mapa.
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default ConsoleDraggableContent;
+export default ConsoleDraggableContent
+
