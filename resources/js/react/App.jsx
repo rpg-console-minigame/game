@@ -6,11 +6,12 @@ import DraggableFrame from "./components/DraggableFrame"
 import DescripcionDraggableContent from "./components/DescripcionDraggableContent"
 import MapDraggableContent from "./components/MapDraggableContent"
 import ConsoleDraggableContent from "./components/ConsoleDraggableContent"
+import HelpDraggableContent from "./components/HelpDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
-  const cuadros = ["Descripcion", "Mapa", "Consola"]
-  const componentes = [DescripcionDraggableContent, MapDraggableContent, ConsoleDraggableContent]
+  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda"]
+  const componentes = [DescripcionDraggableContent, MapDraggableContent, ConsoleDraggableContent, HelpDraggableContent]
 
   const [positions, setPositions] = useState(() => {
     const savedPositions = {}
@@ -24,7 +25,10 @@ const App = () => {
           savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 700, y: 35 }
           break
         case "Mapa":
-          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 700, y: 210 }
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 700, y: 250 }
+          break
+        case "Ayuda":
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 33, y: 250 }
           break
         default:
           savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 0, y: 0 }
@@ -38,13 +42,11 @@ const App = () => {
     const savedStates = {}
     cuadros.forEach((cuadro) => {
       const saved = localStorage.getItem(`${cuadro}-active`)
-      switch (cuadro) {
-        case "Mapa":
-          savedStates[cuadro] = saved ? JSON.parse(saved) : false
-          break
-        default:
-          savedStates[cuadro] = saved ? JSON.parse(saved) : true
-          break
+      if (cuadro === "Ayuda") {
+        savedStates[cuadro] = false // Ayuda está oculta por defecto
+        localStorage.setItem(`${cuadro}-active`, JSON.stringify(false))
+      } else {
+        savedStates[cuadro] = saved ? JSON.parse(saved) : true
       }
     })
     return savedStates
@@ -75,7 +77,7 @@ const App = () => {
   }
 
   const handleToggleActive = useCallback((id) => {
-    if (id === "Mapa") {
+    if (id === "Mapa" || id === "Ayuda") {
       setActiveStates((prev) => {
         const newState = {
           ...prev,
@@ -93,6 +95,14 @@ const App = () => {
       Mapa: true,
     }))
     localStorage.setItem("Mapa-active", JSON.stringify(true))
+  }, [])
+
+  const handleOpenHelp = useCallback(() => {
+    setActiveStates((prev) => ({
+      ...prev,
+      Ayuda: true,
+    }))
+    localStorage.setItem("Ayuda-active", JSON.stringify(true))
   }, [])
 
   const handleFrameClick = useCallback((id) => {
@@ -116,11 +126,15 @@ const App = () => {
               initialPosition={positions[cuadro]}
               onToggleActive={handleToggleActive}
               isActive={activeStates[cuadro]}
-              canClose={cuadro === "Mapa"}
+              canClose={cuadro === "Mapa" || cuadro === "Ayuda"}
               onFrameClick={handleFrameClick}
               zIndex={order[cuadro]}
             >
-              {cuadro === "Consola" ? <ConsoleDraggableContent onOpenMap={handleOpenMap} /> : <Componente />}
+              {cuadro === "Consola" ? (
+                <ConsoleDraggableContent onOpenMap={handleOpenMap} onOpenHelp={handleOpenHelp} />
+              ) : (
+                <Componente />
+              )}
             </DraggableFrame>
           )
         })}

@@ -2,13 +2,16 @@
 
 import { useState } from "react"
 
-const ConsoleDraggableContent = ({ onOpenMap }) => {
+const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp }) => {
   const [input, setInput] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (input.toLowerCase() === "mapa") {
       onOpenMap()
+      setInput("")
+    } else if (input.toLowerCase() === "ayuda") {
+      onOpenHelp()
       setInput("")
     }
   }
@@ -45,8 +48,7 @@ const ConsoleDraggableContent = ({ onOpenMap }) => {
           marginTop: "10px",
         }}
       >
-        Escribe un comando y presiona Enter para ejecutarlo. Usa 'help' para más información. Escribe 'mapa' y presiona
-        Enter para abrir el mapa.
+        Escribe un comando y presiona Enter para ejecutarlo. Usa 'ayuda' para ver el listado de comandos disponibles.
       </p>
     </div>
   )
