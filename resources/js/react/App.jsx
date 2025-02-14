@@ -7,11 +7,12 @@ import DescripcionDraggableContent from "./components/DescripcionDraggableConten
 import MapDraggableContent from "./components/MapDraggableContent"
 import ConsoleDraggableContent from "./components/ConsoleDraggableContent"
 import HelpDraggableContent from "./components/HelpDraggableContent"
+import ChatDraggableContent from "./components/ChatDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
-  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda"]
-  const componentes = [DescripcionDraggableContent, MapDraggableContent, ConsoleDraggableContent, HelpDraggableContent]
+  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat"]
+  const componentes = [DescripcionDraggableContent, MapDraggableContent, ConsoleDraggableContent, HelpDraggableContent, ChatDraggableContent]
 
   const [positions, setPositions] = useState(() => {
     const savedPositions = {}
@@ -77,7 +78,7 @@ const App = () => {
   }
 
   const handleToggleActive = useCallback((id) => {
-    if (id === "Mapa" || id === "Ayuda") {
+    if (id === "Mapa" || id === "Ayuda" || id === "Chat") {
       setActiveStates((prev) => {
         const newState = {
           ...prev,
@@ -104,6 +105,13 @@ const App = () => {
     }))
     localStorage.setItem("Ayuda-active", JSON.stringify(true))
   }, [])
+  const handleOpenChat = useCallback(() => {
+    setActiveStates((prev) => ({
+      ...prev,
+      Chat: true,
+    }))
+    localStorage.setItem("Chat-active", JSON.stringify(true))
+  }, [])
 
   const handleFrameClick = useCallback((id) => {
     setOrder((prevOrder) => {
@@ -126,12 +134,12 @@ const App = () => {
               initialPosition={positions[cuadro]}
               onToggleActive={handleToggleActive}
               isActive={activeStates[cuadro]}
-              canClose={cuadro === "Mapa" || cuadro === "Ayuda"}
+              canClose={cuadro === "Mapa" || cuadro === "Ayuda" || cuadro === "Chat"}
               onFrameClick={handleFrameClick}
               zIndex={order[cuadro]}
             >
               {cuadro === "Consola" ? (
-                <ConsoleDraggableContent onOpenMap={handleOpenMap} onOpenHelp={handleOpenHelp} />
+                <ConsoleDraggableContent onOpenMap={handleOpenMap} onOpenHelp={handleOpenHelp} onOpenChat={handleOpenChat} />
               ) : (
                 <Componente />
               )}
@@ -144,4 +152,3 @@ const App = () => {
 }
 
 export default App
-

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp }) => {
+const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp , onOpenChat}) => {
   const [input, setInput] = useState("")
 
   const handleSubmit = (e) => {
@@ -12,6 +12,10 @@ const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp }) => {
       setInput("")
     } else if (input.toLowerCase() === "ayuda") {
       onOpenHelp()
+      setInput("")
+    }
+    else if (input.toLowerCase() === "chat") {
+      onOpenChat()
       setInput("")
     }
   }
