@@ -64,4 +64,55 @@ class PersonajeController extends Controller
         $personaje = Personaje::where("id", session()->get("character")["id"])->first();
         return response()->json($personaje);
     }
+    public function inputConsole(Request $request){
+        // body: JSON.stringify({ direccion: input.toLowerCase() }),
+        $input = $request->direccion;
+        // if input is "derecha" or "izquierda" or "arriba" or "abajo"
+        switch ($input) {
+            case "abajo":
+                $personaje = Personaje::where("id", session()->get("character")["id"])->first();
+                $zona = Zona::where("id", $personaje->zona_ID)->first();
+                $zona = Zona::where("coord_x", operator: $zona->coord_x+1)->where("coord_y", $zona->coord_y)->first();
+                if($zona){
+                    $personaje->zona_ID = $zona->id;
+                    $personaje->save();
+                    session("pesonaje", $personaje);
+                    return response()->json("ok");
+                }
+                break;
+            case "arriba":
+                $personaje = Personaje::where("id", session()->get("character")["id"])->first();
+                $zona = Zona::where("id", $personaje->zona_ID)->first();
+                $zona = Zona::where("coord_x", $zona->coord_x-1)->where("coord_y", $zona->coord_y)->first();
+                if($zona){
+                    $personaje->zona_ID = $zona->id;
+                    $personaje->save();
+                    return response()->json("ok");
+                }
+                break;
+            case "derecha":
+                $personaje = Personaje::where("id", session()->get("character")["id"])->first();
+                $zona = Zona::where("id", $personaje->zona_ID)->first();
+                $zona = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y+1)->first();
+                if($zona){
+                    $personaje->zona_ID = $zona->id;
+                    $personaje->save();
+                    return response()->json("ok");
+                }
+                break;
+            case "izquierda":
+                $personaje = Personaje::where("id", session()->get("character")["id"])->first();
+                $zona = Zona::where("id", $personaje->zona_ID)->first();
+                $zona = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y-1)->first();
+                if($zona){
+                    $personaje->zona_ID = $zona->id;
+                    $personaje->save();
+                    return response()->json("ok");
+                }
+                break;
+            default:
+            return response()->json(data: "no existe sala");
+                
+        }
+    }
 }

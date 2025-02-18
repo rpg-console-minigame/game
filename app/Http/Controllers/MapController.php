@@ -89,7 +89,8 @@ class MapController extends Controller
 
     public function mapInfo(){
         session_start();
-        $zona = \App\Models\Zona::where("id", session("character")->zona_ID)->first();
+        $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
+        $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
     
         $zonaInfo = [
             'nombre' => $zona->nombre,

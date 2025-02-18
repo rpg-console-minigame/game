@@ -12,7 +12,13 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
   const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat"]
-  const componentes = [DescripcionDraggableContent, MapDraggableContent, ConsoleDraggableContent, HelpDraggableContent, ChatDraggableContent]
+  const componentes = [
+    DescripcionDraggableContent,
+    MapDraggableContent,
+    ConsoleDraggableContent,
+    HelpDraggableContent,
+    ChatDraggableContent,
+  ]
 
   const [positions, setPositions] = useState(() => {
     const savedPositions = {}
@@ -122,6 +128,12 @@ const App = () => {
     })
   }, [])
 
+  const [mapUpdateTrigger, setMapUpdateTrigger] = useState(0)
+
+  const handleMapUpdate = useCallback(() => {
+    setMapUpdateTrigger((prev) => prev + 1)
+  }, [])
+
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="position-relative vh-100 vw-100">
@@ -139,7 +151,15 @@ const App = () => {
               zIndex={order[cuadro]}
             >
               {cuadro === "Consola" ? (
-                <ConsoleDraggableContent onOpenMap={handleOpenMap} onOpenHelp={handleOpenHelp} onOpenChat={handleOpenChat} />
+                <ConsoleDraggableContent
+                  apiUrl={apiUrl}
+                  onOpenMap={handleOpenMap}
+                  onOpenHelp={handleOpenHelp}
+                  onOpenChat={handleOpenChat}
+                  onMapUpdate={handleMapUpdate}
+                />
+              ) : cuadro === "Mapa" ? (
+                <MapDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : (
                 <Componente />
               )}
@@ -152,3 +172,4 @@ const App = () => {
 }
 
 export default App
+
