@@ -1,9 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp , onOpenChat}) => {
   const [input, setInput] = useState("")
+  const [nombre, setNombre] = useState("user@PC:~$")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(apiUrl + "/info")
+        const data = await response.json()
+        setNombre(data.nombre || "user@PC:~$")
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -25,7 +41,7 @@ const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp , onOpenChat}) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group" style={{ display: "flex", alignItems: "center" }}>
           <label htmlFor="console-input" className="console-label" style={{ marginRight: "10px" }}>
-            user@PC:~$
+            {nombre}@PC:~$
           </label>
           <input
             type="text"
@@ -59,4 +75,3 @@ const ConsoleDraggableContent = ({ onOpenMap, onOpenHelp , onOpenChat}) => {
 }
 
 export default ConsoleDraggableContent
-

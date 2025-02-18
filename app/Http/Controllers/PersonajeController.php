@@ -60,4 +60,8 @@ class PersonajeController extends Controller
             return redirect("/")->with("error", "Es necesario nombre o descripcion");
         }
     }
+    public function ifoApi(){
+        $personaje = Personaje::where("id", session()->get("character")["id"])->first();
+        return response()->json($personaje);
+    }
 }

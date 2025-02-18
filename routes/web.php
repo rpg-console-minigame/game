@@ -31,6 +31,7 @@ Route::post("/play", [UserController::class, 'play'])->name('play');
 
 
 Route::get("/mapInfo", [MapController::class, 'mapInfo']);
+Route::get('/info', [PersonajeController::class,'ifoApi'])->name('info');
 
 Route::get('/messages', [ChatController::class, 'index']);
 Route::post('/messages', [ChatController::class, 'store']);
