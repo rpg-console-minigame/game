@@ -7,11 +7,18 @@ import DescripcionDraggableContent from "./components/DescripcionDraggableConten
 import MapDraggableContent from "./components/MapDraggableContent"
 import ConsoleDraggableContent from "./components/ConsoleDraggableContent"
 import HelpDraggableContent from "./components/HelpDraggableContent"
+import ChatDraggableContent from "./components/ChatDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
-  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda"]
-  const componentes = [DescripcionDraggableContent, MapDraggableContent, ConsoleDraggableContent, HelpDraggableContent]
+  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat"]
+  const componentes = [
+    DescripcionDraggableContent,
+    MapDraggableContent,
+    ConsoleDraggableContent,
+    HelpDraggableContent,
+    ChatDraggableContent,
+  ]
 
   const [positions, setPositions] = useState(() => {
     const savedPositions = {}
@@ -42,8 +49,9 @@ const App = () => {
     const savedStates = {}
     cuadros.forEach((cuadro) => {
       const saved = localStorage.getItem(`${cuadro}-active`)
-      if (cuadro === "Ayuda") {
-        savedStates[cuadro] = false // Ayuda está oculta por defecto
+      if (cuadro === "Ayuda" || cuadro === "Chat") {
+        savedStates[cuadro] = localStorage.getItem(`${cuadro}-active`) == "true" ? true : false
+        if (!localStorage.getItem(`${cuadro}-active`))
         localStorage.setItem(`${cuadro}-active`, JSON.stringify(false))
       } else {
         savedStates[cuadro] = saved ? JSON.parse(saved) : true
@@ -77,7 +85,7 @@ const App = () => {
   }
 
   const handleToggleActive = useCallback((id) => {
-    if (id === "Mapa" || id === "Ayuda") {
+    if (id === "Mapa" || id === "Ayuda" || id === "Chat") {
       setActiveStates((prev) => {
         const newState = {
           ...prev,
@@ -104,6 +112,13 @@ const App = () => {
     }))
     localStorage.setItem("Ayuda-active", JSON.stringify(true))
   }, [])
+  const handleOpenChat = useCallback(() => {
+    setActiveStates((prev) => ({
+      ...prev,
+      Chat: true,
+    }))
+    localStorage.setItem("Chat-active", JSON.stringify(true))
+  }, [])
 
   const handleFrameClick = useCallback((id) => {
     setOrder((prevOrder) => {
@@ -112,6 +127,12 @@ const App = () => {
       newOrder[id] = maxOrder + 1
       return newOrder
     })
+  }, [])
+
+  const [mapUpdateTrigger, setMapUpdateTrigger] = useState(0)
+
+  const handleMapUpdate = useCallback(() => {
+    setMapUpdateTrigger((prev) => prev + 1)
   }, [])
 
   return (
@@ -126,12 +147,20 @@ const App = () => {
               initialPosition={positions[cuadro]}
               onToggleActive={handleToggleActive}
               isActive={activeStates[cuadro]}
-              canClose={cuadro === "Mapa" || cuadro === "Ayuda"}
+              canClose={cuadro === "Mapa" || cuadro === "Ayuda" || cuadro === "Chat"}
               onFrameClick={handleFrameClick}
               zIndex={order[cuadro]}
             >
               {cuadro === "Consola" ? (
-                <ConsoleDraggableContent onOpenMap={handleOpenMap} onOpenHelp={handleOpenHelp} />
+                <ConsoleDraggableContent
+                  apiUrl={apiUrl}
+                  onOpenMap={handleOpenMap}
+                  onOpenHelp={handleOpenHelp}
+                  onOpenChat={handleOpenChat}
+                  onMapUpdate={handleMapUpdate}
+                />
+              ) : cuadro === "Mapa" ? (
+                <MapDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : (
                 <Componente />
               )}

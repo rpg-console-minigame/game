@@ -89,8 +89,23 @@ class MapController extends Controller
 
     public function mapInfo(){
         session_start();
-        $zona = \App\Models\Zona::where("id",session("character")->zona_ID)->first();
+        $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
+        $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
+    
+        $zonaInfo = [
+            'nombre' => $zona->nombre,
+            'ruta_IMG' => $zona->ruta_IMG,
+            'descripcion' => $zona->descripcion,
+            'up_door' => $zona->hasUpDoor(),
+            'down_door' => $zona->hasDownDoor(),
+            'left_door' => $zona->hasLeftDoor(),
+            'right_door' => $zona->hasRightDoor(),
+            'coord_x' => $zona->coord_x,
+            'coord_y' => $zona->coord_y,
+            'isSpawn' => $zona->isSpawn
+        ];
+    
         // devolver por api la zona
-        return response()->json($zona);
+        return response()->json($zonaInfo);
     }
 }
