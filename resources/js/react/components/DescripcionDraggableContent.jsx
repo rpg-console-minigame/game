@@ -1,4 +1,30 @@
-const DescripcionDraggableContent = () => {
+"use client"
+
+import { useState, useEffect } from "react"
+const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
+  const [zonaInfo, setZonaInfo] = useState(null)
+
+  useEffect(() => {
+    const fetchZonaInfo = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/mapInfo`)
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json()
+        setZonaInfo(data)
+      } catch (error) {
+        console.error("Error fetching zona info:", error)
+      }
+    }
+
+    fetchZonaInfo()
+  }, [apiUrl, mapUpdateTrigger])
+
+  if (!zonaInfo) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div
       id="Descripcion-content"
@@ -7,7 +33,7 @@ const DescripcionDraggableContent = () => {
         overflowY: "auto",
       }}
     >
-      <h1 style={{ textAlign: "center" }}>El Bosque Encantado [1-1]</h1>
+      <h1 style={{ textAlign: "center" }}>{zonaInfo.nombre || "Loading..."}</h1>
       <p style={{ textAlign: "center" }}>
         -----------,@@@@@@,---------------
         <br />
@@ -32,15 +58,15 @@ const DescripcionDraggableContent = () => {
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       </p>
 
-      <p style={{ textAlign: "center" }}>
-        Bosque denso y misterioso donde los árboles parecen susurrar secretos antiguos con cada soplo de viento. El
-        suelo está cubierto de musgo brillante que resplandece bajo la luz de las luciérnagas que bailan en la penumbra.
-        Los senderos serpentean entre los árboles centenarios, cuyas ramas se entrelazan formando arcos naturales que
-        parecen portales hacia otro mundo.
-        <br />
-        Aquí y allá, flores luminosas y de colores brillantes iluminan la oscuridad, emitiendo un suave resplandor que
-        guía a los viajeros perdidos. Criaturas mágicas como hadas risueñas, elfos silenciosos y centauros majestuosos
-        acechan entre las sombras, observando con curiosidad a aquellos que se aventuran en su reino.
+      <p id="Descripcion-content_text" style={{ textAlign: "center" }}>
+        {zonaInfo.descripcion ||
+          `Loading...`}
+      </p>
+
+      {zonaInfo.isSpawn && <p style={{ textAlign: "center", color: "#ffcc00" }}>¡Esta es la zona de inicio!</p>}
+
+      <p style={{ textAlign: "center", fontSize: "0.8em", color: "#aaa" }}>
+        Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]
       </p>
     </div>
   )

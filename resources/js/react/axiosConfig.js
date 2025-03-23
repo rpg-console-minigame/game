@@ -3,7 +3,9 @@
 import axios from 'axios';
 
 // Set the base URL for all axios requests
-axios.defaults.baseURL = 'http://10.192.83.97:8000';
+// axios.defaults.baseURL = 'http://10.192.83.97:8000';
+axios.defaults.baseURL = 'http://192.168.8.116:8000';
+
 
 // Set withCredentials to true for all requests
 axios.defaults.withCredentials = true;

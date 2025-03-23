@@ -51,8 +51,7 @@ const App = () => {
       const saved = localStorage.getItem(`${cuadro}-active`)
       if (cuadro === "Ayuda" || cuadro === "Chat") {
         savedStates[cuadro] = localStorage.getItem(`${cuadro}-active`) == "true" ? true : false
-        if (!localStorage.getItem(`${cuadro}-active`))
-        localStorage.setItem(`${cuadro}-active`, JSON.stringify(false))
+        if (!localStorage.getItem(`${cuadro}-active`)) localStorage.setItem(`${cuadro}-active`, JSON.stringify(false))
       } else {
         savedStates[cuadro] = saved ? JSON.parse(saved) : true
       }
@@ -161,6 +160,8 @@ const App = () => {
                 />
               ) : cuadro === "Mapa" ? (
                 <MapDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
+              ) : cuadro === "Descripcion" ? (
+                <DescripcionDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : (
                 <Componente />
               )}

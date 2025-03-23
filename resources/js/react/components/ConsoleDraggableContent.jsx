@@ -70,6 +70,12 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
         throw new Error(`HTTP error! status: ${response.status}`)
       }
       const zonaInfo = await response.json()
+      // actualizar la descripción de la zona
+      const descripcion = document.querySelector("#Descripcion-content")
+      descripcion.querySelector("h1").innerText = zonaInfo.nombre
+      descripcion.querySelector("#Descripcion-content_text").innerText = zonaInfo.descripcion
+      //Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]
+      descripcion.querySelector("p:last-child").innerHTML = "coordenadas: [" + zonaInfo.coord_x + ", " + zonaInfo.coord_y + "]"
       // actualizar el pre de la descripción
     const pre = document.querySelector("#Mapa-content pre")
     if (pre) {
