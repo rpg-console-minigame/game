@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('zona', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('ruta_IMG')->nullable();
-            $table->string('descripcion');
+            $table->longText('imagen');
+            $table->longText('descripcion');
             $table->boolean('up_door');
             $table->boolean('down_door');
             $table->boolean('left_door');

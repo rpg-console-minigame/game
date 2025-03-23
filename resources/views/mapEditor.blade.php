@@ -59,58 +59,73 @@
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
                         <p type="button" data-toggle="modal"
                             data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
-                        <div class="modal" id="modalEdit{{ $i }}-{{ $j }}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="{{ route('update') }}" method="POST">
-                                        @csrf
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Modal Heading</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <input type="text" name="nombre" placeholder="Nombre"
-                                                value="{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->nombre }}">
-                                            {{-- <input type="text" name="ruta_IMG" placeholder="Ruta IMG"> --}}
-                                            <input type="text" name="descripcion" placeholder="Descripcion"
-                                                value="{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->descripcion }}">
-                                            <label for="up_door">¿Muro arriba?</label>
-                                            <input type="checkbox" name="up_door" value="1"
-                                                @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->up_door != 1) checked @endif>
-                                            <label for="down_door">¿Muro abajo?</label>
-                                            <input type="checkbox" name="down_door" value="1"
-                                                @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->down_door != 1) checked @endif>
-                                            <label for="left_door">¿Muro a la izquierda?</label>
-                                            <input type="checkbox" name="left_door" value="1"
-                                                @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->left_door != 1) checked @endif>
-                                            <label for="right_door">¿Muro a la derecha?</label>
-                                            <input type="checkbox" name="right_door" value="1"
-                                                @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->right_door != 1) checked @endif>
-                                            <label for="isSpawn">¿Es Spawn?</label>
-                                            <input type="checkbox" name="isSpawn" value="1"
-                                                @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->isSpawn == 1) checked @endif>
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
+                            <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <form action="{{ route('update') }}" method="POST">
+                                            @csrf
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Editar Casilla</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="nombre">Nombre</label>
+                                                    <input type="text" class="form-control form-control-lg" name="nombre" placeholder="Nombre"
+                                                        value="{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->nombre }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="descripcion">Descripción</label>
+                                                    <textarea class="form-control" name="descripcion" rows="3" placeholder="Descripción">{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->descripcion }}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="descripcion">Imagen Ascii</label>
+                                                    <textarea class="form-control" name="imagen" rows="3" placeholder="Descripción">{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->imagen }}</textarea>
+                                                </div>
+                                                <fieldset class="border p-3">
+                                                    <legend class="w-auto">Muros</legend>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="up_door" value="1"
+                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->up_door != 1) checked @endif>
+                                                        <label class="form-check-label">Muro arriba</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="down_door" value="1"
+                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->down_door != 1) checked @endif>
+                                                        <label class="form-check-label">Muro abajo</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="left_door" value="1"
+                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->left_door != 1) checked @endif>
+                                                        <label class="form-check-label">Muro a la izquierda</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="right_door" value="1"
+                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->right_door != 1) checked @endif>
+                                                        <label class="form-check-label">Muro a la derecha</label>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="form-check mt-3">
+                                                    <input class="form-check-input" type="checkbox" name="isSpawn" value="1"
+                                                        @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->isSpawn == 1) checked @endif>
+                                                    <label class="form-check-label">¿Es Spawn?</label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="coord_x" value="{{ $i }}">
+                                                <input type="hidden" name="coord_y" value="{{ $j }}">
+                                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                                        </form>
+                                        <form action="{{ route('delete') }}" method="POST" class="ml-2">
+                                            @csrf
                                             <input type="hidden" name="coord_x" value="{{ $i }}">
                                             <input type="hidden" name="coord_y" value="{{ $j }}">
-                                            {{-- <a href="?coord_x={{$i}}&coord_y={{$j}}" class="btn btn-primary">Create</a> --}}
-                                            <button type="submit" class="btn btn-primary">Update</button>
-                                    </form>
-                                    <form action="{{ route('delete') }}" method="POST">
-                                        <input type="hidden" name="coord_x" value="{{ $i }}">
-                                        <input type="hidden" name="coord_y" value="{{ $j }}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </div>
-
                             </div>
-                        </div>
+                            
                     </div>
         </div>
     @elseif (
@@ -123,42 +138,57 @@
             <p type="button" data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
                 Create</p>
             <!-- The Modal -->
-            <div class="modal" id="modalCreate{{ $i }}-{{ $j }}">
-                <div class="modal-dialog">
+            <div class="modal fade" id="modalCreate{{ $i }}-{{ $j }}" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <form action="{{ route('create') }}" method="POST">
                             @csrf
-                            <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
+                                <h4 class="modal-title">Crear Casilla</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-
-                            <!-- Modal body -->
                             <div class="modal-body">
-                                <input type="text" name="nombre" placeholder="Nombre">
-                                {{-- <input type="text" name="ruta_IMG" placeholder="Ruta IMG"> --}}
-                                <input type="text" name="descripcion" placeholder="Descripcion">
-                                <label for="up_door">¿Muro arriba?</label>
-                                <input type="checkbox" name="up_door" value="1">
-                                <label for="down_door">¿Muro abajo?</label>
-                                <input type="checkbox" name="down_door" value="1">
-                                <label for="left_door">¿Muro a la izquierda?</label>
-                                <input type="checkbox" name="left_door" value="1">
-                                <label for="right_door">¿Muro a la derecha?</label>
-                                <input type="checkbox" name="right_door" value="1">
-                                <label for="isSpawn">¿Es Spawn?</label>
-                                <input type="checkbox" name="isSpawn" value="1">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control form-control-lg" name="nombre" placeholder="Nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción</label>
+                                    <textarea class="form-control" name="descripcion" rows="3" placeholder="Descripción"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion">Imagen Ascii</label>
+                                    <textarea class="form-control" name="imagen" rows="3" placeholder=""></textarea>
+                                </div>
+                                <fieldset class="border p-3">
+                                    <legend class="w-auto">Muros</legend>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="up_door" value="1">
+                                        <label class="form-check-label">Muro arriba</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="down_door" value="1">
+                                        <label class="form-check-label">Muro abajo</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="left_door" value="1">
+                                        <label class="form-check-label">Muro a la izquierda</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="right_door" value="1">
+                                        <label class="form-check-label">Muro a la derecha</label>
+                                    </div>
+                                </fieldset>
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" name="isSpawn" value="1">
+                                    <label class="form-check-label">¿Es Spawn?</label>
+                                </div>
                             </div>
-
-                            <!-- Modal footer -->
                             <div class="modal-footer">
                                 <input type="hidden" name="coord_x" value="{{ $i }}">
                                 <input type="hidden" name="coord_y" value="{{ $j }}">
-                                {{-- <a href="?coord_x={{$i}}&coord_y={{$j}}" class="btn btn-primary">Create</a> --}}
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Crear</button>
                             </div>
-
                         </form>
                     </div>
                 </div>

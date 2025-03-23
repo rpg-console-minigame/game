@@ -72,6 +72,7 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
       const zonaInfo = await response.json()
       // actualizar la descripción de la zona
       const descripcion = document.querySelector("#Descripcion-content")
+      descripcion.querySelector("#Descripcion-content_img").innerText = zonaInfo.imagen
       descripcion.querySelector("h1").innerText = zonaInfo.nombre
       descripcion.querySelector("#Descripcion-content_text").innerText = zonaInfo.descripcion
       //Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]

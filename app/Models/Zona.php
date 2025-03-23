@@ -15,7 +15,7 @@ class Zona extends Model
 
     protected $fillable = [
         'nombre',
-        'ruta_IMG',
+        'imagen',
         'descripcion',
         'up_door',
         'down_door',
