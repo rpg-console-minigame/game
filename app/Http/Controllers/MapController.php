@@ -29,7 +29,7 @@ class MapController extends Controller
             $zone->coord_x = request("coord_x");
             $zone->coord_y = request("coord_y");
             $zone->nombre = request("nombre");
-            $zone->ruta_IMG = request("ruta_IMG");
+            $zone->imagen = request("imagen");
             $zone->descripcion = request("descripcion");
             $zone->up_door = request("up_door") ? 0 : 1;
             $zone->down_door = request("down_door") ? 0 : 1;
@@ -70,7 +70,7 @@ class MapController extends Controller
         $zone->coord_x = request("coord_x");
         $zone->coord_y = request("coord_y");
         $zone->nombre = request("nombre");
-        // $zone->ruta_IMG = request("ruta_IMG");
+        $zone->imagen = request("imagen");
         $zone->descripcion = request("descripcion");
         $zone->up_door = request("up_door") ? 0 : 1;
         $zone->down_door = request("down_door") ? 0 : 1;
@@ -93,6 +93,7 @@ class MapController extends Controller
         $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
     
         $zonaInfo = [
+            "imagen" => $zona->imagen,
             'nombre' => $zona->nombre,
             'ruta_IMG' => $zona->ruta_IMG,
             'descripcion' => $zona->descripcion,

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
                 Zona::factory()->create([
                     'nombre' => 'Sala ' . $contador,
                     'descripcion' => 'Sala ' . $contador,
+                    'imagen' => 'a',
                     'down_door' => true,
                     'left_door' => true,
                     'right_door' => true,
