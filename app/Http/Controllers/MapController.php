@@ -9,7 +9,8 @@ class MapController extends Controller
 {
     function index() {
         $map = \App\Models\Zona::all();
-        return view("mapEditor", ["map" => $map]);
+        $items = \App\Models\Objeto::all();
+        return view("mapEditor", ["map" => $map, "items" => $items]);
     }
     function create(Request $request) {
         $data =[

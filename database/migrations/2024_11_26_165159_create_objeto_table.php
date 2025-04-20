@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('objeto', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('zona_ID')->nullable();
-            $table->foreign('zona_ID')->references('id')->on('zona');
+            $table->foreign('zona_ID')->references('id')->on('zona')->nullable();
             $table->string('nombre');
-            $table->integer('durabilidad');
-            $table->string('function_name');
+            $table->string('descripcion')->nullable();
+            $table->integer('coste' )->nullable();
+            $table->integer('durabilidad')->nullable();
+            $table->string('function_name')->nullable();
             $table->timestamps();
         });
     }

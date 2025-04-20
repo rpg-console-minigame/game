@@ -15,6 +15,8 @@ class Objeto extends Model
 
     protected $fillable = [
         'nombre',
+        'coste',
+        'descripcion',
         'function_name',
         'durabilidad',
         'zona_ID'
