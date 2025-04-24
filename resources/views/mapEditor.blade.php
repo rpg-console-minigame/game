@@ -250,7 +250,7 @@
             <div class="modal fade" id="modalCreateObject" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="" method="POST">
+                        <form action="{{route("createObject")}}" method="POST">
                             @csrf
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear Objeto</h4>
