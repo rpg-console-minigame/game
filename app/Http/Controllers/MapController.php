@@ -92,7 +92,7 @@ class MapController extends Controller
         session_start();
         $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
         $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
-    
+        $objetos = \App\Models\Objeto::where("zona_ID", $zona->id)->get();
         $zonaInfo = [
             "imagen" => $zona->imagen,
             'nombre' => $zona->nombre,
@@ -104,7 +104,8 @@ class MapController extends Controller
             'right_door' => $zona->hasRightDoor(),
             'coord_x' => $zona->coord_x,
             'coord_y' => $zona->coord_y,
-            'isSpawn' => $zona->isSpawn
+            'isSpawn' => $zona->isSpawn,
+            'objetos' => $objetos
         ];
     
         // devolver por api la zona
