@@ -13,13 +13,27 @@ class Objeto extends Model
     
     protected $primary = 'id';
 
+    // Schema::create('objeto', function (Blueprint $table) {
+    //     $table->id();
+    //     $table->unsignedBigInteger('zona_ID')->nullable();
+    //     $table->foreign('zona_ID')->references('id')->on('zona')->nullable();
+    //     $table->unsignedBigInteger('personaje_ID')->nullable();
+    //     $table->foreign('personaje_ID')->references('id')->on('personaje')->nullable();
+    //     $table->string('nombre');
+    //     $table->string('descripcion')->nullable();
+    //     $table->integer('coste' )->nullable();
+    //     $table->integer('durabilidad')->nullable();
+    //     $table->string('function_name')->nullable();
+    //     $table->timestamps();
+    // });
     protected $fillable = [
         'nombre',
         'coste',
         'descripcion',
         'function_name',
         'durabilidad',
-        'zona_ID'
+        'zona_ID',
+        'personaje_ID'
     ];
     public function Zona(){
         return $this->hasOne('zona');
