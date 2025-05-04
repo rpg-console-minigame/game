@@ -387,6 +387,11 @@
                                         placeholder="Descripcion" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="durabilidad">Minutos</label>
+                                    <input type="text" class="form-control form-control-lg" name="minutos"
+                                        placeholder="Minutos" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="zona_ID">Zona ID</label>
                                     <select class="form-control form-control-lg" name="zona_ID" required>
                                         @foreach ($map as $zona)

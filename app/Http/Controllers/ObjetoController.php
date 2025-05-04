@@ -15,6 +15,8 @@ class ObjetoController extends Controller
         $objeto->durabilidad = $request->input('durabilidad');
         $objeto->descripcion = $request->input('descripcion');
         $objeto->zona_ID = $request->input('zona_ID');
+        $objeto->coste = $request->input('coste');
+        $objeto->minutos = $request->input('minutos');
         $objeto->save();
         return redirect('/map')->with('success', 'Objeto creado exitosamente!');
     }
@@ -25,6 +27,8 @@ class ObjetoController extends Controller
             $objeto->function_name = $request->input('function_name');
             $objeto->durabilidad = $request->input('durabilidad');
             $objeto->descripcion = $request->input('descripcion');
+            $objeto->coste = $request->input('coste');
+            $objeto->minutos = $request->input('minutos');
             $objeto->zona_ID = $request->input('zona_ID');
             $objeto->save();
             return redirect('/map')->with('success', 'Objeto editado exitosamente!');

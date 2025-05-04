@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Objeto extends Model
+class objetoInGame extends Model
 {
     use HasFactory;
-
-    protected $table ='objeto';
+    protected $table ='objetoInGame';
     
     protected $primary = 'id';
 
@@ -21,8 +20,12 @@ class Objeto extends Model
         'durabilidad',
         'minutos',
         'zona_ID',
+        'personaje_ID',
     ];
     public function Zona(){
         return $this->hasOne('zona');
+    }
+    public function Personaje(){
+        return $this->hasOne('personaje');
     }
 }
