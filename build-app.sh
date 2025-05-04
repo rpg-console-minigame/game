@@ -7,8 +7,8 @@ set -e
 # Build assets using NPM
 npm run build
 # Run migrations
-php artisan migrate --force
-php artisan db:seed --force
+php artisan migrate
+php artisan db:seed
 
 # Clear cache
 php artisan optimize:clear
