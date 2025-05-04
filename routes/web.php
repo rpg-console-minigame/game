@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ObjetoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,11 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/map/create', [MapController::class, 'create'])->name('create');
 Route::post('/map/delete', [MapController::class, 'delete'])->name('delete');
 Route::post('/map/update', [MapController::class, 'update'])->name('update');
+Route::post('/map/createObject', [ObjetoController::class, 'create'])->name('createObject');
+Route::post('/map/editObject/{id}', [ObjetoController::class, 'edit'])->name('editObject');
+Route::post('/map/deleteObject', [ObjetoController::class, 'delete'])->name('deleteObject');
+
+
 Route::post('/login', [UserController::class, 'login'])->name('loginEnter');
 Route::post('/register', [UserController::class, 'register'])->name('registerEnter');
 Route::post('createPj', [PersonajeController::class, 'create'])->name('createPj');

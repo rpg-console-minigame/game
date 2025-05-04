@@ -59,73 +59,75 @@
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
                         <p type="button" data-toggle="modal"
                             data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
-                            <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1" role="dialog">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <form action="{{ route('update') }}" method="POST">
-                                            @csrf
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Editar Casilla</h4>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1"
+                            role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form action="{{ route('update') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Editar Casilla</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="nombre" placeholder="Nombre"
+                                                    value="{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->nombre }}">
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="nombre">Nombre</label>
-                                                    <input type="text" class="form-control form-control-lg" name="nombre" placeholder="Nombre"
-                                                        value="{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->nombre }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="descripcion">Descripción</label>
-                                                    <textarea class="form-control" name="descripcion" rows="3" placeholder="Descripción">{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->descripcion }}</textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="descripcion">Imagen Ascii</label>
-                                                    <textarea class="form-control" name="imagen" rows="3" placeholder="Descripción">{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->imagen }}</textarea>
-                                                </div>
-                                                <fieldset class="border p-3">
-                                                    <legend class="w-auto">Muros</legend>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="up_door" value="1"
-                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->up_door != 1) checked @endif>
-                                                        <label class="form-check-label">Muro arriba</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="down_door" value="1"
-                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->down_door != 1) checked @endif>
-                                                        <label class="form-check-label">Muro abajo</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="left_door" value="1"
-                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->left_door != 1) checked @endif>
-                                                        <label class="form-check-label">Muro a la izquierda</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="right_door" value="1"
-                                                            @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->right_door != 1) checked @endif>
-                                                        <label class="form-check-label">Muro a la derecha</label>
-                                                    </div>
-                                                </fieldset>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" name="isSpawn" value="1"
-                                                        @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->isSpawn == 1) checked @endif>
-                                                    <label class="form-check-label">¿Es Spawn?</label>
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="form-control" name="descripcion" rows="3" placeholder="Descripción">{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->descripcion }}</textarea>
                                             </div>
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="coord_x" value="{{ $i }}">
-                                                <input type="hidden" name="coord_y" value="{{ $j }}">
-                                                <button type="submit" class="btn btn-primary">Actualizar</button>
-                                        </form>
-                                        <form action="{{ route('delete') }}" method="POST" class="ml-2">
-                                            @csrf
+                                            <div class="form-group">
+                                                <label for="descripcion">Imagen Ascii</label>
+                                                <textarea class="form-control" name="imagen" rows="3" placeholder="Descripción">{{ $map->where('coord_x', $i)->where('coord_y', $j)->first()->imagen }}</textarea>
+                                            </div>
+                                            <fieldset class="border p-3">
+                                                <legend class="w-auto">Muros</legend>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="up_door"
+                                                        value="1" @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->up_door != 1) checked @endif>
+                                                    <label class="form-check-label">Muro arriba</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="down_door"
+                                                        value="1" @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->down_door != 1) checked @endif>
+                                                    <label class="form-check-label">Muro abajo</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="left_door"
+                                                        value="1" @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->left_door != 1) checked @endif>
+                                                    <label class="form-check-label">Muro a la izquierda</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="right_door"
+                                                        value="1" @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->right_door != 1) checked @endif>
+                                                    <label class="form-check-label">Muro a la derecha</label>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-check mt-3">
+                                                <input class="form-check-input" type="checkbox" name="isSpawn"
+                                                    value="1" @if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->isSpawn == 1) checked @endif>
+                                                <label class="form-check-label">¿Es Spawn?</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
                                             <input type="hidden" name="coord_x" value="{{ $i }}">
                                             <input type="hidden" name="coord_y" value="{{ $j }}">
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </div>
+                                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                                    </form>
+                                    <form action="{{ route('delete') }}" method="POST" class="ml-2">
+                                        @csrf
+                                        <input type="hidden" name="coord_x" value="{{ $i }}">
+                                        <input type="hidden" name="coord_y" value="{{ $j }}">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
                                 </div>
                             </div>
-                            
+                        </div>
+
                     </div>
         </div>
     @elseif (
@@ -135,10 +137,12 @@
             $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
         <div class="col" style="height: 50px; width: 50px; background-color: green;">
             {{-- <a href="{{ route('create', ['coord_x' => $i, 'coord_y' => $j]) }}">Create</a> --}}
-            <p type="button" data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
+            <p type="button" data-toggle="modal"
+                data-target="#modalCreate{{ $i }}-{{ $j }}">
                 Create</p>
             <!-- The Modal -->
-            <div class="modal fade" id="modalCreate{{ $i }}-{{ $j }}" tabindex="-1" role="dialog">
+            <div class="modal fade" id="modalCreate{{ $i }}-{{ $j }}" tabindex="-1"
+                role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <form action="{{ route('create') }}" method="POST">
@@ -150,7 +154,8 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control form-control-lg" name="nombre" placeholder="Nombre">
+                                    <input type="text" class="form-control form-control-lg" name="nombre"
+                                        placeholder="Nombre">
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
@@ -163,19 +168,23 @@
                                 <fieldset class="border p-3">
                                     <legend class="w-auto">Muros</legend>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="up_door" value="1">
+                                        <input class="form-check-input" type="checkbox" name="up_door"
+                                            value="1">
                                         <label class="form-check-label">Muro arriba</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="down_door" value="1">
+                                        <input class="form-check-input" type="checkbox" name="down_door"
+                                            value="1">
                                         <label class="form-check-label">Muro abajo</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="left_door" value="1">
+                                        <input class="form-check-input" type="checkbox" name="left_door"
+                                            value="1">
                                         <label class="form-check-label">Muro a la izquierda</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="right_door" value="1">
+                                        <input class="form-check-input" type="checkbox" name="right_door"
+                                            value="1">
                                         <label class="form-check-label">Muro a la derecha</label>
                                     </div>
                                 </fieldset>
@@ -200,6 +209,208 @@
     @endfor
     </div>
     @endfor
+    {{-- div objects table --}}
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    {{-- 'nombre',
+                        'coste',
+                        'function_name',
+                        'durabilidad',
+                        'zona_ID' --}}
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>function_name</th>
+                    <th>Durabilidad</th>
+                    <th>Zona_ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($items as $object)
+                    <tr>
+                        <td>{{ $object->id }}</td>
+                        <td>{{ $object->nombre }}</td>
+                        <td>{{ $object->function_name }}</td>
+                        <td>{{ $object->durabilidad }}</td>
+                        <td>{{ $object->zona_ID }}</td>
+                        {{-- boton editar objeto --}}
+                        <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#modalEditObject{{ $object->id }}">Editar</button></td>
+                        {{-- modal  modalEditObject --}}
+                        <div class="modal fade" id="modalEditObject{{ $object->id }}" tabindex="-1"
+                            role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form action="{{ route('editObject', ['id' => $object->id]) }}" method="POST">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Editar Objeto</h4>
+                                            <button type="button" class="close"
+                                                data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="nombre" placeholder="Nombre"
+                                                    value="{{ $object->nombre }}">
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="function_name">Function Name</label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="function_name" placeholder="Function Name"
+                                                    value="{{ $object->function_name }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="durabilidad">Durabilidad</label>
+                                                <input type="number" class="form-control form-control-lg"
+                                                    name="durabilidad" placeholder="Durabilidad"
+                                                    value="{{ $object->durabilidad }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="coste">Coste</label>
+                                                <input type="number" class="form-control form-control-lg"
+                                                    name="coste" placeholder="Coste" value="{{ $object->coste }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="durabilidad">Descripcion</label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="descripcion" placeholder="Descripcion"
+                                                    value="{{ $object->descripcion }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="zona_ID">Zona ID</label>
+                                                <select class="form-control form-control-lg" name="zona_ID">
+                                                    @foreach ($map as $zona)
+                                                        <option value="{{ $zona->id }}"
+                                                            @if ($object->zona_ID == $zona->id) selected @endif>
+                                                            {{ $zona->nombre }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="id" value="{{ $object->id }}">
+                                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- boton eliminar objeto --}}
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#modalDeleteObject{{ $object->id }}">Eliminar</button></td>
+                        {{-- modal  modalDeleteObject --}}
+                        <div class="modal fade" id="modalDeleteObject{{ $object->id }}" tabindex="-1"
+                            role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form action="{{ route('deleteObject') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Eliminar Objeto</h4>
+                                            <button type="button" class="close"
+                                                data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div
+                                            class="modal-body
+                                            <p>¿Estás seguro de que quieres eliminar el objeto
+                                                {{ $object->nombre }}?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="id" value="{{ $object->id }}">
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                @endforeach
+            </tbody>
+            {{-- boton crear objeto --}}
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#modalCreateObject">Crear Objeto</button>
+                    </td>
+                </tr>
+            </tfoot>
+            {{-- modal  modalCreateObject --}}
+            <div class="modal fade" id="modalCreateObject" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form action="{{ route('createObject') }}" method="POST">
+                            @csrf
+                            <div class="modal-header">
+                                <h4 class="modal-title">Crear Objeto</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                {{-- $table->id();
+            $table->unsignedBigInteger('zona_ID');
+            $table->foreign('zona_ID')->references('id')->on('zona');
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();
+            $table->integer('coste' )->nullable();
+            $table->integer('durabilidad')->nullable();
+            $table->string('function_name'); --}}
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control form-control-lg" name="nombre"
+                                        placeholder="Nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="function_name">Function Name</label>
+                                    <input type="text" class="form-control form-control-lg" name="function_name"
+                                        placeholder="Function Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="durabilidad">Durabilidad</label>
+                                    <input type="number" class="form-control form-control-lg" name="durabilidad"
+                                        placeholder="Durabilidad" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="coste">Coste</label>
+                                    <input type="number" class="form-control form-control-lg" name="coste"
+                                        placeholder="Coste" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="durabilidad">Descripcion</label>
+                                    <input type="text" class="form-control form-control-lg" name="descripcion"
+                                        placeholder="Descripcion" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="durabilidad">Minutos</label>
+                                    <input type="text" class="form-control form-control-lg" name="minutos"
+                                        placeholder="Minutos" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zona_ID">Zona ID</label>
+                                    <select class="form-control form-control-lg" name="zona_ID" required>
+                                        @foreach ($map as $zona)
+                                            <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Crear</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </table>
+    </div>
 </body>
 
 </html>

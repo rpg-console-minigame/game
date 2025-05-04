@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('objeto', function (Blueprint $table) {
+        Schema::create('objetoInGame', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('zona_ID');
             $table->foreign('zona_ID')->references('id')->on('zona');
+            $table->unsignedBigInteger('personaje_ID')->nullable();
+            $table->foreign('personaje_ID')->references('id')->on('personaje')->nullable();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->integer('coste' )->nullable();
             $table->integer('durabilidad')->nullable();
             $table->string('function_name');
-            $table->integer("minutos");
-            $table->timestamp('last_copied_at')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('objeto');
+        Schema::dropIfExists('objetoInGame');
     }
 };

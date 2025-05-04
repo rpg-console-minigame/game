@@ -45,6 +45,18 @@ const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
       <p style={{ textAlign: "center", fontSize: "0.8em", color: "#aaa" }}>
         Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]
       </p>
+      <h2 style={{ textAlign: "center" }}>Objetos en la zona</h2>
+      <ul style={{ listStyleType: "none", padding: 0, textAlign: "center" }}>
+        {zonaInfo.objetos && zonaInfo.objetos.length > 0 ? (
+          zonaInfo.objetos.map((objeto, index) => (
+            <li key={index} style={{ margin: "5px 0" }}>
+              {objeto.nombre || `Loading...`}
+            </li>
+          ))
+        ) : (
+          <li>No hay objetos en esta zona.</li>
+        )}
+      </ul>
     </div>
   )
 }
