@@ -224,6 +224,7 @@
                     <th>function_name</th>
                     <th>Durabilidad</th>
                     <th>Zona_ID</th>
+                    <th>Minutos</th>
                 </tr>
             </thead>
             <tbody>
@@ -234,6 +235,7 @@
                         <td>{{ $object->function_name }}</td>
                         <td>{{ $object->durabilidad }}</td>
                         <td>{{ $object->zona_ID }}</td>
+                        <td>{{ $object->minutos }}</td>
                         {{-- boton editar objeto --}}
                         <td><button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalEditObject{{ $object->id }}">Editar</button></td>
@@ -278,6 +280,12 @@
                                                 <input type="text" class="form-control form-control-lg"
                                                     name="descripcion" placeholder="Descripcion"
                                                     value="{{ $object->descripcion }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="durabilidad">Minutos</label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="minutos" placeholder="Minutos"
+                                                    value="{{ $object->minutos }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="zona_ID">Zona ID</label>
