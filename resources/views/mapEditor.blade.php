@@ -230,9 +230,7 @@
                             @csrf
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear Casilla</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;
-                                    <i class="fas fa-plus-circle"></i>
-                                </button>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
@@ -445,7 +443,9 @@
                             @csrf
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear Objeto</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal">&times;
+                                <i class="fas fa-plus-circle"></i>
+                                </button>
                             </div>
                             <div class="modal-body">
                                 {{-- $table->id();
