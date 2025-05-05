@@ -140,7 +140,6 @@
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
                         <p type="button" data-toggle="modal"
                             data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
-                        </div>
                         <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1"
                             role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">
