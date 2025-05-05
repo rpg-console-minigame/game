@@ -125,7 +125,7 @@
                     
                 
                 <div class="col"
-                        style="height: 50px; width: 50px; background-color: red; cursor: pointer; transition: background-color 0.3s;
+                        style="height: 50px; width: 50px; background-color: red; cursor: pointer; transition: background-color 0.3s; margin: 0 4px;
 
                     
                     <?php
