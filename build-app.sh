@@ -4,9 +4,6 @@
 # Exit the script if any command fails
 set -e
 
-# Build assets using NPM
-npm run build
-
 # Corre el build de Vite
 npm run build
 
