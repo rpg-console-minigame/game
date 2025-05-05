@@ -138,8 +138,16 @@
                         echo 'border-right: 2px solid black;';
                     } ?>">
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
-                        <p type="button" data-toggle="modal"
-                            data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
+<!--                         <p type="button" data-toggle="modal"
+                            data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p> -->
+
+                        
+                        <div class="col d-flex align-items-center justify-content-center" 
+                         style="height: 50px; width: 50px; background-color: #FF0000; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; margin: 4px;"
+                         data-toggle="modal" data-target="#modalEdit{{ $i }}-{{ $j }}">
+                        <p class="mb-0 text-white text-center" style="font-size: 12px;">Create</p>
+
+                            
                         <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1"
                             role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -217,7 +225,7 @@
             $map->where('coord_x', $i)->where('coord_y', $j + 1)->count() == 1 ||
             $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
         <div class="col d-flex align-items-center justify-content-center" 
-     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 8px; cursor: pointer; transition: background-color 0.3s;"
+     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; margin: 4px;"
      data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
     <p class="mb-0 text-white text-center" style="font-size: 12px;">Create</p>
             <!-- The Modal -->
