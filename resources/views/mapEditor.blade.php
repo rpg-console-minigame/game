@@ -231,7 +231,7 @@
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear Casilla</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;
-                                    <i class="fas fa-plus-circle"></i> Crear Objeto
+                                    <i class="fas fa-plus-circle"></i>
                                 </button>
                             </div>
                             <div class="modal-body">
