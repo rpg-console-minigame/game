@@ -122,8 +122,12 @@
         <div class="row">
             @for ($j = 0; $j <= $max_y; $j++)
                 @if ($map->where('coord_x', $i)->where('coord_y', $j)->count() == 1)
-                    <div class="col"
-                        style="height: 50px; width: 50px; background-color: red;
+                    
+                
+                <div class="col"
+                        style="height: 50px; width: 50px; background-color: red; cursor: pointer; transition: background-color 0.3s;
+
+                    
                     <?php
                     if ($map->where('coord_x', $i)->where('coord_y', $j)->first()->up_door == 0) {
                         echo 'border-top: 2px solid black;';
@@ -138,8 +142,12 @@
                         echo 'border-right: 2px solid black;';
                     } ?>">
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
+
+                        
                         <p class="mb-0 text-white text-center" style="font-size: 12px;" type="button" data-toggle="modal"
                             data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
+
+                        
                         <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1"
                             role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">
