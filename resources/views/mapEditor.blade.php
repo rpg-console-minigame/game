@@ -10,86 +10,104 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap (si no lo tienes aún) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
 </head>
 <style>
     body {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        /* Oculta el scroll horizontal */
+        background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+        font-family: 'Segoe UI', sans-serif;
     }
 
-    .row {
-        margin: 0;
-        /* Elimina el margen lateral de .row que podría generar el scroll */
+    .table {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .col {
-        padding: 0;
-        /* Asegura que no haya espacios internos innecesarios */
-    }
-
-    
-    .table th,
-    .table td {
-        vertical-align: middle;
+    .table th {
+        background-color: #0d6efd;
+        color: white;
         text-align: center;
     }
 
+    .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
     .btn {
-        margin: 2px;
+        border-radius: 30px;
+        padding: 8px 18px;
+        font-weight: 500;
+    }
+
+    .btn i {
+        margin-right: 5px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #4e73df, #224abe);
+        border: none;
+    }
+
+    .btn-danger {
+        background: linear-gradient(to right, #e74c3c, #c0392b);
+        border: none;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(to right, #95a5a6, #7f8c8d);
+        border: none;
+    }
+
+    .modal-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 1.2rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
 
     .modal-header {
-        background-color: #007bff;
+        background: linear-gradient(to right, #0d6efd, #0b5ed7);
         color: white;
+        border-top-left-radius: 1.2rem;
+        border-top-right-radius: 1.2rem;
     }
 
-    .modal-footer {
-        justify-content: space-between;
-    }
-
-    .form-control-lg {
+    .form-control {
         border-radius: 0.5rem;
+        border: 1px solid #ced4da;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
     }
 
     .modal-title {
         font-weight: bold;
     }
 
-    .table thead {
-        background-color: #343a40;
-        color: white;
-    }
-
-    .table-bordered {
-        border: 1px solid #dee2e6;
-        border-radius: 0.5rem;
-        overflow: hidden;
-    }
-
-    .modal-content {
-        border-radius: 1rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border: none;
-    }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        border: none;
-    }
-
     tfoot td {
         text-align: center;
+        padding-top: 1rem;
+    }
+
+    .card-form {
+        background: white;
+        border-radius: 1rem;
+        padding: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
     }
 </style>
 
@@ -212,7 +230,9 @@
                             @csrf
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear Casilla</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal">&times;
+                                    <i class="fas fa-plus-circle"></i> Crear Objeto
+                                </button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
@@ -301,7 +321,9 @@
                         <td>{{ $object->minutos }}</td>
                         {{-- boton editar objeto --}}
                         <td><button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modalEditObject{{ $object->id }}">Editar</button></td>
+                                data-target="#modalEditObject{{ $object->id }}">Editar
+                            <i class="fas fa-edit"></i> Editar
+                        </button></td>
                         {{-- modal  modalEditObject --}}
                         <div class="modal fade" id="modalEditObject{{ $object->id }}" tabindex="-1"
                             role="dialog">
@@ -373,7 +395,9 @@
                         </div>
                         {{-- boton eliminar objeto --}}
                         <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#modalDeleteObject{{ $object->id }}">Eliminar</button></td>
+                                data-target="#modalDeleteObject{{ $object->id }}">Eliminar
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                        </button></td>
                         {{-- modal  modalDeleteObject --}}
                         <div class="modal fade" id="modalDeleteObject{{ $object->id }}" tabindex="-1"
                             role="dialog">
