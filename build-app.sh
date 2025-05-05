@@ -4,6 +4,9 @@
 # Exit the script if any command fails
 set -e
 
+echo "Instalando dependencias..."
+npm install
+
 # Corre el build de Vite
 npm run build
 
