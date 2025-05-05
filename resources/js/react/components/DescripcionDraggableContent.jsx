@@ -42,7 +42,7 @@ const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
         {zonaInfo.descripcion ||
           `Loading...`}
       </p>
-      <p style={{ textAlign: "center", fontSize: "0.8em", color: "#aaa" }}>
+      <p style={{ textAlign: "center", fontSize: "0.8em", color: "#aaa" }} id="Coord-content_text">
         Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]
       </p>
       <h2 style={{ textAlign: "center" }}>Objetos en la zona</h2>

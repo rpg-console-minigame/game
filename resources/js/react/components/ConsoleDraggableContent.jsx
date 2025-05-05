@@ -76,7 +76,24 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
       descripcion.querySelector("h1").innerText = zonaInfo.nombre
       descripcion.querySelector("#Descripcion-content_text").innerText = zonaInfo.descripcion
       //Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]
-      descripcion.querySelector("p:last-child").innerHTML = "coordenadas: [" + zonaInfo.coord_x + ", " + zonaInfo.coord_y + "]"
+      descripcion.querySelector("#Coord-content_text").innerHTML = "coordenadas: [" + zonaInfo.coord_x + ", " + zonaInfo.coord_y + "]"
+
+      const objetosList = descripcion.querySelector("ul")
+      objetosList.innerHTML = "" // Limpiar la lista de objetos
+      if (zonaInfo.objetos && zonaInfo.objetos.length > 0) {
+        zonaInfo.objetos.forEach((objeto, index) => {
+          const li = document.createElement("li")
+          li.style.margin = "5px 0"
+          li.innerText = objeto.nombre || `Loading...`
+          objetosList.appendChild(li)
+        })
+      }
+      else {
+        const li = document.createElement("li")
+        li.innerText = "No hay objetos en esta zona."
+        objetosList.appendChild(li)
+      }
+      
       // actualizar el pre de la descripción
     const pre = document.querySelector("#Mapa-content pre")
     if (pre) {
