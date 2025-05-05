@@ -216,11 +216,10 @@
             $map->where('coord_x', $i - 1)->where('coord_y', $j)->count() == 1 ||
             $map->where('coord_x', $i)->where('coord_y', $j + 1)->count() == 1 ||
             $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
-        <div class="col" style="height: 50px; width: 50px; background-color: green;">
-            {{-- <a href="{{ route('create', ['coord_x' => $i, 'coord_y' => $j]) }}">Create</a> --}}
-            <p type="button" data-toggle="modal"
-                data-target="#modalCreate{{ $i }}-{{ $j }}">
-                Create</p>
+        <div class="col d-flex align-items-center justify-content-center" 
+     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 8px; cursor: pointer; transition: background-color 0.3s;"
+     data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
+    <p class="mb-0 text-white text-center" style="font-size: 12px;">Create</p>
             <!-- The Modal -->
             <div class="modal fade" id="modalCreate{{ $i }}-{{ $j }}" tabindex="-1"
                 role="dialog">
