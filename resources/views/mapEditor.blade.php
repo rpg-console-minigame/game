@@ -124,11 +124,8 @@
                 @if ($map->where('coord_x', $i)->where('coord_y', $j)->count() == 1)
                     
                 
-                <div class="col d-flex align-items-center justify-content-center shadow"
-     style="height: 50px; width: 50px; background-color: red; border-radius: 12px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin: 0 6px;"
-     data-toggle="modal" data-target="#modalEdit{{ $i }}-{{ $j }}"
-     onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.2)'"
-     onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <div class="col"
+                        style="height: 50px; width: 50px; background-color: red; cursor: pointer; transition: background-color 0.3s; margin: 0 4px;
 
                     
                     <?php
@@ -147,7 +144,7 @@
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
 
                         
-                        <p class="mb-0 text-white text-center font-weight-bold" style="font-size: 13px;" type="button" data-toggle="modal"
+                        <p class="mb-0 text-white text-center" style="font-size: 12px;" type="button" data-toggle="modal"
                             data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
 
                         
@@ -227,12 +224,10 @@
             $map->where('coord_x', $i - 1)->where('coord_y', $j)->count() == 1 ||
             $map->where('coord_x', $i)->where('coord_y', $j + 1)->count() == 1 ||
             $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
-        <div class="col d-flex align-items-center justify-content-center shadow"
-     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 12px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin: 0 6px;"
-     data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}"
-     onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.2)'"
-     onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
-    <p class="mb-0 text-white text-center font-weight-bold" style="font-size: 13px;">Create</p>
+        <div class="col d-flex align-items-center justify-content-center" 
+     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 6px; cursor: pointer; transition: background-color 0.3s; margin: 0 4px;"
+     data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
+    <p class="mb-0 text-white text-center" style="font-size: 12px;">Create</p>
             <!-- The Modal -->
             <div class="modal fade" id="modalCreate{{ $i }}-{{ $j }}" tabindex="-1"
                 role="dialog">
