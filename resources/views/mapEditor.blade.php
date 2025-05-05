@@ -431,7 +431,9 @@
                 <tr>
                     <td colspan="5">
                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modalCreateObject">Crear Objeto</button>
+                            data-target="#modalCreateObject">Crear Objeto
+                        <i class="fas fa-plus-circle"></i>
+                        </button>
                     </td>
                 </tr>
             </tfoot>
@@ -443,9 +445,7 @@
                             @csrf
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear Objeto</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;
-                                <i class="fas fa-plus-circle"></i>
-                                </button>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
                                 {{-- $table->id();
