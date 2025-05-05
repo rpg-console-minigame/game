@@ -322,7 +322,7 @@
                         {{-- boton editar objeto --}}
                         <td><button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalEditObject{{ $object->id }}">Editar
-                            <i class="fas fa-edit"></i> Editar
+                            <i class="fas fa-edit"></i>
                         </button></td>
                         {{-- modal  modalEditObject --}}
                         <div class="modal fade" id="modalEditObject{{ $object->id }}" tabindex="-1"
@@ -396,7 +396,7 @@
                         {{-- boton eliminar objeto --}}
                         <td><button type="button" class="btn btn-danger" data-toggle="modal"
                                 data-target="#modalDeleteObject{{ $object->id }}">Eliminar
-                        <i class="fas fa-trash-alt"></i> Eliminar
+                        <i class="fas fa-trash-alt"></i>
                         </button></td>
                         {{-- modal  modalDeleteObject --}}
                         <div class="modal fade" id="modalDeleteObject{{ $object->id }}" tabindex="-1"
