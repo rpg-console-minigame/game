@@ -217,7 +217,7 @@
             $map->where('coord_x', $i)->where('coord_y', $j + 1)->count() == 1 ||
             $map->where('coord_x', $i)->where('coord_y', $j - 1)->count() == 1)
         <div class="col d-flex align-items-center justify-content-center" 
-     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 6px; cursor: pointer; transition: background-color 0.3s; margin: 2px;"
+     style="height: 50px; width: 50px; background-color: #28a745; border-radius: 6px; cursor: pointer; transition: background-color 0.3s; margin: 0 4px;"
      data-toggle="modal" data-target="#modalCreate{{ $i }}-{{ $j }}">
     <p class="mb-0 text-white text-center" style="font-size: 12px;">Create</p>
             <!-- The Modal -->
