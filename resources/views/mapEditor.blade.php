@@ -28,6 +28,69 @@
         padding: 0;
         /* Asegura que no haya espacios internos innecesarios */
     }
+
+    
+    .table th,
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .btn {
+        margin: 2px;
+    }
+
+    .modal-header {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .modal-footer {
+        justify-content: space-between;
+    }
+
+    .form-control-lg {
+        border-radius: 0.5rem;
+    }
+
+    .modal-title {
+        font-weight: bold;
+    }
+
+    .table thead {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .table-bordered {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+
+    .modal-content {
+        border-radius: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+    tfoot td {
+        text-align: center;
+    }
 </style>
 
 <body>
