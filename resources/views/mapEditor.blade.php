@@ -138,7 +138,9 @@
                         echo 'border-right: 2px solid black;';
                     } ?>">
                         {{-- <a href="{{ route('delete', ['coord_x' => $i, 'coord_y' => $j]) }}">Edit</a> --}}
-                        <p type="button" data-toggle="modal"
+                        <div class="col d-flex align-items-center justify-content-center" 
+                            style="height: 50px; width: 50px; background-color: #28a745; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; margin: 4px;"
+                        <p class="mb-0 text-white text-center" style="font-size: 12px;" type="button" data-toggle="modal"
                             data-target="#modalEdit{{ $i }}-{{ $j }}">Edit</p>
                         <div class="modal fade" id="modalEdit{{ $i }}-{{ $j }}" tabindex="-1"
                             role="dialog">
