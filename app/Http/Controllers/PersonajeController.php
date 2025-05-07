@@ -13,7 +13,6 @@ class PersonajeController extends Controller
 {
     public function create(Request $request)
     {
-        session_start();
 
         $data = [
             'nombre' => $request['nombre'],
