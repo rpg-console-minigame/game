@@ -42,3 +42,7 @@ Route::post('/input', [PersonajeController::class, 'inputConsole'])->name('input
 
 Route::get('/messages', [ChatController::class, 'index']);
 Route::post('/messages', [ChatController::class, 'store']);
+
+Route::get('/a',function(){
+    return ('hola');
+});
