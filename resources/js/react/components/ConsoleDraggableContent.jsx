@@ -6,7 +6,6 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
   const [input, setInput] = useState("")
   const [nombre, setNombre] = useState("user@PC:~$")
   const [error, setError] = useState("")
-  const apiUrl = "{{ env('API_URL') }}"
 
   useEffect(() => {
     const fetchData = async () => {
