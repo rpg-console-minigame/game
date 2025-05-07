@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class objetoInGame extends Model
 {
     use HasFactory;
-    protected $table ='objetoInGame';
+    protected $table ='objetoingame';
     
     protected $primary = 'id';
 
