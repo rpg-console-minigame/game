@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 const MapDraggableContent = () => {
   const [zonaInfo, setZonaInfo] = useState(null)
+    const apiUrl = "{{ env('API_URL') }}"
 
   useEffect(() => {
     const fetchMapInfo = async () => {
