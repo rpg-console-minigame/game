@@ -6,11 +6,11 @@
     <title>Vite + React</title>
     @vite(['resources/js/react/main.jsx'])
   </head>
-  <body  style= "background-color: #647994">
+  <body style="background-color: #647994">
     <div id="root"></div>
+
+    <script>
+      let apiUrl = "https://minigame-rpg.up.railway.app/api";
+    </script>
   </body>
 </html>
-<script>
-  let apiUrl = "{{ env('API_URL') }}"
-  // let apiUrl = "https://game-production-0fc8.up.railway.app/api"
-</script>
