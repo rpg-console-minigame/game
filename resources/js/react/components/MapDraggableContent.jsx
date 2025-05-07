@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 const MapDraggableContent = () => {
   const [zonaInfo, setZonaInfo] = useState(null)
 
+
   useEffect(() => {
     const fetchMapInfo = async () => {
       try {

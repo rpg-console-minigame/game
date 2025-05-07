@@ -9,8 +9,9 @@
   <body  style= "background-color: #647994">
     <div id="root"></div>
   </body>
+  <script>
+     let apiUrl = "{{ env('APP_URL') }}"
+
+    // let apiUrl = "https://game-production-0fc8.up.railway.app/api"
+  </script>
 </html>
-<script>
-  let apiUrl = "{{ env('VITE_API_URL') }}"
-  // let apiUrl = "https://game-production-0fc8.up.railway.app/api"
-</script>
