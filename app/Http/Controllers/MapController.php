@@ -88,11 +88,59 @@ class MapController extends Controller
         
     }
 
-    public function mapInfo(){
+    // public function mapInfo(){
+    //     session_start();
+    //     $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
+    //     $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
+    //     $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)->where("personaje_ID", null)->get();
+    //     $zonaInfo = [
+    //         "imagen" => $zona->imagen,
+    //         'nombre' => $zona->nombre,
+    //         'ruta_IMG' => $zona->ruta_IMG,
+    //         'descripcion' => $zona->descripcion,
+    //         'up_door' => $zona->hasUpDoor(),
+    //         'down_door' => $zona->hasDownDoor(),
+    //         'left_door' => $zona->hasLeftDoor(),
+    //         'right_door' => $zona->hasRightDoor(),
+    //         'coord_x' => $zona->coord_x,
+    //         'coord_y' => $zona->coord_y,
+    //         'isSpawn' => $zona->isSpawn,
+    //         'objetos' => $objetos
+    //     ];
+    
+    //     // devolver por api la zona
+    //     return response()->json($zonaInfo);
+    // }
+
+    public function mapInfo() {
         session_start();
-        $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
-        $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
-        $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)->where("personaje_ID", null)->get();
+    
+        if (!session()->has("character")) {
+            return response()->json([
+                "error" => "No hay personaje en sesión"
+            ], 401);
+        }
+    
+        $personaje = \App\Models\Personaje::find(session("character")->id);
+    
+        if (!$personaje) {
+            return response()->json([
+                "error" => "Personaje no encontrado"
+            ], 404);
+        }
+    
+        $zona = \App\Models\Zona::find($personaje->zona_ID);
+    
+        if (!$zona) {
+            return response()->json([
+                "error" => "Zona no encontrada"
+            ], 404);
+        }
+    
+        $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)
+            ->whereNull("personaje_ID")
+            ->get();
+    
         $zonaInfo = [
             "imagen" => $zona->imagen,
             'nombre' => $zona->nombre,
@@ -108,7 +156,7 @@ class MapController extends Controller
             'objetos' => $objetos
         ];
     
-        // devolver por api la zona
         return response()->json($zonaInfo);
     }
+    
 }
