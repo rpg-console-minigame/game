@@ -92,7 +92,7 @@ class MapController extends Controller
         session_start();
         $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
         $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
-        $objetos = \App\Models\Objeto::where("zona_ID", $zona->id)->get();
+        $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)->where("personaje_ID", null)->get();
         $zonaInfo = [
             "imagen" => $zona->imagen,
             'nombre' => $zona->nombre,

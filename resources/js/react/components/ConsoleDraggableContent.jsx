@@ -42,7 +42,7 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ direccion: input.toLowerCase() }),
+            body: JSON.stringify({ input: input.toLowerCase() }),
           })
 
           if (!response.ok) {
@@ -57,7 +57,33 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
           console.error("Error moving:", error)
           setError("Error al mover. Por favor, intenta de nuevo.")
         }
-      } else {
+      } else if (input.toLowerCase().startsWith("tomar")) {
+        try {
+          // const objeto  todo sin la palabra tomar y el primer espacio (contar que el nombre puede contener espacios)
+          const objeto = input.substring(6).trim()
+          const response = await fetch(`${apiUrl}/input`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ input: "tomar", objeto: objeto }),
+          })
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+
+          const data = await response.json()
+          console.log("Objeto tomado:", data)
+          setInput("")
+          updateZonaInfo()
+        }
+        catch (error) {
+          console.error("Error tomando objeto:", error)
+          setError("Error al tomar el objeto. Por favor, intenta de nuevo.")
+        }
+      }
+      else {
         setError("Comando no reconocido. Usa 'ayuda' para ver los comandos disponibles.")
       }
     },
