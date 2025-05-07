@@ -10,7 +10,7 @@
     <div id="root"></div>
   </body>
   <script>
-     let apiUrl = "{{ env('APP_URL') }}"
+     let apiUrl = "{{ env('API_URL') }}"
 
     // let apiUrl = "https://game-production-0fc8.up.railway.app/api"
   </script>
