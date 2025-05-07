@@ -44,5 +44,7 @@ Route::get('/messages', [ChatController::class, 'index']);
 Route::post('/messages', [ChatController::class, 'store']);
 
 Route::get('/a',function(){
-    return ('hola');
+    session_start();
+    $personaje = session()->get("character");
+    return ($personaje);
 });
