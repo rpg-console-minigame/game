@@ -1,12 +1,17 @@
 import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/', // Asegúrate de que la base esté configurada para el servidor de producción
-  plugins: [
-    react(),
-  ],
-  build: {
-    outDir: 'public/build', // Esto asegurará que los archivos se generen en public/build
-  },
+     base: '/', 
+    plugins: [
+        laravel({
+            input: [
+                'resources/js/app.js',        // Asegúrate de mantener otros archivos
+                'resources/js/react/main.jsx' // Agrega aquí tu archivo React
+            ],
+            refresh: true, // Recarga automática para desarrollo
+        }),
+        react(), // Plugin para soporte de React
+    ],
 });
