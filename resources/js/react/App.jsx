@@ -10,6 +10,8 @@ import HelpDraggableContent from "./components/HelpDraggableContent"
 import ChatDraggableContent from "./components/ChatDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
+const apiUrl = import.meta.env.VITE_API_URL 
+
 const App = () => {
   const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat"]
   const componentes = [
