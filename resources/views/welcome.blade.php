@@ -7,179 +7,277 @@
     <title>Modelo Ajustado</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        html,
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            height: 100%;
             margin: 0;
-            background-color: #222;
-            color: #ddd;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        :root {
+            --principal: #27c93f;
+        }
+
+        * {
             font-family: "Source Code Pro", monospace;
+            box-sizing: border-box;
         }
 
-        .d-flex {
-            height: 100%;
+        /* Barra de navegación */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 10%;
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .console-container {
-            border: 4px solid #bbb;
-            background-color: #333;
-            color: #ddd;
-            height: 100%;
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            left: 0;
+            bottom: -3px;
+            background-color: var(--principal);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: var(--principal);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        button {
+            padding: 6px 16px;
+            border: 2px solid var(--principal);
+            border-radius: 10px;
+            background-color: var(--principal);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        /* Sección principal */
+        main {
+            padding: 5% 10%;
+        }
+
+        /* Hero */
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .dibujo {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .dibujo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .texto {
+            flex: 2;
+            padding: 1rem;
+        }
+
+        .texto h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: #ffffff;
+        }
+
+        .texto h4 {
+            font-size: 1rem;
+            font-weight: normal;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #cccccc;
+        }
+
+        /* Demo section */
+        .demo {
+            background-color: var(--principal);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+
+        .demo h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem 5%;
+            }
+
+            .info {
+                flex-direction: column;
+            }
+
+            .texto h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ESTILOS DE LOS MODALES */
+
+        .modal-content.console-container {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .console-header {
-            background-color: #bbb;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
-            border-bottom: 4px solid #bbb;
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-bottom: 1px solid #444;
         }
 
-        .console-header h4 {
+        .console-header h5 {
             margin: 0;
-            color: #222;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .form-control {
-            background-color: #444;
-            color: #ddd;
-            border: none;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            font-family: "Source Code Pro", monospace;
-        }
-
-        .form-control:focus {
-            background-color: #555;
+            font-size: 1.2rem;
             color: #fff;
-            outline: none;
-            box-shadow: none;
         }
 
-        .btn-submit {
-            background-color: lightgreen;
-            color: #222;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            width: 100%;
-            padding: 10px;
-            font-family: "Source Code Pro", monospace;
+        .console-controls span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 6px;
+            border-radius: 50%;
         }
 
-        .btn-submit:hover {
-            background-color: #32cd32;
+        .console-controls .red {
+            background-color: #ff5f56;
         }
 
-        .input-label {
-            color: #ddd;
-            margin-bottom: 5px;
-            font-family: "Source Code Pro", monospace;
+        .console-controls .yellow {
+            background-color: #ffbd2e;
         }
 
-        .form-container {
-            width: 50%;
-            margin: auto;
-            border: 4px solid #bbb;
-            border-radius: 8px;
-            background-color: #333;
-            padding: 20px;
-            margin-top: 50px;
-        }
-
-        .fixed-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-
-        .console-header .d-flex p {
-            margin-top: 4px;
-        }
-
-        .info-box {
-            max-height: 355px;
-            overflow-y: auto;
-            padding: 10px;
-            background-color: #444;
-            border-radius: 5px;
-            border: 1px solid #555;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        /* modales */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .yellow {
-            background-color: #ffc107;
-        }
-
-        .green {
-            background-color: #28a745;
-        }
-
-        .red {
-            background-color: #dc3545;
+        .console-controls .green {
+            background-color: #27c93f;
         }
 
         .console-body {
-            padding: 20px;
+            padding: 1.5rem;
         }
 
         .input-group {
-            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1f1f1f;
+            border-radius: 5px;
+            padding: 0.5rem;
         }
 
         .input-group span {
-            color: lightgreen;
-            margin-bottom: 5px;
-            display: inline-block;
-            margin-right: 1%;
+            margin-right: 0.5rem;
+            white-space: nowrap;
+            color: #ccc;
         }
 
-        .form-control {
-            background-color: darkgray;
+        .input-group input {
+            flex-grow: 1;
+            background-color: transparent;
             border: none;
-            color: #222;
-        }
-
-        .form-control:focus {
+            color: white;
             outline: none;
-            box-shadow: none;
+            padding: 0.5rem;
+            font-size: 1rem;
         }
 
-        .btn {
-            font-weight: bold;
+        .input-group input:focus {
+            outline: none;
         }
+
     </style>
+
 </head>
 
 <body>
+
+    <nav>
+        <a href="">RPG MINIGAME</a>
+        <a href="">Documentacion</a>
+        <a href="">Sobre nosotros</a>
+        <a href="">Mis logros</a>
+        <a href="">Contacto</a>
+        <button data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+    </nav>
+
+    <main>
+
+        <section class="info">
+            <div class="texto">
+                <h2>RPG Console Minigame, un videojuego web lleno de sorpresas.</h2>
+                <h4>¡Descubre Ethereal Realms! El nuevo MMO RPG que revoluciona la fantasía online: mundo abierto
+                    dinámico, razas únicas, combates épicos y decisiones que forjan tu leyenda. ¿Estás listo?</h4>
+                <button data-bs-toggle="modal" data-bs-target="#registerModal">Registro</button>
+            </div>
+            <div class="dibujo">
+                <img src="dibujo.png" alt="">
+            </div>
+        </section>
+
+        <!-- Contenido principal -->
+        <section class="demo">
+            <h2 style="color: black;">Prueba una versión beta de nuestro juego.</h2>
+
+
+        </section>
+
+    </main>
+
+
     <div class="d-flex">
-        <!-- Barra lateral -->
-        <div class="w-25 console-container p-3">
-            <button class="btn btn-outline-light mb-3 w-100" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar
-                Sesión</button>
-            <button class="btn btn-outline-light mb-3 w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Registro</button>
-        </div>
+
         <!-- Modal Inicio de Sesión -->
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -203,12 +301,13 @@
                                 <span>user@password:~$</span>
                                 <input type="password" class="form-control" placeholder="Contraseña" name="password">
                             </div>
-                            <button type="submit" class="btn btn-success w-100">Acceder</button>
+                            <button type="submit" class="w-100">Acceder</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Modal Registro -->
         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
             aria-hidden="true">
@@ -242,21 +341,16 @@
                                 <input type="password" class="form-control" placeholder="Confirmar contraseña"
                                     name="password_confirmation">
                             </div>
-                            <button type="submit" class="btn btn-success w-100">Enviar</button>
+                            <button type="submit" class="w-100">Enviar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Contenido principal -->
-        <div class="w-75 console-container mx-auto">
-            <div class="console-header">
-                <h4 class="m-0">Aquí empieza todo</h4>
-            </div>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
