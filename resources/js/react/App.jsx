@@ -113,6 +113,7 @@ const App = () => {
     }))
     localStorage.setItem("Ayuda-active", JSON.stringify(true))
   }, [])
+
   const handleOpenChat = useCallback(() => {
     setActiveStates((prev) => ({
       ...prev,
@@ -176,4 +177,3 @@ const App = () => {
 }
 
 export default App
-
