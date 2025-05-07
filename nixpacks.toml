@@ -3,12 +3,24 @@ nixPkgs = ["nodejs_20", "php81", "php81Packages.composer"]
 
 [phases.install]
 cmds = [
+  # Instalar dependencias de Composer para Laravel (incluyendo Sanctum)
   "composer install --no-dev --optimize-autoloader",
+  
+  # Instalar dependencias de NPM para el frontend (React, Vite)
   "npm install"
 ]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = [
+  # Construir los archivos del frontend con Vite
+  "npm run build"
+]
 
 [start]
-cmd = "php artisan serve --host=0.0.0.0 --port=${PORT}"
+cmd = """
+  # Ejecutar migraciones, instalar Sanctum y otros paquetes de PHP
+  php artisan migrate --force;
+
+  # Ejecutar el servidor de Laravel para servir la aplicación
+  php artisan serve --host=0.0.0.0 --port=${PORT}
+"""

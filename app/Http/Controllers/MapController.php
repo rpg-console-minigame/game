@@ -111,4 +111,7 @@ class MapController extends Controller
         // devolver por api la zona
         return response()->json($zonaInfo);
     }
+
+    
+    
 }
