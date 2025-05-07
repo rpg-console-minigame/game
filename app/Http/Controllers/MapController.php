@@ -112,35 +112,26 @@ class MapController extends Controller
     //     return response()->json($zonaInfo);
     // }
 
-    public function mapInfo() {
-        session_start();
-    
-        if (!session()->has("character")) {
-            return response()->json([
-                "error" => "No hay personaje en sesión"
-            ], 401);
+    public function mapInfo(){
+        // Eliminar session_start(), Laravel maneja las sesiones
+        if (!session()->has('character')) {
+            return response()->json(['error' => 'No hay personaje en sesión'], 400);
         }
     
-        $personaje = \App\Models\Personaje::find(session("character")->id);
+        $personaje = \App\Models\Personaje::where("id", session('character')->id)->first();
     
         if (!$personaje) {
-            return response()->json([
-                "error" => "Personaje no encontrado"
-            ], 404);
+            return response()->json(['error' => 'Personaje no encontrado'], 404);
         }
     
-        $zona = \App\Models\Zona::find($personaje->zona_ID);
+        $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
     
         if (!$zona) {
-            return response()->json([
-                "error" => "Zona no encontrada"
-            ], 404);
+            return response()->json(['error' => 'Zona no encontrada'], 404);
         }
     
-        $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)
-            ->whereNull("personaje_ID")
-            ->get();
-    
+        $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)->where("personaje_ID", null)->get();
+        
         $zonaInfo = [
             "imagen" => $zona->imagen,
             'nombre' => $zona->nombre,
@@ -156,7 +147,9 @@ class MapController extends Controller
             'objetos' => $objetos
         ];
     
+        // Devolver la respuesta con la información de la zona
         return response()->json($zonaInfo);
     }
+    
     
 }
