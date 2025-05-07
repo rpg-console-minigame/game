@@ -3,12 +3,17 @@ nixPkgs = ["nodejs_20", "php81", "php81Packages.composer"]
 
 [phases.install]
 cmds = [
-  "composer install --no-dev --optimize-autoloader",
-  "npm install"
+  "composer install --no-dev --optimize-autoloader",  # Instalar dependencias de Laravel
+  "npm install"  # Instalar dependencias de Vite y React
 ]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = [
+  "npm run build",  # Compilar el proyecto con Vite
+  "php artisan config:cache",  # Cache de configuración para Laravel
+  "php artisan route:cache",  # Cache de rutas para Laravel
+  "php artisan view:cache"   # Cache de vistas para Laravel
+]
 
 [start]
-cmd = "php artisan serve --host=0.0.0.0 --port=${PORT}"
+cmd = "php artisan serve --host=0.0.0.0 --port=${PORT}"  # Iniciar Laravel en el puerto asignado
