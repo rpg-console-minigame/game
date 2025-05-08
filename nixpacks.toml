@@ -1,10 +1,25 @@
+# nixpacks.toml
+
+[providers]
+php = {}
+node = {}
+
 [phases.setup]
-nixPkgs = ["php", "phpPackages.composer"]
+# Asegura que composer y node estén disponibles
+nixPkgs = ["php", "phpPackages.composer", "nodejs"]
 
 [phases.build]
 cmds = [
   "composer install --no-dev --optimize-autoloader",
-  "chmod +x run-cron.sh"
+  "npm ci",
+  "npm run build",                    # Ajusta este comando si usas Vite, Webpack, etc.
+  "chmod +x run-cron.sh"              # Asegura que el script tenga permisos
+]
+
+[phases.deploy]
+cmds = [
+  "php artisan migrate --force",
+  "php artisan config:cache"
 ]
 
 [start]
