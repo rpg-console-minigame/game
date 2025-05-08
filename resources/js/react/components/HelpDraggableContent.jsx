@@ -7,6 +7,7 @@ const HelpDraggableContent = () => {
         -"mapa" : muestra el mapa
         -"chat" : muestra el chat              
         -"arriba/abajo/izquierda/derecha" : mueve al personaje
+        -"tomar (item)" : toma el item del mapa y lo agrega al inventario
         `}
       </pre>
     </div>
