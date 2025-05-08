@@ -1,29 +1,26 @@
-# nixpacks.toml
-
-[providers]
-php = {}
-node = {}
-
 [phases.setup]
-# Asegura que composer y node estén disponibles
-nixPkgs = ["php", "phpPackages.composer", "nodejs"]
+nixPkgs = ["nodejs_20", "php81", "php81Packages.composer"]
+
+[phases.install]
+cmds = [
+  # Instalar dependencias de Composer para Laravel (incluyendo Sanctum)
+  "composer install --no-dev --optimize-autoloader",
+  
+  # Instalar dependencias de NPM para el frontend (React, Vite)
+  "npm install"
+]
 
 [phases.build]
 cmds = [
-  "composer install --no-dev --optimize-autoloader",
-  "npm ci",
-  "npm run build",                    # Ajusta este comando si usas Vite, Webpack, etc.
-  "chmod +x run-cron.sh"              # Asegura que el script tenga permisos
-]
-
-[phases.deploy]
-cmds = [
-  "php artisan migrate --force",
-  "php artisan config:cache"
+  # Construir los archivos del frontend con Vite
+  "npm run build"
 ]
 
 [start]
-cmd = "php artisan serve --host=0.0.0.0 --port=8080"
+cmd = """
+  # Ejecutar migraciones, instalar Sanctum y otros paquetes de PHP
+  php artisan migrate --force;
 
-[start.cron]
-cmd = "./run-cron.sh"
+  # Ejecutar el servidor de Laravel para servir la aplicación
+  php artisan serve --host=0.0.0.0 --port=${PORT}
+"""
