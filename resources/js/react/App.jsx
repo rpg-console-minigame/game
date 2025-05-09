@@ -8,16 +8,19 @@ import MapDraggableContent from "./components/MapDraggableContent"
 import ConsoleDraggableContent from "./components/ConsoleDraggableContent"
 import HelpDraggableContent from "./components/HelpDraggableContent"
 import ChatDraggableContent from "./components/ChatDraggableContent"
+import InventarioDraggableContent from "./components/InventarioDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
+
 const App = () => {
-  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat"]
+  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat", "Inventario"]
   const componentes = [
     DescripcionDraggableContent,
     MapDraggableContent,
     ConsoleDraggableContent,
     HelpDraggableContent,
     ChatDraggableContent,
+    InventarioDraggableContent,
   ]
 
   const [positions, setPositions] = useState(() => {
@@ -26,16 +29,22 @@ const App = () => {
       const saved = localStorage.getItem(cuadro)
       switch (cuadro) {
         case "Descripcion":
-          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 33, y: 35 }
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 20, y: 20 }
           break
         case "Consola":
-          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 700, y: 35 }
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 20, y: 400 }
           break
         case "Mapa":
-          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 700, y: 250 }
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 650, y: 20 }
           break
         case "Ayuda":
-          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 33, y: 250 }
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 650, y: 400 }
+          break
+        case "Chat":
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 335, y: 20 }
+          break
+        case "Inventario":
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 335, y: 400 }
           break
         default:
           savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 0, y: 0 }
@@ -49,7 +58,7 @@ const App = () => {
     const savedStates = {}
     cuadros.forEach((cuadro) => {
       const saved = localStorage.getItem(`${cuadro}-active`)
-      if (cuadro === "Ayuda" || cuadro === "Chat") {
+      if (cuadro === "Ayuda" || cuadro === "Chat" || cuadro === "Inventario") {
         savedStates[cuadro] = localStorage.getItem(`${cuadro}-active`) == "true" ? true : false
         if (!localStorage.getItem(`${cuadro}-active`)) localStorage.setItem(`${cuadro}-active`, JSON.stringify(false))
       } else {
@@ -84,7 +93,7 @@ const App = () => {
   }
 
   const handleToggleActive = useCallback((id) => {
-    if (id === "Mapa" || id === "Ayuda" || id === "Chat") {
+    if (id === "Mapa" || id === "Ayuda" || id === "Chat" || id === "Inventario") {
       setActiveStates((prev) => {
         const newState = {
           ...prev,
@@ -96,30 +105,8 @@ const App = () => {
     }
   }, [])
 
-  const handleOpenMap = useCallback(() => {
-    setActiveStates((prev) => ({
-      ...prev,
-      Mapa: true,
-    }))
-    localStorage.setItem("Mapa-active", JSON.stringify(true))
-  }, [])
-
-  const handleOpenHelp = useCallback(() => {
-    setActiveStates((prev) => ({
-      ...prev,
-      Ayuda: true,
-    }))
-    localStorage.setItem("Ayuda-active", JSON.stringify(true))
-  }, [])
-  const handleOpenChat = useCallback(() => {
-    setActiveStates((prev) => ({
-      ...prev,
-      Chat: true,
-    }))
-    localStorage.setItem("Chat-active", JSON.stringify(true))
-  }, [])
-
-  const handleFrameClick = useCallback((id) => {
+  // Función para poner una ventana por encima de las demás
+  const bringToFront = useCallback((id) => {
     setOrder((prevOrder) => {
       const newOrder = { ...prevOrder }
       const maxOrder = Math.max(...Object.values(newOrder))
@@ -127,6 +114,77 @@ const App = () => {
       return newOrder
     })
   }, [])
+
+  const handleOpenMap = useCallback(() => {
+    // Si ya está abierta, solo la ponemos por encima
+    if (activeStates["Mapa"]) {
+      bringToFront("Mapa")
+      return
+    }
+
+    // Si no está abierta, la abrimos y la ponemos por encima
+    setActiveStates((prev) => ({
+      ...prev,
+      Mapa: true,
+    }))
+    localStorage.setItem("Mapa-active", JSON.stringify(true))
+    bringToFront("Mapa")
+  }, [activeStates, bringToFront])
+
+  const handleOpenHelp = useCallback(() => {
+    // Si ya está abierta, solo la ponemos por encima
+    if (activeStates["Ayuda"]) {
+      bringToFront("Ayuda")
+      return
+    }
+
+    // Si no está abierta, la abrimos y la ponemos por encima
+    setActiveStates((prev) => ({
+      ...prev,
+      Ayuda: true,
+    }))
+    localStorage.setItem("Ayuda-active", JSON.stringify(true))
+    bringToFront("Ayuda")
+  }, [activeStates, bringToFront])
+
+  const handleOpenChat = useCallback(() => {
+    // Si ya está abierta, solo la ponemos por encima
+    if (activeStates["Chat"]) {
+      bringToFront("Chat")
+      return
+    }
+
+    // Si no está abierta, la abrimos y la ponemos por encima
+    setActiveStates((prev) => ({
+      ...prev,
+      Chat: true,
+    }))
+    localStorage.setItem("Chat-active", JSON.stringify(true))
+    bringToFront("Chat")
+  }, [activeStates, bringToFront])
+
+  const handleOpenInventario = useCallback(() => {
+    // Si ya está abierta, solo la ponemos por encima
+    if (activeStates["Inventario"]) {
+      bringToFront("Inventario")
+      return
+    }
+
+    // Si no está abierta, la abrimos y la ponemos por encima
+    setActiveStates((prev) => ({
+      ...prev,
+      Inventario: true,
+    }))
+    localStorage.setItem("Inventario-active", JSON.stringify(true))
+    bringToFront("Inventario")
+  }, [activeStates, bringToFront])
+
+  const handleFrameClick = useCallback(
+    (id) => {
+      bringToFront(id)
+    },
+    [bringToFront],
+  )
 
   const [mapUpdateTrigger, setMapUpdateTrigger] = useState(0)
 
@@ -146,7 +204,7 @@ const App = () => {
               initialPosition={positions[cuadro]}
               onToggleActive={handleToggleActive}
               isActive={activeStates[cuadro]}
-              canClose={cuadro === "Mapa" || cuadro === "Ayuda" || cuadro === "Chat"}
+              canClose={cuadro === "Mapa" || cuadro === "Ayuda" || cuadro === "Chat" || cuadro === "Inventario"}
               onFrameClick={handleFrameClick}
               zIndex={order[cuadro]}
             >
@@ -156,12 +214,15 @@ const App = () => {
                   onOpenMap={handleOpenMap}
                   onOpenHelp={handleOpenHelp}
                   onOpenChat={handleOpenChat}
+                  onOpenInventario={handleOpenInventario}
                   onMapUpdate={handleMapUpdate}
                 />
               ) : cuadro === "Mapa" ? (
                 <MapDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : cuadro === "Descripcion" ? (
                 <DescripcionDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
+              ) : cuadro === "Inventario" ? (
+                <InventarioDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : (
                 <Componente />
               )}
@@ -174,4 +235,3 @@ const App = () => {
 }
 
 export default App
-
