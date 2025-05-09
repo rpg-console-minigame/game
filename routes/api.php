@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\ObjetoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +18,5 @@ use Illuminate\Support\Facades\Artisan;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/run-schedule', function (Request $request) {
-    $key = $request->header('X-CRON-KEY');
 
-    if ($key !== env('CRON_SECRET')) {
-        abort(403, 'Unauthorized');
-    }
-
-    Artisan::call('schedule:run');
-    return response()->json(['status' => 'Schedule executed']);
-});
+Route::post('/run-schedule', [ObjetoController::class, 'copiarObjetos'])->name('runSchedule');
