@@ -13,7 +13,6 @@ const InventarioDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
           throw new Error(`¡Error HTTP! Estado: ${response.status}`);
         }
         const data = await response.json();
-        console.log("Información del inventario:", data);
         setInventarioInfo(data);
       } catch (error) {
         console.error("Error al obtener la información del inventario:", error);
