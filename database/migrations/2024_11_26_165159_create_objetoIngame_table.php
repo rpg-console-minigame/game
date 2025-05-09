@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('objetoInGame', function (Blueprint $table) {
+        Schema::create('objetoingame', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('zona_ID');
             $table->foreign('zona_ID')->references('id')->on('zona');
