@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-const MapDraggableContent = () => {
-  const [zonaInfo, setZonaInfo] = useState(null)
 
+const MapDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
+  const [zonaInfo, setZonaInfo] = useState(null)
 
   useEffect(() => {
     const fetchMapInfo = async () => {
@@ -20,7 +20,7 @@ const MapDraggableContent = () => {
     }
 
     fetchMapInfo()
-  }, [apiUrl])
+  }, [apiUrl, mapUpdateTrigger])
 
   if (!zonaInfo) {
     return <div>Loading...</div>
@@ -56,4 +56,3 @@ const MapDraggableContent = () => {
 }
 
 export default MapDraggableContent
-

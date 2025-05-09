@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 
-const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpdate }) => {
+const ConsoleDraggableContent = ({ apiUrl, onOpenMap, onOpenHelp, onOpenChat, onOpenInventario, onMapUpdate }) => {
   const [input, setInput] = useState("")
   const [nombre, setNombre] = useState("user@PC:~$")
   const [error, setError] = useState("")
@@ -35,6 +35,9 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
       } else if (input.toLowerCase() === "chat") {
         onOpenChat()
         setInput("")
+      } else if (input.toLowerCase() === "inventario") {
+        onOpenInventario()
+        setInput("")
       } else if (["derecha", "izquierda", "arriba", "abajo"].includes(input.toLowerCase())) {
         try {
           const response = await fetch(`${apiUrl}/input`, {
@@ -52,7 +55,7 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
           const data = await response.json()
           console.log("Movimiento exitoso:", data)
           setInput("")
-          updateZonaInfo()
+          onMapUpdate() // Usar onMapUpdate en lugar de updateZonaInfo
         } catch (error) {
           console.error("Error moving:", error)
           setError("Error al mover. Por favor, intenta de nuevo.")
@@ -76,80 +79,17 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
           const data = await response.json()
           console.log("Objeto tomado:", data)
           setInput("")
-          updateZonaInfo()
-        }
-        catch (error) {
+          onMapUpdate() // Usar onMapUpdate en lugar de updateZonaInfo
+        } catch (error) {
           console.error("Error tomando objeto:", error)
           setError("Error al tomar el objeto. Por favor, intenta de nuevo.")
         }
-      }
-      else {
+      } else {
         setError("Comando no reconocido. Usa 'ayuda' para ver los comandos disponibles.")
       }
     },
-    [input, onOpenMap, onOpenHelp, onOpenChat, onMapUpdate, apiUrl],
+    [input, onOpenMap, onOpenHelp, onOpenChat, onOpenInventario, onMapUpdate, apiUrl],
   )
-  const updateZonaInfo = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/mapInfo`)
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const zonaInfo = await response.json()
-      // actualizar la descripción de la zona
-      const descripcion = document.querySelector("#Descripcion-content")
-      descripcion.querySelector("#Descripcion-content_img").innerText = zonaInfo.imagen
-      descripcion.querySelector("h1").innerText = zonaInfo.nombre
-      descripcion.querySelector("#Descripcion-content_text").innerText = zonaInfo.descripcion
-      //Coordenadas: [{zonaInfo.coord_x}, {zonaInfo.coord_y}]
-      descripcion.querySelector("#Coord-content_text").innerHTML = "coordenadas: [" + zonaInfo.coord_x + ", " + zonaInfo.coord_y + "]"
-
-      const objetosList = descripcion.querySelector("ul")
-      objetosList.innerHTML = "" // Limpiar la lista de objetos
-      if (zonaInfo.objetos && zonaInfo.objetos.length > 0) {
-        zonaInfo.objetos.forEach((objeto, index) => {
-          const li = document.createElement("li")
-          li.style.margin = "5px 0"
-          li.innerText = objeto.nombre || `Loading...`
-          objetosList.appendChild(li)
-        })
-      }
-      else {
-        const li = document.createElement("li")
-        li.innerText = "No hay objetos en esta zona."
-        objetosList.appendChild(li)
-      }
-      
-      // actualizar el pre de la descripción
-    const pre = document.querySelector("#Mapa-content pre")
-    if (pre) {
-      pre.innerHTML = `
-                                 ${zonaInfo.up_door ? "╔══════════════════════╗" : "                      "} 
-                                 ${zonaInfo.up_door ? "║" : ""}                      ${zonaInfo.up_door ? "║" : ""}                      
-                                 ${zonaInfo.up_door ? "║" : ""}                      ${zonaInfo.up_door ? "║" : ""}                      
-                                 ${zonaInfo.up_door ? "║" : ""}                      ${zonaInfo.up_door ? "║" : ""}                      
-                                 ${zonaInfo.up_door ? "║" : ""}                      ${zonaInfo.up_door ? "║" : ""}                      
-                                 ${zonaInfo.up_door ? "║" : ""}                      ${zonaInfo.up_door ? "║" : ""}                      
-          ${zonaInfo.left_door ? "╔══════════════════════" : "                       "}${zonaInfo.left_door && zonaInfo.up_door ? "╬" : zonaInfo.left_door ? "╦" : zonaInfo.up_door ? "╠" : "╔"}═════════${zonaInfo.up_door ? "  " : "══"}═══════════${zonaInfo.right_door && zonaInfo.up_door ? "╬" : zonaInfo.right_door ? "╦" : zonaInfo.up_door ? "╣" : "╗"}${zonaInfo.right_door ? "══════════════════════╗" : "                       "}
-          ${zonaInfo.left_door ? "║" : " "}                      ║                      ║                      ${zonaInfo.right_door ? "║" : " "}
-          ${zonaInfo.left_door ? "║" : " "}                      ║                      ║                      ${zonaInfo.right_door ? "║" : " "}
-          ${zonaInfo.left_door ? "║" : " "}                      ${zonaInfo.left_door ? " " : "║"}         ◯           ${zonaInfo.right_door ? " " : "║"}                      ${zonaInfo.right_door ? "║" : " "}
-          ${zonaInfo.left_door ? "║" : " "}                      ║                      ║                      ${zonaInfo.right_door ? "║" : " "}
-          ${zonaInfo.left_door ? "║" : " "}                      ║                      ║                      ${zonaInfo.right_door ? "║" : " "}
-          ${zonaInfo.left_door ? "╚══════════════════════" : "                       "}${zonaInfo.left_door && zonaInfo.down_door ? "╬" : zonaInfo.left_door ? "╩" : zonaInfo.down_door ? "╠" : "╚"}═════════${zonaInfo.down_door ? "  " : "══"}═══════════${zonaInfo.right_door && zonaInfo.down_door ? "╬" : zonaInfo.right_door ? "╩" : zonaInfo.down_door ? "╣" : "╝"}${zonaInfo.right_door ? "══════════════════════╝" : "                       "}
-                                 ${zonaInfo.down_door ? "║" : ""}                      ${zonaInfo.down_door ? "║" : ""} 
-                                 ${zonaInfo.down_door ? "║" : ""}                      ${zonaInfo.down_door ? "║" : ""} 
-                                 ${zonaInfo.down_door ? "║" : ""}                      ${zonaInfo.down_door ? "║" : ""}  
-                                 ${zonaInfo.down_door ? "║" : ""}                      ${zonaInfo.down_door ? "║" : ""}  
-                                 ${zonaInfo.down_door ? "║" : ""}                      ${zonaInfo.down_door ? "║" : ""}  
-                                 ${zonaInfo.down_door ? "╚══════════════════════╝" : "                      "}
-          `
-    }
-    } catch (error) {
-      console.error("Error fetching map info:", error)
-    }
-    
-  }
 
   return (
     <div id="Consola-content" className="console-container">
@@ -191,4 +131,3 @@ const ConsoleDraggableContent = ({  onOpenMap, onOpenHelp, onOpenChat, onMapUpda
 }
 
 export default ConsoleDraggableContent
-
