@@ -65,7 +65,7 @@ class ObjetoController extends Controller
 
         foreach ($objetos as $objeto) {
             // Verifica si ya existe una copia sin personaje asignado
-            $existeSinPersonaje = DB::table('objetoInGame')
+            $existeSinPersonaje = DB::table('objetoingame')
                 ->where('nombre', $objeto->nombre)
                 ->where('zona_ID', $objeto->zona_ID)
                 ->whereNull('personaje_ID')
@@ -87,7 +87,7 @@ class ObjetoController extends Controller
             }
 
             if ($debeCopiarse) {
-                DB::table('objetoInGame')->insert([
+                DB::table('objetoingame')->insert([
                     'zona_ID' => $objeto->zona_ID,
                     'personaje_ID' => null,
                     'nombre' => $objeto->nombre,
