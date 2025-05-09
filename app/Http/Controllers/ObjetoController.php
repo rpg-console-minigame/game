@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Objeto;
 use App\Models\Zona;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ObjetoController extends Controller
 {
-    function create(Request $request){
+    function create(Request $request)
+    {
         $objeto = new Objeto();
         $objeto->nombre = $request->input('nombre');
         $objeto->function_name = $request->input('function_name');
@@ -20,7 +24,8 @@ class ObjetoController extends Controller
         $objeto->save();
         return redirect('/map')->with('success', 'Objeto creado exitosamente!');
     }
-    function edit(Request $request, $id){
+    function edit(Request $request, $id)
+    {
         $objeto = Objeto::find($id);
         if ($objeto) {
             $objeto->nombre = $request->input('nombre');
@@ -36,7 +41,8 @@ class ObjetoController extends Controller
             return redirect('/map')->with('error', 'Objeto no encontrado!');
         }
     }
-    function delete(Request $request){
+    function delete(Request $request)
+    {
         $id = $request->input('id');
         $objeto = Objeto::find($id);
         if ($objeto) {
@@ -45,5 +51,60 @@ class ObjetoController extends Controller
         } else {
             return redirect('/map')->with('error', 'Objeto no encontrado!');
         }
+    }
+
+    public function copiarObjetos(Request $request)
+    {
+        $key = $request->header('X-CRON-KEY');
+
+        if ($key !== env('CRON_SECRET')) {
+            abort(403, 'Unauthorized');
+        }
+        Log::info('Comando copiar:objetos ejecutado a las ' . now());
+        $objetos = DB::table('objeto')->get();
+
+        foreach ($objetos as $objeto) {
+            // Verifica si ya existe una copia sin personaje asignado
+            $existeSinPersonaje = DB::table('objetoInGame')
+                ->where('nombre', $objeto->nombre)
+                ->where('zona_ID', $objeto->zona_ID)
+                ->whereNull('personaje_ID')
+                ->exists();
+
+            if ($existeSinPersonaje) {
+                continue; // No copiar si ya hay uno sin personaje
+            }
+
+            $debeCopiarse = false;
+
+            if (!$objeto->last_copied_at) {
+                $debeCopiarse = true;
+            } else {
+                $ultimo = Carbon::parse($objeto->last_copied_at);
+                if (now()->diffInMinutes($ultimo) >= $objeto->minutos) {
+                    $debeCopiarse = true;
+                }
+            }
+
+            if ($debeCopiarse) {
+                DB::table('objetoInGame')->insert([
+                    'zona_ID' => $objeto->zona_ID,
+                    'personaje_ID' => null,
+                    'nombre' => $objeto->nombre,
+                    'descripcion' => $objeto->descripcion,
+                    'coste' => $objeto->coste,
+                    'durabilidad' => $objeto->durabilidad,
+                    'function_name' => $objeto->function_name,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                DB::table('objeto')->where('id', $objeto->id)->update([
+                    'last_copied_at' => now()
+                ]);
+
+            }
+        }
+        return response()->json(['status' => 'Schedule executed']);
     }
 }
