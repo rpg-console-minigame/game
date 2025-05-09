@@ -75,7 +75,8 @@ class PersonajeController extends Controller
                     session()->put("character", $personaje);
                     return response()->json("ok");
                 } else {
-                    return response()->json("no hay zona hacia abajo");
+                    // return response()->json("no hay zona hacia abajo"); json error
+                    return response()->json("no hay zona hacia abajo", 501);
                 }
 
             case "arriba":
@@ -88,7 +89,7 @@ class PersonajeController extends Controller
                     session()->put("character", $personaje);
                     return response()->json("ok");
                 } else {
-                    return response()->json("no hay zona hacia arriba");
+                    return response()->json("no hay zona hacia arriba", 501);
                 }
 
             case "derecha":
@@ -101,7 +102,7 @@ class PersonajeController extends Controller
                     session()->put("character", $personaje);
                     return response()->json("ok");
                 } else {
-                    return response()->json("no hay zona hacia la derecha");
+                    return response()->json("no hay zona hacia la derecha", 501);
                 }
 
             case "izquierda":
@@ -114,7 +115,7 @@ class PersonajeController extends Controller
                     session()->put("character", $personaje);
                     return response()->json("ok");
                 } else {
-                    return response()->json("no hay zona hacia la izquierda");
+                    return response()->json("no hay zona hacia la izquierda", 501);
                 }
 
             case "tomar":
@@ -130,11 +131,66 @@ class PersonajeController extends Controller
                     session()->put("character", $personaje);
                     return response()->json("ok");
                 } else {
-                    return response()->json("no existe objeto en la sala");
+                    return response()->json("no existe objeto en la sala", 501);
                 }
-
+            case "usar":
+                // recibimos $request->objeto con el nombre del objeto, si existen 2, se usa el primero
+                $objeto = objetoInGame::where("nombre", $request->objeto)
+                    ->where("personaje_ID", session()->get("character")["id"])
+                    ->first();
+                if ($objeto) {
+                    $this->use($objeto->function_name);
+                    $objeto->durabilidad -= 1;
+                    if ($objeto->durabilidad <= 0)$objeto->delete();
+                    else  $objeto->save();
+                    return response()->json("ok", 200);
+                }
+                else return response()->json("no existe objeto en el inventario", 501);
             default:
-                return response()->json("Comando no reconocido");
+                return response()->json("Comando no reconocido", 501);
         }
+    }
+    function use($string){
+        switch ($string) {
+            case 'curar10':
+                $this->curar10();
+                break;
+            case 'curar20':
+                $this->curar20();
+                break;
+            case 'curar50':
+                $this->curar50();
+                break;
+            default:
+                return response()->json(['error' => 'Invalid object'], 400);
+        }
+    }
+
+    function curar10(){
+        session_start();
+        $personaje = session('character');
+        $personaje->HP += 10;
+        if ($personaje->HP > $personaje->Max_HP) {
+            $personaje->HP = $personaje->Max_HP;
+        }
+        $personaje->save();
+    }
+    function curar20(){
+        session_start();
+        $personaje = session('character');
+        $personaje->HP += 20;
+        if ($personaje->HP > $personaje->Max_HP) {
+            $personaje->HP = $personaje->Max_HP;
+        }
+        $personaje->save();
+    }
+    function curar50(){
+        session_start();
+        $personaje = session('character');
+        $personaje->HP += 50;
+        if ($personaje->HP > $personaje->Max_HP) {
+            $personaje->HP = $personaje->Max_HP;
+        }
+        $personaje->save();
     }
 }
