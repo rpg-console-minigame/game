@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Artisan;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::post('/run-schedule', function (Request $request) {
     $key = $request->header('X-CRON-KEY');
 
