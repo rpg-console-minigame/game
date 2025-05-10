@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class MapController extends Controller
 {
-    function index() {
-        $map = \App\Models\Zona::all();
-        $items = \App\Models\Objeto::all();
-        return view("mapEditor", ["map" => $map, "items" => $items]);
+
+    public function index(Request $request) {
+        $name = $request->input('name');
+        $password = $request->input('password');
+
+        $user = \App\Models\adminUser::where("name", $name)->first();
+
+        if($user && Hash::check($password, $user->password)) {
+            $map = \App\Models\Zona::all();
+            $items = \App\Models\Objeto::all();
+            return view("mapEditor", ["map" => $map, "items" => $items]);
+        } else {
+            // Si no se encuentra el usuario o la contraseña es incorrecta, redirigir con mensaje de error
+            return redirect("/map")->with("error", "Usuario o contraseña incorrectos");
+        }
     }
+
     function create(Request $request) {
         $data =[
             'nombre' => $request['nombre'],
