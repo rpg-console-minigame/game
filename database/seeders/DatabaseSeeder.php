@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Zona;
+use App\Models\adminUser;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,5 +35,10 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+        // Crear adminUser con usuario y contraseña "admin"
+        adminUser::create([
+            'name' => 'admin',
+            'password' => Hash::make('admin'),
+        ]);
     }
 }
