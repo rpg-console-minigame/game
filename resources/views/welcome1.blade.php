@@ -246,7 +246,7 @@
         <div class="aside-container w-20">
             <img src="https://via.placeholder.com/100" alt="Usuario">
             {{-- <h5>Nombre Usuario</h5> --}}
-            <h5>{{ $personaje->nombre }}</h5>
+            <h5 id=nombreUsuario>nombreUsuario</h5>
             <hr>
             <p><strong>Logros:</strong></p>
             <ul class="text-start" style="padding-left: 20px;">

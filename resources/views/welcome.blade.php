@@ -29,8 +29,8 @@
 
         /* Barra de navegación */
         nav {
-            display: flex;
-            justify-content: space-between;
+/*             display: flex;
+            justify-content: space-between; */
             align-items: center;
             padding: 1rem 10%;
             background-color: #1e1e1e;
@@ -243,14 +243,33 @@
 
 <body>
 
-    <nav>
-        <a href="">RPG MINIGAME</a>
-        <a href="">Documentacion</a>
-        <a href="">Sobre nosotros</a>
-        <a href="">Mis logros</a>
-        <a href="">Contacto</a>
-        <button data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3">
+    <div class="container-fluid">
+        <!-- Marca a la izquierda -->
+        <a class="navbar-brand fw-bold" href="#">RPG MINIGAME</a>
+
+        <!-- Hamburguesa a la derecha -->
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú colapsable -->
+        <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#">Documentación</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Mis logros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://minigame-rpg.up.railway.app/map">Mapa</a></li>
+            </ul>
+            <div class="d-flex">
+                <button data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+</nav>
 
     <main>
 
