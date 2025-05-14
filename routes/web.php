@@ -23,7 +23,9 @@ Route::get('/map', function () {
     return view('loginMap');
 })->name('map');
 
-Route::match(['get', 'post'], '/map/editor', [MapController::class, 'index'])->name('mapEditor');
+Route::get('/map/editor', [MapController::class, 'showLogin'])->name('mapEditorLogin');
+Route::post('/map/editor', [MapController::class, 'processLogin'])->name('mapEditorLoginPost');
+Route::get('/map/editor/dashboard', [MapController::class, 'dashboard'])->name('mapEditor');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/map/create', [MapController::class, 'create'])->name('create');
 Route::post('/map/delete', [MapController::class, 'delete'])->name('delete');

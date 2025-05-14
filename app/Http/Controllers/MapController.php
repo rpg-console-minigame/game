@@ -8,97 +8,139 @@ use Illuminate\Support\Facades\Validator;
 
 class MapController extends Controller
 {
-    public function index(Request $request) {
+    // Muestra la vista de login del editor de mapas
+    public function showLogin(Request $request) {
+        return view('loginMap');
+    }
+
+    // Procesa el login del editor de mapas
+    public function processLogin(Request $request) {
         $name = $request->input('name');
         $password = $request->input('password');
 
         $user = \App\Models\adminUser::where("name", $name)->first();
 
         if ($user && Hash::check($password, $user->password)) {
-            $map = \App\Models\Zona::all();
-            $items = \App\Models\Objeto::all();
-            return view("mapEditor", ["map" => $map, "items" => $items]);
+            session(['is_admin' => true]);
+            return redirect()->route('mapEditor'); // Redirige al dashboard
         } else {
-            return redirect("/map/editor")->with("error", "Usuario o contraseña incorrectos");
+            return redirect()->route('mapEditorLogin')->with("error", "Usuario o contraseña incorrectos");
         }
     }
 
-    function create(Request $request) {
+    // Vista principal del editor de mapas (solo si logueado)
+    public function dashboard() {
+        if (!session('is_admin')) {
+            return redirect()->route('mapEditorLogin')->with("error", "Debes iniciar sesión");
+        }
+
+        $map = \App\Models\Zona::all();
+        $items = \App\Models\Objeto::all();
+        return view("mapEditor", ["map" => $map, "items" => $items]);
+    }
+
+    // Crea una nueva zona del mapa
+    public function create(Request $request) {
+        if (!session('is_admin')) {
+            return redirect()->route('mapEditorLogin');
+        }
+
         $data = [
             'nombre' => $request['nombre'],
             'descripcion' => $request['descripcion']
         ];
 
-        $validator = Validator::make($data,
-        [
+        $validator = Validator::make($data, [
             'nombre' => 'required|string|max:100',
             'descripcion' => 'required|string|max:2000'
-        ],
-        []);
+        ]);
 
         if ($validator->passes()) {
             $zone = new \App\Models\Zona;
-            $zone->coord_x = request("coord_x");
-            $zone->coord_y = request("coord_y");
-            $zone->nombre = request("nombre");
-            $zone->imagen = request("imagen");
-            $zone->descripcion = request("descripcion");
-            $zone->up_door = request("up_door") ? 0 : 1;
-            $zone->down_door = request("down_door") ? 0 : 1;
-            $zone->left_door = request("left_door") ? 0 : 1;
-            $zone->right_door = request("right_door") ? 0 : 1;
-            $zone->isSpawn = request("isSpawn") ? 1 : 0;
+            $zone->coord_x = $request->input("coord_x");
+            $zone->coord_y = $request->input("coord_y");
+            $zone->nombre = $request->input("nombre");
+            $zone->imagen = $request->input("imagen");
+            $zone->descripcion = $request->input("descripcion");
+            $zone->up_door = $request->has("up_door") ? 0 : 1;
+            $zone->down_door = $request->has("down_door") ? 0 : 1;
+            $zone->left_door = $request->has("left_door") ? 0 : 1;
+            $zone->right_door = $request->has("right_door") ? 0 : 1;
+            $zone->isSpawn = $request->has("isSpawn") ? 1 : 0;
             $zone->save();
-            return redirect("/map/editor")->with("success", true);
+            return redirect()->route('mapEditor')->with("success", true);
         } else {
-            return redirect("/map/editor")->with("error", "Es necesario nombre o descripcion");
+            return redirect()->route('mapEditor')->with("error", "Es necesario nombre o descripción");
         }
     }
 
-    function delete(Request $request) {
-        $zone = \App\Models\Zona::all()->where("coord_x", $request->coord_x)->where("coord_y", $request->coord_y)->first();
-        $zone->delete();
-        return redirect("/map/editor")->with("success", true);
+    // Elimina una zona del mapa
+    public function delete(Request $request) {
+        if (!session('is_admin')) {
+            return redirect()->route('mapEditorLogin');
+        }
+
+        $zone = \App\Models\Zona::where("coord_x", $request->coord_x)
+                                ->where("coord_y", $request->coord_y)
+                                ->first();
+
+        if ($zone) {
+            $zone->delete();
+            return redirect()->route('mapEditor')->with("success", true);
+        } else {
+            return redirect()->route('mapEditor')->with("error", "Zona no encontrada");
+        }
     }
 
-    function update(Request $request) {
+    // Actualiza una zona del mapa
+    public function update(Request $request) {
+        if (!session('is_admin')) {
+            return redirect()->route('mapEditorLogin');
+        }
+
         $data = [
             'nombre' => $request['nombre'],
             'descripcion' => $request['descripcion']
         ];
 
-        $validator = Validator::make($data,
-        [
+        $validator = Validator::make($data, [
             'nombre' => 'required|string|max:100',
             'descripcion' => 'required|string|max:2000'
-        ],
-        []);
+        ]);
 
         if ($validator->passes()) {
-            $zone = \App\Models\Zona::all()->where("coord_x", $request->coord_x)->where("coord_y", $request->coord_y)->first();
-            $zone->coord_x = request("coord_x");
-            $zone->coord_y = request("coord_y");
-            $zone->nombre = request("nombre");
-            $zone->imagen = request("imagen");
-            $zone->descripcion = request("descripcion");
-            $zone->up_door = request("up_door") ? 0 : 1;
-            $zone->down_door = request("down_door") ? 0 : 1;
-            $zone->left_door = request("left_door") ? 0 : 1;
-            $zone->right_door = request("right_door") ? 0 : 1;
-            $zone->isSpawn = request("isSpawn") ? 1 : 0;
-            $zone->save();
-            return redirect("/map/editor")->with("success", true);
+            $zone = \App\Models\Zona::where("coord_x", $request->coord_x)
+                                    ->where("coord_y", $request->coord_y)
+                                    ->first();
+
+            if ($zone) {
+                $zone->coord_x = $request->input("coord_x");
+                $zone->coord_y = $request->input("coord_y");
+                $zone->nombre = $request->input("nombre");
+                $zone->imagen = $request->input("imagen");
+                $zone->descripcion = $request->input("descripcion");
+                $zone->up_door = $request->has("up_door") ? 0 : 1;
+                $zone->down_door = $request->has("down_door") ? 0 : 1;
+                $zone->left_door = $request->has("left_door") ? 0 : 1;
+                $zone->right_door = $request->has("right_door") ? 0 : 1;
+                $zone->isSpawn = $request->has("isSpawn") ? 1 : 0;
+                $zone->save();
+                return redirect()->route('mapEditor')->with("success", true);
+            } else {
+                return redirect()->route('mapEditor')->with("error", "Zona no encontrada");
+            }
         } else {
-            return redirect("/map/editor")->with("error", "Es necesario nombre o descripcion");
+            return redirect()->route('mapEditor')->with("error", "Es necesario nombre o descripción");
         }
     }
 
+    // Devuelve información del mapa actual del personaje
     public function mapInfo() {
         session_start();
         $personaje = \App\Models\Personaje::where("id", session("character")->id)->first();
         $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
         $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)->where("personaje_ID", null)->get();
-        $inentario = \App\Models\objetoInGame::where("personaje_ID", $personaje->id)->get();
+        $inventario = \App\Models\objetoInGame::where("personaje_ID", $personaje->id)->get();
 
         $zonaInfo = [
             "imagen" => $zona->imagen,
@@ -113,7 +155,7 @@ class MapController extends Controller
             'coord_y' => $zona->coord_y,
             'isSpawn' => $zona->isSpawn,
             'objetos' => $objetos,
-            'inentario' => $inentario,
+            'inventario' => $inventario,
         ];
 
         return response()->json($zonaInfo);
