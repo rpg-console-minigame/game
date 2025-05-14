@@ -51,16 +51,16 @@ class MapController extends Controller
             $zone->right_door = request( "right_door") ? 0 : 1;
             $zone->isSpawn = request("isSpawn") ? 1 : 0;
             $zone->save();
-            return redirect("/map")->with("success",true);
+            return redirect("/mapEditor")->with("success",true);
         }else{
-            return redirect("/map")->with("error","Es necesario nombre o descripcion");
+            return redirect("/mapEditor")->with("error","Es necesario nombre o descripcion");
         }
     }
     function delete(Request $request) {
         // borrar una entrada de la base de datos
         $zone = \App\Models\Zona::all()->where("coord_x", $request->coord_x)->where("coord_y", $request->coord_y)->first();
         $zone->delete();
-        return redirect("/map")->with("success",true);
+        return redirect("/mapEditor")->with("success",true);
     }
     function update(Request $request){
 
@@ -92,10 +92,10 @@ class MapController extends Controller
         $zone->right_door = request("right_door") ? 0 : 1;
         $zone->isSpawn = request("isSpawn") ? 1 : 0;
         $zone->save();
-        return redirect("/map")->with("success",true);
+        return redirect("/mapEditor")->with("success",true);
         }
         else{
-            return redirect("/map")->with("error","Es necesario nombre o descripcion");
+            return redirect("/mapEditor")->with("error","Es necesario nombre o descripcion");
         }
         
         
