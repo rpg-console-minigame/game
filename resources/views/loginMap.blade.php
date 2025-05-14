@@ -170,6 +170,25 @@
             width: 100%;
         }
 
+        @media (max-width: 768px) {
+            footer .row > div {
+                text-align: center !important;
+                margin-bottom: 1.5rem;
+            }
+        
+            footer .text-start {
+                text-align: center !important;
+            }
+        
+            footer ul {
+                padding-left: 0;
+            }
+        
+            footer li {
+                list-style: none;
+            }
+        }
+
     </style>
 </head>
 
