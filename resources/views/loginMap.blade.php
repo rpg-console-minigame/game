@@ -224,7 +224,7 @@
                 </div>
             </div>
             <div class="console-body">
-                <form action="{{ route('mapEditor') }}" method="POST">
+                <form action="{{ route('mapEditorLoginPost') }}" method="POST">
                     @csrf
                     <div class="input-group">
                         <span>user@Name:~$</span>
