@@ -143,6 +143,33 @@
             color: white;
             border-color: white;
         }
+
+        footer a {
+            position: relative;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: color 0.3s;
+        }
+        
+        footer a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            left: 0;
+            bottom: -3px;
+            background-color: var(--principal);
+            transition: width 0.3s ease-in-out;
+        }
+        
+        footer a:hover {
+            color: var(--principal);
+        }
+        
+        footer a:hover::after {
+            width: 100%;
+        }
+
     </style>
 </head>
 
