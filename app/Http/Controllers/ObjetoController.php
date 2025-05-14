@@ -22,24 +22,11 @@ class ObjetoController extends Controller
         $objeto->coste = $request->input('coste');
         $objeto->minutos = $request->input('minutos');
         $objeto->save();
-
-        $map = \App\Models\Zona::all();
-        $items = \App\Models\Objeto::all();
-
-        return view('mapEditor', [
-            'map' => $map,
-            'items' => $items,
-            'success' => 'Objeto creado exitosamente!'
-        ]);
+        return redirect('/map')->with('success', 'Objeto creado exitosamente!');
     }
-
     function edit(Request $request, $id)
     {
         $objeto = Objeto::find($id);
-
-        $map = \App\Models\Zona::all();
-        $items = \App\Models\Objeto::all();
-
         if ($objeto) {
             $objeto->nombre = $request->input('nombre');
             $objeto->function_name = $request->input('function_name');
@@ -49,42 +36,20 @@ class ObjetoController extends Controller
             $objeto->minutos = $request->input('minutos');
             $objeto->zona_ID = $request->input('zona_ID');
             $objeto->save();
-
-            return view('mapEditor', [
-                'map' => $map,
-                'items' => $items,
-                'success' => 'Objeto editado exitosamente!'
-            ]);
+            return redirect('/map')->with('success', 'Objeto editado exitosamente!');
         } else {
-            return view('mapEditor', [
-                'map' => $map,
-                'items' => $items,
-                'error' => 'Objeto no encontrado!'
-            ]);
+            return redirect('/map')->with('error', 'Objeto no encontrado!');
         }
     }
-
     function delete(Request $request)
     {
         $id = $request->input('id');
         $objeto = Objeto::find($id);
-
-        $map = \App\Models\Zona::all();
-        $items = \App\Models\Objeto::all();
-
         if ($objeto) {
             $objeto->delete();
-            return view('mapEditor', [
-                'map' => $map,
-                'items' => $items,
-                'success' => 'Objeto eliminado exitosamente!'
-            ]);
+            return redirect('/map')->with('success', 'Objeto eliminado exitosamente!');
         } else {
-            return view('mapEditor', [
-                'map' => $map,
-                'items' => $items,
-                'error' => 'Objeto no encontrado!'
-            ]);
+            return redirect('/map')->with('error', 'Objeto no encontrado!');
         }
     }
 
@@ -95,18 +60,20 @@ class ObjetoController extends Controller
         if ($key !== env('CRON_SECRET')) {
             abort(403, 'Unauthorized');
         }
-
         Log::info('Comando copiar:objetos ejecutado a las ' . now());
         $objetos = DB::table('objeto')->get();
 
         foreach ($objetos as $objeto) {
+            // Verifica si ya existe una copia sin personaje asignado
             $existeSinPersonaje = DB::table('objetoingame')
                 ->where('nombre', $objeto->nombre)
                 ->where('zona_ID', $objeto->zona_ID)
                 ->whereNull('personaje_ID')
                 ->exists();
 
-            if ($existeSinPersonaje) continue;
+            if ($existeSinPersonaje) {
+                continue; // No copiar si ya hay uno sin personaje
+            }
 
             $debeCopiarse = false;
 
@@ -135,9 +102,9 @@ class ObjetoController extends Controller
                 DB::table('objeto')->where('id', $objeto->id)->update([
                     'last_copied_at' => now()
                 ]);
+
             }
         }
-
         return response()->json(['status' => 'Schedule executed']);
     }
 }
