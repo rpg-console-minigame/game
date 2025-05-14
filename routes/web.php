@@ -23,7 +23,7 @@ Route::get('/map', function () {
     return view('loginMap');
 })->name('map');
 
-Route::post('/map/editor', [MapController::class, 'index'])->name('mapEditor');
+Route::get('/map/editor', [MapController::class, 'index'])->name('mapEditor');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/map/create', [MapController::class, 'create'])->name('create');
 Route::post('/map/delete', [MapController::class, 'delete'])->name('delete');
