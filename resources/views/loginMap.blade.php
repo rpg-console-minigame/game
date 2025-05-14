@@ -194,6 +194,63 @@
         </div>
     </div>
 
+
+    <footer class="bg-dark text-light pt-5 pb-4">
+    <div class="container text-md-left">
+        <div class="row text-md-left">
+
+            <!-- Sección 1: Logo y descripción -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold" style="color: var(--principal);">RPG MINIGAME</h6>
+                <p>Explora mundos, completa misiones, evoluciona. Un RPG clásico en esencia, moderno en ejecución.</p>
+            </div>
+
+            <!-- Sección 2: Navegación -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold">Navegación</h6>
+                <p><a href="#" class="text-reset text-decoration-none">Inicio</a></p>
+                <p><a href="#" class="text-reset text-decoration-none">Documentación</a></p>
+                <p><a href="#" class="text-reset text-decoration-none">Mis logros</a></p>
+                <p><a href="#" class="text-reset text-decoration-none">Mapa</a></p>
+            </div>
+
+            <!-- Sección 3: Soporte -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold">Soporte</h6>
+                <p><a href="#" class="text-reset text-decoration-none">Preguntas Frecuentes</a></p>
+                <p><a href="#" class="text-reset text-decoration-none">Centro de ayuda</a></p>
+                <p><a href="#" class="text-reset text-decoration-none">Contacto</a></p>
+                <p><a href="#" class="text-reset text-decoration-none">Términos y condiciones</a></p>
+            </div>
+
+            <!-- Sección 4: Contacto -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold">Contacto</h6>
+                <p><i class="bi bi-envelope-fill me-2"></i> soporte@rpgminigame.com</p>
+                <p><i class="bi bi-github me-2"></i> github.com/rpgminigame</p>
+                <p><i class="bi bi-globe me-2"></i> www.rpgminigame.com</p>
+            </div>
+        </div>
+
+        <!-- Línea divisoria -->
+        <hr class="my-4" style="border-top: 1px solid #444;" />
+
+        <!-- Derechos -->
+        <div class="row">
+            <div class="col-md-7 col-lg-8">
+                <p class="text-center text-md-start">© 2025 RPG Minigame. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="text-center text-md-end">
+                    <a href="#" class="text-reset me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-reset me-3"><i class="bi bi-discord"></i></a>
+                    <a href="#" class="text-reset me-3"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
