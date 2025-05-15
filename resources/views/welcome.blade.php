@@ -309,6 +309,7 @@
                 <li class="nav-item"><a class="nav-link" href="#">Mis logros</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
                 <li class="nav-item"><a class="nav-link" href="https://minigame-rpg.up.railway.app/map">Mapa</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://minigame-rpg.up.railway.app/tiendaOro">Tienda</a></li>
             </ul>
             <div class="d-flex">
                 <button data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
