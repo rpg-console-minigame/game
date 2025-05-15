@@ -143,70 +143,26 @@
 
     <!-- TIENDA -->
     <div class="container py-5">
-        <h2 class="text-center mb-5" style="color: var(--principal);">Tienda de Objetos</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    <h2 class="text-center mb-5" style="color: var(--principal);">Tienda de Objetos</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach ($tienda as $item)
             <div class="col">
                 <div class="card h-100 text-center">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Espada">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ $item->nombre }}">
                     <div class="card-body">
-                        <h5 class="card-title">Espada de Fuego</h5>
-                        <p class="card-text">Corta enemigos con llamas ardientes.</p>
+                        <h5 class="card-title">{{ $item->nombre }}</h5>
+                        <p class="card-text">{{ $item->descripcion }}</p>
+                        <p class="card-text fw-bold text-warning">
+                            {{ $item->precio_oro }} <i class="fa-solid fa-coins"></i>
+                        </p>
                         <button class="btn btn-custom">Comprar</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Escudo">
-                    <div class="card-body">
-                        <h5 class="card-title">Escudo de Hierro</h5>
-                        <p class="card-text">Protección impenetrable ante ataques físicos.</p>
-                        <button class="btn btn-custom">Comprar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Poción">
-                    <div class="card-body">
-                        <h5 class="card-title">Poción de Vida</h5>
-                        <p class="card-text">Recupera tu salud al instante.</p>
-                        <button class="btn btn-custom">Comprar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Amuleto">
-                    <div class="card-body">
-                        <h5 class="card-title">Amuleto Místico</h5>
-                        <p class="card-text">Aumenta tu poder mágico durante batallas.</p>
-                        <button class="btn btn-custom">Comprar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <img src="p_6650_0160_1_1.jpg" class="card-img-top" alt="Armadura">
-                    <div class="card-body">
-                        <h5 class="card-title">Armadura de Sombra</h5>
-                        <p class="card-text">Perfecta para el sigilo y defensa nocturna.</p>
-                        <button class="btn btn-custom">Comprar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Anillo">
-                    <div class="card-body">
-                        <h5 class="card-title">Anillo del Destino</h5>
-                        <p class="card-text">Aumenta la probabilidad de crítico.</p>
-                        <button class="btn btn-custom">Comprar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+</div>
+
 
     <!-- FOOTER -->
     <footer class="bg-dark text-light pt-5 pb-4">
