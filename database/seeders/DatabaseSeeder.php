@@ -11,7 +11,7 @@ use App\Models\TiendaOro;
 class DatabaseSeeder extends Seeder
 {
     // /**
-    //  * Seed the application's database.
+    //  * Seed the application's database. 
     //  *
     //  * @return void
     //  */
