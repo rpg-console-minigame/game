@@ -148,7 +148,6 @@
         @foreach ($tienda as $item)
             <div class="col">
                 <div class="card h-100 text-center">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ $item->nombre }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->nombre }}</h5>
                         <p class="card-text">{{ $item->descripcion }}</p>
