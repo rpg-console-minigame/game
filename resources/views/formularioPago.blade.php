@@ -149,27 +149,34 @@
   <!-- FORMULARIO DE PAGO -->
   <div class="payment-form">
     <h2 class="mb-4">💳 Pago Seguro</h2>
-    <form action="#" method="POST">
-      <div class="mb-3">
+    <form action="{{ route('pagoRealizado') }}" method="POST">
+    @csrf
+
+    <div class="mb-3">
         <label class="form-label">Nombre en la tarjeta</label>
-        <input type="text" class="form-control" required />
-      </div>
-      <div class="mb-3">
+        <input type="text" name="nombre_titular" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Número de tarjeta</label>
-        <input type="text" class="form-control" maxlength="19" required />
-      </div>
-      <div class="mb-3 row">
+        <input type="text" name="numero_tarjeta" class="form-control" maxlength="19" required />
+    </div>
+
+    <div class="mb-3 row">
         <div class="col">
-          <label class="form-label">Expira</label>
-          <input type="text" class="form-control" placeholder="MM/AA" required />
+            <label class="form-label">Expira</label>
+            <input type="text" name="expira" class="form-control" placeholder="MM/AA" required />
         </div>
         <div class="col">
-          <label class="form-label">CVV</label>
-          <input type="text" class="form-control" maxlength="4" required />
+            <label class="form-label">CVV</label>
+            <input type="text" name="cvv" class="form-control" maxlength="4" required />
         </div>
-      </div>
-      <button type="submit" class="w-100 mt-3">Pagar ahora</button>
-    </form>
+    </div>
+
+    <button type="submit" class="w-100 mt-3">Pagar ahora</button>
+</form>
+
+    
   </div>
 
   <!-- FOOTER -->

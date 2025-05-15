@@ -164,7 +164,8 @@
       <h4 class="fw-bold text-success">1500 de oro</h4>
       <p>ID de transacción: <code>#TXN2025-0941</code></p>
       <p>¡Ahora puedes volver a jugar y usar tu nuevo oro!</p>
-      <a href="#" class="btn-principal mt-3 d-inline-block">Volver al juego</a>
+
+      <a href="{{ route("devolver") }}" class="btn-principal mt-3 d-inline-block">Volver al juego</a>
     </div>
   </div>
 

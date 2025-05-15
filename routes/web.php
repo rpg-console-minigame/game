@@ -52,3 +52,6 @@ Route::post('/messages', [ChatController::class, 'store']);
 Route::get('/tiendaOro', [TiendaController::class, 'index'])->name('tiendaOro');
 Route::get('/compra', [TiendaController::class, 'show'])->name('tiendaOroShow');
 Route::get('/tiendaObjetos', [TiendaController::class, 'indexObjetos'])->name('tiendaObjetos');
+Route::post('/pagoRealizado', [TiendaController::class, 'showObjeto'])->name('pagoRealizado');
+Route::get('/devolver', [TiendaController::class, 'devolver'])->name('devolver');
+

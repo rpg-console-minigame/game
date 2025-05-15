@@ -27,4 +27,14 @@ class TiendaController extends Controller
         $tienda = \App\Models\Tienda::all();
         return view('tienda', ['tienda' => $tienda]);
     }
+
+    public function showObjeto(Request $request)
+    {
+        return view('paginaCompra');
+    }
+
+    public function devolver(Request $request)
+    {
+        return view('welcome1');
+    }
 }
