@@ -43,10 +43,32 @@ class DatabaseSeeder extends Seeder
     //     ]);
 
         // Insertar paquetes de oro
-        TiendaOro::create([
-            ['nombre' => 'Paquete 1', 'img_url' => 'https://static.vecteezy.com/system/resources/previews/022/542/143/non_2x/pixel-art-game-currency-coin-vector.jpg', 'cantidad_oro' => 100, 'precio' => 0.99],
-            ['nombre' => 'Paquete 2', 'img_url' => 'https://static.vecteezy.com/system/resources/previews/022/542/143/non_2x/pixel-art-game-currency-coin-vector.jpg', 'cantidad_oro' => 250, 'precio' => 2.49],
-            ['nombre' => 'Paquete 3', 'img_url' => 'https://static.vecteezy.com/system/resources/previews/022/542/143/non_2x/pixel-art-game-currency-coin-vector.jpg', 'cantidad_oro' => 500, 'precio' => 4.99]
+         TiendaOro::insert([
+            [
+              'nombre' => 'Paquete 1',
+              'img_url' => 'https://…/coin-vector.jpg',
+              'cantidad_oro' => 100,
+              'precio' => 0.99,
+              'created_at' => now(),
+              'updated_at' => now(),
+            ],
+            [
+              'nombre' => 'Paquete 2',
+              'img_url' => 'https://…/coin-vector.jpg',
+              'cantidad_oro' => 250,
+              'precio' => 2.49,
+              'created_at' => now(),
+              'updated_at' => now(),
+            ],
+            [
+              'nombre' => 'Paquete 3',
+              'img_url' => 'https://…/coin-vector.jpg',
+              'cantidad_oro' => 500,
+              'precio' => 4.99,
+              'created_at' => now(),
+              'updated_at' => now(),
+            ],
+            // … hasta los 6 paquetes …
         ]);
     }
 }
