@@ -192,5 +192,5 @@ class PersonajeController extends Controller
             $personaje->HP = $personaje->Max_HP;
         }
         $personaje->save();
-    }
+    }
 }
