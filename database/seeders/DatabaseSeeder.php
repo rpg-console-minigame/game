@@ -70,6 +70,5 @@ class DatabaseSeeder extends Seeder
     //         ],
     //         // … hasta los 6 paquetes …
     //     ]);
-    }
 }
 
