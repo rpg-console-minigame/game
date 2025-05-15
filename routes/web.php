@@ -6,6 +6,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ObjetoController;
+use App\Http\Controllers\TiendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,4 @@ Route::post('/input', [PersonajeController::class, 'inputConsole'])->name('input
 
 Route::get('/messages', [ChatController::class, 'index']);
 Route::post('/messages', [ChatController::class, 'store']);
+Route::get('/tiendaOro', [TiendaController::class, 'index'])->name('tiendaOro');
