@@ -11,6 +11,7 @@ class CreateTiendaOroTable extends Migration
         Schema::create('tienda_oro', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('img_url');
             $table->integer('cantidad_oro');
             $table->decimal('precio', 8, 2);
             $table->timestamps();
