@@ -207,18 +207,157 @@
             border-color: white;
         }
 
+        @media (max-width: 992px) {
+        .d-flex {
+            flex-direction: column !important;
+        }
+
+        .console-container {
+            width: 100% !important;
+            height: auto !important;
+            border-right: none;
+            border-bottom: 2px solid #555;
+        }
+
+        .principal {
+            order: 2;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .aside-container {
+            order: 3;
+            width: 100% !important;
+            padding: 10px;
+            border-left: none;
+            border-top: 2px solid #555;
+        }
+
+        nav {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1rem;
+        }
+
+        nav a {
+            margin: 0.5rem 0;
+        }
+
+        .form-container {
+            width: 100% !important;
+        }
+
+        .life-bar-container {
+            padding: 0 10px;
+        }
+
+        .fixed-button {
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        nav {
+            padding: 0.5rem;
+        }
+
+        nav a {
+            font-size: 14px;
+        }
+
+        .console-header h4,
+        .zoneName {
+            font-size: 16px;
+        }
+
+        .life-bar {
+            height: 18px;
+        }
+
+        .btn-submit,
+        .btn-jugar {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .aside-container img {
+            width: 80px;
+        }
+    }
+
+    .navbar-nav .nav-link {
+    color: #e0e0e0 !important;
+    font-weight: bold;
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #27c93f !important;
+}
+
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -3px;
+    background-color: #27c93f;
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-toggler {
+    border-color: #27c93f;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+
+
     </style>
 </head>
 
 <body>
 
-    <nav>
-        <a href="">RPG MINIGAME</a>
-        <a href="">Documentacion</a>
-        <a href="">Sobre nosotros</a>
-        <a href="">Mis logros</a>
-        <a href="">Contacto</a>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <div class="container-fluid">
+        <!-- Título -->
+        <a class="navbar-brand fw-bold" href="#">RPG MINIGAME</a>
+
+        <!-- Hamburguesa a la derecha -->
+        <button class="navbar-toggler ms-auto border-success" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Documentacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mis logros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
     <!-- Layout principal -->
     <div class="d-flex" style="margin-top: 0;">
