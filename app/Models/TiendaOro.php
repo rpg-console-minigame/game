@@ -15,7 +15,8 @@ class TiendaOro extends Model
 
     protected $fillable = [
         'nombre',
+        'img_url' ,  
         'cantidad_oro',
-        'precio',
+        'precio'
     ];
 }
