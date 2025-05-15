@@ -40,39 +40,60 @@ class MapController extends Controller
     }
 
     // Crea una nueva zona del mapa
-    public function create(Request $request) {
-        if (!session('is_admin')) {
-            return redirect()->route('mapEditorLogin');
-        }
-
-        $data = [
-            'nombre' => $request['nombre'],
-            'descripcion' => $request['descripcion']
-        ];
-
-        $validator = Validator::make($data, [
-            'nombre' => 'required|string|max:100',
-            'descripcion' => 'required|string|max:2000'
-        ]);
-
-        if ($validator->passes()) {
-            $zone = new \App\Models\Zona;
-            $zone->coord_x = $request->input("coord_x");
-            $zone->coord_y = $request->input("coord_y");
-            $zone->nombre = $request->input("nombre");
-            $zone->imagen = $request->input("imagen");
-            $zone->descripcion = $request->input("descripcion");
-            $zone->up_door = $request->has("up_door") ? 0 : 1;
-            $zone->down_door = $request->has("down_door") ? 0 : 1;
-            $zone->left_door = $request->has("left_door") ? 0 : 1;
-            $zone->right_door = $request->has("right_door") ? 0 : 1;
-            $zone->isSpawn = $request->has("isSpawn") ? 1 : 0;
-            $zone->save();
-            return redirect()->route('mapEditor')->with("success", true);
-        } else {
-            return redirect()->route('mapEditor')->with("error", "Es necesario nombre o descripción");
-        }
+public function create(Request $request)
+{
+    if (!session('is_admin')) {
+        return redirect()->route('mapEditorLogin');
     }
+
+    // Validación inicial
+    $validator = Validator::make($request->all(), [
+        'nombre' => 'required|string|max:100',
+        'descripcion' => 'required|string|max:2000',
+        'coord_x' => 'required|integer',
+        'coord_y' => 'required|integer',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->route('mapEditor')
+                         ->with("error", "Todos los campos son requeridos y deben ser válidos.");
+    }
+
+    $coord_x = (int) $request->input("coord_x");
+    $coord_y = (int) $request->input("coord_y");
+
+    // Comprobamos si ya existe una casilla en esas coordenadas
+    $existing = \App\Models\Zona::where('coord_x', $coord_x)
+                                ->where('coord_y', $coord_y)
+                                ->first();
+
+    if ($existing) {
+        return redirect()->route('mapEditor')
+                         ->with("error", "Ya existe una casilla en las coordenadas ($coord_x, $coord_y).");
+    }
+
+    // Crear nueva casilla
+    $zone = new \App\Models\Zona;
+    $zone->coord_x = $coord_x;
+    $zone->coord_y = $coord_y;
+    $zone->nombre = $request->input("nombre");
+    $zone->descripcion = $request->input("descripcion");
+    $zone->imagen = $request->input("imagen");
+
+    // Si el checkbox está marcado, significa que NO hay muro => puerta abierta (valor 0)
+    $zone->up_door = $request->has("up_door") ? 0 : 1;
+    $zone->down_door = $request->has("down_door") ? 0 : 1;
+    $zone->left_door = $request->has("left_door") ? 0 : 1;
+    $zone->right_door = $request->has("right_door") ? 0 : 1;
+    $zone->isSpawn = $request->has("isSpawn") ? 1 : 0;
+
+    $zone->save();
+
+    // Redireccionar con mensaje y scroll opcional
+    return redirect()->route('mapEditor')
+                     ->with("success", "Casilla creada en ($coord_x, $coord_y).");
+}
+
 
     // Elimina una zona del mapa
     public function delete(Request $request) {
