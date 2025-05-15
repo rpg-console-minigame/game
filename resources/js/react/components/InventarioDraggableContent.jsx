@@ -14,6 +14,7 @@ const InventarioDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
         }
         const data = await response.json();
         setInventarioInfo(data);
+        console.log("Inventario Info:", data.inventario);
       } catch (error) {
         console.error("Error al obtener la información del inventario:", error);
       }
@@ -36,10 +37,10 @@ const InventarioDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
     >
       <h1 style={{ textAlign: "center" }}>Inventario</h1>
 
-      {inventarioInfo.inentario && inventarioInfo.inentario.length > 0 ? (
+      {inventarioInfo.inventario && inventarioInfo.inventario.length > 0 ? (
         <div>
           <ul style={{ listStyleType: "none", padding: 0 }}>
-            {inventarioInfo.inentario.map((objeto, index) => (
+            {inventarioInfo.inventario.map((objeto, index) => (
               <li
                 key={index}
                 style={{
