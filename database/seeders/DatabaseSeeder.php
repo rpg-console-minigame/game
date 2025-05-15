@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Zona;
 use App\Models\adminUser;
 use App\Models\TiendaOro;
+use App\Models\Tienda;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -65,6 +67,51 @@ class DatabaseSeeder extends Seeder
                 'img_url' => 'https://via.placeholder.com/150?text=Paquete+3',
                 'cantidad_oro' => 500,
                 'precio' => 4.99,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        Tienda::insert([
+            [
+                'nombre' => 'Espada de Hierro',
+                'descripcion' => 'Una espada resistente hecha de hierro. Ideal para combates básicos.',
+                'precio_oro' => 150,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Escudo de Roble',
+                'descripcion' => 'Un escudo robusto tallado en madera de roble. Aumenta la defensa.',
+                'precio_oro' => 120,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Poción de Vida',
+                'descripcion' => 'Restaura 50 puntos de salud. De un solo uso.',
+                'precio_oro' => 50,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Armadura de Cuero',
+                'descripcion' => 'Ligera pero efectiva. Ofrece protección básica.',
+                'precio_oro' => 200,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Anillo de Agilidad',
+                'descripcion' => 'Incrementa la velocidad del jugador durante 5 minutos.',
+                'precio_oro' => 300,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nombre' => 'Botas de Aceleración',
+                'descripcion' => 'Permiten moverse más rápido por el mapa.',
+                'precio_oro' => 180,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
