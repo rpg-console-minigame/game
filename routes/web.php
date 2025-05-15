@@ -50,3 +50,4 @@ Route::post('/input', [PersonajeController::class, 'inputConsole'])->name('input
 Route::get('/messages', [ChatController::class, 'index']);
 Route::post('/messages', [ChatController::class, 'store']);
 Route::get('/tiendaOro', [TiendaController::class, 'index'])->name('tiendaOro');
+Route::get('/compra', [TiendaController::class, 'show'])->name('tiendaOroShow');

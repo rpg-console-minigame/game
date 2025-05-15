@@ -192,7 +192,11 @@
       </div>
       <div>
         <p class="mb-2 fw-bold">{{ $item->precio }} €</p>
-        <button class="buy-button">Comprar</button>
+        <form action="{{ route('tiendaOroShow') }}" method="GET">
+          @csrf
+          <button type="submit" class="buy-button">Comprar</button>
+      </form>
+
       </div>
     </div>
   @endforeach

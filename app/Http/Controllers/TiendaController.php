@@ -11,9 +11,13 @@ class TiendaController extends Controller
     //
 
     public function index()
-{
-    $tienda = \App\Models\TiendaOro::all();
-    return view('tiendaOro', ['tienda' => $tienda]);
-}
+    {
+        $tienda = \App\Models\TiendaOro::all();
+        return view('tiendaOro', ['tienda' => $tienda]);
+    }
 
+    public function show(Request $request)
+    {
+        return view('formularioPago');
+    }
 }
