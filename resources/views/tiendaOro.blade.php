@@ -179,44 +179,26 @@
 
   <!-- TIENDA DE ORO -->
   <div class="store-container">
-    <h2 class="text-center mb-5">Compra Oro</h2>
+  <h2 class="text-center mb-5" style="color: var(--principal);">Tienda de Objetos</h2>
 
-    <div class="d-flex flex-column gap-4">
-      <div class="gold-card">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-coin gold-icon"></i>
-          <div class="gold-info">
-            <h5>500 de Oro</h5>
-            <p>Paquete para principiantes.</p>
-          </div>
+  @foreach ($tienda as $item)
+    <div class="gold-card mb-4">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-coin gold-icon"></i>
+        <div class="gold-info">
+          <h5>{{ $item->nombre }}</h5>
+          <p>{{ $item->cantidad_oro }} monedas de oro</p>
         </div>
-        <button class="buy-button">0.99 €</button>
       </div>
-
-      <div class="gold-card">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-coin gold-icon"></i>
-          <div class="gold-info">
-            <h5>1,200 de Oro</h5>
-            <p>¡Incluye un bono del 20%!</p>
-          </div>
-        </div>
-        <button class="buy-button">2.99 €</button>
+      <div>
+        <p class="mb-2 fw-bold">{{ $item->precio }} €</p>
+        <button class="buy-button">Comprar</button>
       </div>
-
-      <div class="gold-card">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-coin gold-icon"></i>
-          <div class="gold-info">
-            <h5>2,500 de Oro</h5>
-            <p>Ideal para aventuras más grandes.</p>
-          </div>
-        </div>
-        <button class="buy-button">4.99 €</button>
-      </div>
-
     </div>
-  </div>
+  @endforeach
+</div>
+
+
 
   <!-- FOOTER -->
   <footer class="bg-dark text-light pt-5 pb-4">
