@@ -195,8 +195,7 @@
         <form action="{{ route('tiendaOroShow') }}" method="GET">
           @csrf
           <button type="submit" class="buy-button">Comprar</button>
-      </form>
-
+        </form>
       </div>
     </div>
   @endforeach

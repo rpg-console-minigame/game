@@ -35,6 +35,6 @@ class TiendaController extends Controller
 
     public function devolver(Request $request)
     {
-        return view('welcome1');
+        return view('welcome');
     }
 }
