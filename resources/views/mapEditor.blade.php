@@ -118,8 +118,10 @@
     <?php
     // saber cuál es la casilla más alejada de x=0 e y=0
     // se suma 1 para mostrar la opción de crear nueva casilla más alejada
-    $max_x = $map->max('coord_x') + 1;
-    $max_y = $map->max('coord_y') + 1;
+    $max_x = $map->max('coord_x') ?? -1;
+    $max_y = $map->max('coord_y') ?? -1;
+    $max_x++;
+    $max_y++;
     ?>
     @for ($i = 0; $i <= $max_x; $i++)
         <div class="row">
