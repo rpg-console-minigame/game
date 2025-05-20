@@ -541,7 +541,7 @@
                         `;
 
                         document.querySelector('.eliminarPersonaje').innerHTML = `
-                            <form action="{{ route('play') }}" method="POST" target="_blank">
+                            <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="personaje" value="${personaje.id}">
                                 <button type="submit" class="btn btn-jugar" style="background-color: #27c93f;">EliminarPersonaje</button>

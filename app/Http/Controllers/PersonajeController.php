@@ -53,6 +53,24 @@ class PersonajeController extends Controller
         }
     }
 
+    public function delete(Request $request)
+    {
+        session_start();
+        $personaje = Personaje::where("id", $request->id)->first();
+        if ($personaje) {
+            if ($personaje->users_ID == session()->get('user')['id']) {
+                $personaje->delete();
+                
+                session()->put("character", $personaje);
+               return redirect("/")->with("success", true);
+            } else {
+                return response()->json("no tienes permisos para eliminar este personaje", 501);
+            }
+        } else {
+            return response()->json("no existe el personaje", 501);
+        }
+    }
+
     public function ifoApi()
     {
         $personaje = Personaje::where("id", session()->get("character")["id"])->first();
