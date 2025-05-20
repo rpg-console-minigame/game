@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Juega y Conquista</title>
     @vite(['resources/js/react/main.jsx'])
   </head>
   <body  style= "background-color: #647994">
