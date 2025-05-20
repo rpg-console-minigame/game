@@ -467,6 +467,8 @@
     <!-- Botón de jugar -->
     <div class="fixed-button jugar"></div>
 
+    <div class="fixed-button eliminarPersonaje"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     @if (isset($personajes))
@@ -535,6 +537,14 @@
                                 @csrf
                                 <input type="hidden" name="personaje" value="${personaje.id}">
                                 <button type="submit" class="btn btn-jugar" style="background-color: #27c93f;">JUGAR</button>
+                            </form>
+                        `;
+
+                        document.querySelector('.eliminarPersonaje').innerHTML = `
+                            <form action="{{ route('play') }}" method="POST" target="_blank">
+                                @csrf
+                                <input type="hidden" name="personaje" value="${personaje.id}">
+                                <button type="submit" class="btn btn-jugar" style="background-color: #27c93f;">EliminarPersonaje</button>
                             </form>
                         `;
 
