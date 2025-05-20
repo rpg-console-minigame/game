@@ -353,7 +353,7 @@
                         <div class="console-controls">
                             <span class="yellow"></span>
                             <span class="green"></span>
-                            <span class="red"></span>
+                            <span class="red" data-bs-dismiss="modal" style="cursor: pointer;"></span>
                         </div>
                     </div>
                     <div class="console-body">
@@ -384,7 +384,7 @@
                         <div class="console-controls">
                             <span class="yellow"></span>
                             <span class="green"></span>
-                            <span class="red"></span>
+                            <span class="red" data-bs-dismiss="modal" style="cursor: pointer;"></span>
                         </div>
                     </div>
                     <div class="console-body">
