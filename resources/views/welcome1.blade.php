@@ -508,7 +508,7 @@
 
 
                         document.querySelector('.jugar').innerHTML = `
-                            <form action="{{ route('play') }}" method="POST">
+                            <form action="{{ route('play') }}" method="POST" target="_blank">
                                 @csrf
                                 <input type="hidden" name="personaje" value="${personaje.id}">
                                 <button type="submit" class="btn btn-jugar" style="background-color: #27c93f;">JUGAR</button>
