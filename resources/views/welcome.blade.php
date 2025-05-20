@@ -282,6 +282,18 @@
             }
         }
 
+        .input-group input::placeholder {
+            color: #bbbbbb;
+            transition: color 0.3s;
+        }
+
+        .input-group input:hover::placeholder {
+            color: #ffffff;
+        }
+
+        .input-group input:focus::placeholder {
+            color: black;
+        }
 
     </style>
 
