@@ -364,7 +364,30 @@
             }
         }
 
-
+        /* ===== OPCIÓN 1: Botón Jugar más visible, subido desde abajo a la derecha ===== */
+        .fixed-button.jugar {
+            position: fixed;
+            bottom: 80px; /* Subido para hacerlo más visible */
+            right: 20px;
+            z-index: 10000;
+        }
+    
+        .btn-jugar {
+            background-color: #28a745; /* Verde brillante */
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.6);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .btn-jugar:hover {
+            background-color: #218838; /* Verde oscuro */
+            box-shadow: 0 8px 16px rgba(33, 136, 56, 0.8);
+        }
 
     </style>
 </head>
