@@ -28,4 +28,10 @@ class Personaje extends Model
     public function Zona(){
         return $this->hasOne('zona');
     }
+    
+    public function objetosInGame()
+    {
+        return $this->hasMany(ObjetoInGame::class, 'personaje_ID');
+    }
+
 }
