@@ -56,3 +56,12 @@ Route::get('/tiendaObjetos', [TiendaController::class, 'indexObjetos'])->name('t
 Route::post('/pagoRealizado', [TiendaController::class, 'showObjeto'])->name('pagoRealizado');
 Route::get('/devolver', [TiendaController::class, 'devolver'])->name('devolver');
 
+
+Route::get('/sobreNosotros', function () {
+    return view('sobreNosotros');
+})->name('sobreNosotros');
+
+Route::get('/contacto', function () {
+    return view('contacto');
+})->name('contacto');
+

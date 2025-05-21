@@ -477,18 +477,34 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="#">RPG MINIGAME</a>
+            <!-- Título -->
+            <a class="navbar-brand fw-bold" href="{{ route('welcome') }}">RPG MINIGAME</a>
+
+            <!-- Hamburguesa a la derecha -->
             <button class="navbar-toggler ms-auto border-success" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Enlaces -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Documentacion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Mis logros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Documentacion</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('map') }}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sobreNosotros') }}">Sobre nosotros</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Mis logros</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -649,32 +665,24 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Navegación</h6>
                     <p>
-                        <a href="#" class="text-reset text-decoration-none">Inicio</a>
+                        <a href="{{ route('welcome') }}" class="text-reset text-decoration-none">RPG MINIGAME</a>
                     </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Documentación</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Mis logros</a>
-                    </p>
-                    <p><a href="#" class="text-reset text-decoration-none">Mapa</a></p>
+                    <p><a href="{{ route('map') }}" class="text-reset text-decoration-none">Mapa</a></p>
+                    <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre Nosotros</a></p>
                 </div>
 
                 <!-- Sección 3: Soporte -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Soporte</h6>
                     <p>
+                        <a href="{{ route('contacto') }}" class="text-reset text-decoration-none">Contacto</a>
+                    </p>
+                    <!-- <p>
                         <a href="#" class="text-reset text-decoration-none">Preguntas Frecuentes</a>
                     </p>
                     <p>
-                        <a href="#" class="text-reset text-decoration-none">Centro de ayuda</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Contacto</a>
-                    </p>
-                    <p>
                         <a href="#" class="text-reset text-decoration-none">Términos y condiciones</a>
-                    </p>
+                    </p> -->
                 </div>
 
                 <!-- Sección 4: Contacto -->

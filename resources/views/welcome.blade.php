@@ -280,7 +280,7 @@
     <nav class="navbar navbar-expand-lg px-4 py-3">
         <div class="container-fluid">-
             <!-- Marca a la izquierda -->
-            <a href="#">CONSOLE MINIGAME</a>
+            <a href="{{ route('welcome') }}">CONSOLE MINIGAME</a>
 
             <!-- Hamburguesa a la derecha -->
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -292,11 +292,11 @@
             <!-- Menú colapsable -->
             <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="#">Sobre nosotros</a></li>
-                    <li class="nav-item"><a href="#">Mis logros</a></li>
-                    <li class="nav-item"><a href="#">Contacto</a></li>
-                    <li class="nav-item"><a href="https://minigame-rpg.up.railway.app/map">Mapa</a></li>
-                    <li class="nav-item"><a href="https://minigame-rpg.up.railway.app/tiendaOro">Tienda</a></li>
+                    <li class="nav-item"><a href="{{ route('sobreNosotros') }}">Sobre nosotros</a></li>
+                    <!-- <li class="nav-item"><a href="#">Mis logros</a></li> -->
+                    <li class="nav-item"><a href="{{ route('contacto') }}">Contacto</a></li>
+                    <li class="nav-item"><a href="{{ route('map') }}">Mapa</a></li>
+                    <li class="nav-item"><a href="{{ route('tiendaOro') }}">Tienda</a></li>
                 </ul>
                 <div class="d-flex">
                     <button data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
@@ -428,34 +428,73 @@
         </div>
     </div>
 
-    <footer class="p-8 bg-dark text-light">
-        <hr>
+    <footer class="bg-dark text-light pt-5 pb-4">
         <div class="container text-md-left">
             <div class="row text-md-left">
+                <!-- Sección 1: Logo y descripción -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 fw-bold" style="color: var(--principal)">
+                        RPG MINIGAME
+                    </h6>
+                    <p>
+                        Explora mundos, completa misiones, evoluciona. Un RPG clásico en
+                        esencia, moderno en ejecución.
+                    </p>
+                </div>
 
                 <!-- Sección 2: Navegación -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Navegación</h6>
-                    <p><a href="#" class="text-reset text-decoration-none">Mis logros</a></p>
-                    <p><a href="#" class="text-reset text-decoration-none">Mapa</a></p>
+                    <p>
+                        <a href="{{ route('welcome') }}" class="text-reset text-decoration-none">RPG MINIGAME</a>
+                    </p>
+                    <p><a href="{{ route('map') }}" class="text-reset text-decoration-none">Mapa</a></p>
+                    <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre Nosotros</a></p>
                 </div>
 
                 <!-- Sección 3: Soporte -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Soporte</h6>
-                    <p><a href="#" class="text-reset text-decoration-none">Centro de ayuda</a></p>
-                    <p><a href="#" class="text-reset text-decoration-none">Términos y condiciones</a></p>
+                    <p>
+                        <a href="{{ route('contacto') }}" class="text-reset text-decoration-none">Contacto</a>
+                    </p>
+                    <!-- <p>
+                        <a href="#" class="text-reset text-decoration-none">Preguntas Frecuentes</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-reset text-decoration-none">Términos y condiciones</a>
+                    </p> -->
                 </div>
 
                 <!-- Sección 4: Contacto -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Contacto</h6>
-                    <p><i class="bi bi-envelope-fill me-2"></i> soporte@rpgminigame.com</p>
+                    <p>
+                        <i class="bi bi-envelope-fill me-2"></i> soporte@rpgminigame.com
+                    </p>
                     <p><i class="bi bi-github me-2"></i> github.com/rpgminigame</p>
+                    <p><i class="bi bi-globe me-2"></i> www.rpgminigame.com</p>
                 </div>
             </div>
 
+            <!-- Línea divisoria -->
+            <hr class="my-4" style="border-top: 1px solid #444" />
 
+            <!-- Derechos -->
+            <div class="row">
+                <div class="col-md-7 col-lg-8">
+                    <p class="text-center text-md-start">
+                        © 2025 RPG Minigame. Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="text-center text-md-end">
+                        <a href="#" class="text-reset me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-reset me-3"><i class="bi bi-discord"></i></a>
+                        <a href="#" class="text-reset me-3"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
