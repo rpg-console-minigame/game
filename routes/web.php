@@ -41,6 +41,7 @@ Route::post('/register', [UserController::class, 'register'])->name('registerEnt
 Route::post('createPj', [PersonajeController::class, 'create'])->name('createPj');
 
 Route::post("/play", [UserController::class, 'play'])->name('play');
+Route::post("/deletePj/{id}", [PersonajeController::class, 'delete'])->name('deletePj');
 
 
 Route::get("/mapInfo", [MapController::class, 'mapInfo']);
