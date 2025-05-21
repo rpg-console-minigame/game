@@ -495,8 +495,8 @@
       </div>
 
       <!-- Botón de jugar -->
-        <div class="fixed-button jugar"></div>
-        <div class="fixed-button eliminarPersonaje"></div>
+        <div class="jugar"></div>
+        <div class="eliminarPersonaje"></div>
 
       <!-- Aside con perfil y logros -->
       <div class="aside-container w-20">
