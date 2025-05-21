@@ -31,7 +31,7 @@ class Personaje extends Model
     
     public function objetosInGame()
     {
-        return $this->hasMany(ObjetoInGame::class, 'personaje_ID');
+        return $this->hasOne('objetoingame');
     }
 
 }
