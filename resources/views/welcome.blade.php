@@ -19,7 +19,7 @@
         }
 
         :root {
-            --principal: #27c93f;
+            --principal: rgb(143, 255, 158);
         }
 
         * {
@@ -62,7 +62,7 @@
         button {
             padding: 6px 16px;
             border: 2px solid var(--principal);
-            border-radius: 10px;
+            border-radius: 24px;
             background-color: var(--principal);
             font-weight: bold;
             cursor: pointer;
@@ -271,7 +271,6 @@
         .input-group input:focus::placeholder {
             color: black;
         }
-
     </style>
 
 </head>
@@ -287,8 +286,7 @@
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon white-icon"></span>
-
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <!-- Menú colapsable -->
@@ -312,7 +310,7 @@
         <section class="info">
             <div class="texto">
                 <h2>RPG Console Minigame, un videojuego web lleno de sorpresas.</h2>
-                <h4>¡Descubre Ethereal Realms! El nuevo MMO RPG que revoluciona la fantasía online: mundo abierto
+                <h4 style="color: black;">¡Descubre Ethereal Realms! El nuevo MMO RPG que revoluciona la fantasía online: mundo abierto
                     dinámico, razas únicas, combates épicos y decisiones que forjan tu leyenda. ¿Estás listo?</h4>
                 <button data-bs-toggle="modal" data-bs-target="#registerModal">Registro</button>
             </div>
@@ -321,12 +319,36 @@
             </div>
         </section>
 
-        <!-- Contenido principal -->
-        <section class="demo">
-            <h2 style="color: black;">Prueba una versión beta de nuestro juego.</h2>
+        <div id="miSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#miSlider" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#miSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#miSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
 
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://via.placeholder.com/1200x500?text=Imagen+1" class="d-block w-100" alt="Imagen 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1200x500?text=Imagen+2" class="d-block w-100" alt="Imagen 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1200x500?text=Imagen+3" class="d-block w-100" alt="Imagen 3">
+                </div>
+            </div>
 
-        </section>
+            <button class="carousel-control-prev" type="button" data-bs-target="#miSlider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#miSlider" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
 
     </main>
 
@@ -354,7 +376,8 @@
                             </div>
                             <div class="input-group">
                                 <span>user@password:~$</span>
-                                <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                                <input type="password" class="form-control" placeholder="Contraseña"
+                                    name="password">
                             </div>
                             <button type="submit" class="w-100">Acceder</button>
                         </form>
@@ -405,7 +428,7 @@
         </div>
     </div>
 
-    <footer class="p-8">
+    <footer class="p-8 bg-dark text-light">
         <hr>
         <div class="container text-md-left">
             <div class="row text-md-left">
