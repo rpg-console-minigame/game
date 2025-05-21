@@ -478,7 +478,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
         <div class="container-fluid">
             <!-- Título -->
-            <a class="navbar-brand fw-bold" href="{{ route('welcome') }}">RPG MINIGAME</a>
+            <a class="navbar-brand fw-bold" href="#">RPG MINIGAME</a>
 
             <!-- Hamburguesa a la derecha -->
             <button class="navbar-toggler ms-auto border-success" type="button" data-bs-toggle="collapse"
@@ -486,33 +486,26 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Enlaces -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Documentacion</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route(name: 'map') }}">Mapa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sobreNosotros') }}">Sobre nosotros</a>
+                        <a class="nav-link" href="#">Sobre nosotros</a>
                     </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Mis logros</a>
-                    </li> -->
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                        <a class="nav-link" href="#">Contacto</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Layout principal -->
     <div class="d-flex" style="margin-top: 0">
-        <!-- Barra lateral izquierda -->
         <div class="console-container p-3" style="width: 15%">
             @if (isset($personajes))
                 @foreach ($personajes as $index => $personaje)
@@ -527,18 +520,12 @@
             </a>
         </div>
 
-        <!-- Contenido principal -->
         <div class="flex-grow-1 console-container principal">
             <!-- Aquí se carga dinámicamente el contenido -->
         </div>
 
-
-        <!-- Aside con perfil y logros -->
         <div class="aside-container w-20">
             <img src="https://via.placeholder.com/100" alt="Usuario" />
-            {{--
-        <h5>Nombre Usuario</h5>
-        --}}
             <h5 id="nombreUsuario">nombreUsuario</h5>
             <hr />
             <p><strong>Logros:</strong></p>
@@ -550,108 +537,107 @@
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     @if (isset($personajes))
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const botonesPJ = document.querySelectorAll('.botonPJ');
                 const personajes = @json($personajes);
 
-                document.querySelector('.crear').addEventListener('click', function() {
+                // Función reutilizable para seleccionar personaje
+                function seleccionarPersonaje(index) {
+                    const personaje = personajes[index];
+
                     document.querySelector('.principal').innerHTML = `
-                              <div class="console-header"><h4 class="m-0">Crear</h4></div>
-                              <div class="form-container">
-                                  <form action="{{ route('createPj') }}" method="POST">
-                                      @csrf
-                                      <div class="mb-3">
-                                          <label class="form-label">Nombre</label>
-                                          <input type="text" name="nombre" class="form-control">
-                                      </div>
-                                      <div class="mb-3">
-                                          <label class="form-label">Zona</label>
-                                          <select name="zona_ID" class="form-control">
-                                              @foreach ($spawns as $zona)
-                                                  <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
-                                              @endforeach
-                                          </select>
-                                      </div>
-                                      <button type="submit" class="btn-submit">Crear</button>
-                                  </form>
-                              </div>
-                          `;
+                        <div class="console-header"><h4>${personaje.nombre}</h4></div>
+                        <div class="life-bar-container">
+                            <div class="life-bar d-flex position-relative" style="height: 24px; border-radius: 5px; overflow: hidden; margin-top: 5px;">
+                                <div style="background-color: #27c93f; width:${(personaje.HP / personaje.Max_HP) * 100}%;"></div>
+                                <div class="bg-danger" style="width:${((personaje.Max_HP - personaje.HP) / personaje.Max_HP) * 100}%;"></div>
+                                <span class="life-text position-absolute w-100 text-center" style="color: white; font-weight: bold; z-index: 1;">
+                                    ${personaje.HP}/${personaje.Max_HP} HP
+                                </span>
+                            </div>
+                            <div class="life-bar d-flex position-relative" style="height: 24px; border-radius: 5px; overflow: hidden; margin-top: 5px;">
+                                <div class="bg-warning" style="width:${(personaje.dinero / 1000) * 100}%;"></div>
+                                <div class="bg-dark" style="width:${((1000 - personaje.dinero) / 1000) * 100}%;"></div>
+                                <span class="life-text position-absolute w-100 text-center" style="color: white; font-weight: bold; z-index: 1;">
+                                    ${personaje.dinero} Gold
+                                </span>
+                            </div>
+                        </div>
+
+                        <h5 class="text-center pt-3 pb-3 zoneName">Estás en la sala: ${personaje.zona.nombre}</h5>
+                        <div class="info-box d-flex justify-content-between">
+                            <div class="col-6 pe-2 border-end">
+                                <p><strong>Descripción:</strong></p>
+                                <p>${personaje.zona.descripcion}</p>
+                            </div>
+                            <div class="col-6 ps-2">
+                                <p><strong>Otro contenido:</strong></p>
+                                <p>Aquí podés poner estadísticas, ítems, enemigos, etc.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                            <form action="{{ route('play') }}" method="POST" target="_blank">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="personaje" value="${personaje.id}">
+                                <button type="submit" class="btn btn-jugar">JUGAR</button>
+                            </form>
+                            <form action="/deletePj/${personaje.id}" method="POST">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
+                            </form>
+                        </div>
+                    `;
+
+                    document.querySelector('#dineroPersonaje').innerHTML = `<p class="text-white">${personaje.dinero} Gold</p>`;
+                    document.querySelector('#nivelPersonaje').innerHTML = `<p class="text-white">${personaje.nivel} lvl</p>`;
+                }
+
+                // Evento click en botones
+                botonesPJ.forEach(boton => {
+                    boton.addEventListener('click', function () {
+                        const index = boton.getAttribute('data-index');
+                        seleccionarPersonaje(index);
+                    });
+                });
+
+                // Evento click en "CREAR"
+                document.querySelector('.crear').addEventListener('click', function () {
+                    document.querySelector('.principal').innerHTML = `
+                        <div class="console-header"><h4 class="m-0">Crear</h4></div>
+                        <div class="form-container">
+                            <form action="{{ route('createPj') }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" name="nombre" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Zona</label>
+                                    <select name="zona_ID" class="form-control">
+                                        @foreach ($spawns as $zona)
+                                            <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-submit">Crear</button>
+                            </form>
+                        </div>
+                    `;
                     document.querySelector('.jugar').innerHTML = "";
                 });
 
-                botonesPJ.forEach(boton => {
-                    boton.addEventListener('click', function() {
-                        const index = boton.getAttribute('data-index');
-                        const personaje = personajes[index];
-
-                        document.querySelector('.principal').innerHTML = `
-                                <div class="console-header"><h4>${personaje.nombre}</h4></div>
-                              <div class="life-bar-container">
-                                  <div class="life-bar d-flex position-relative" style="height: 24px; border-radius: 5px; overflow: hidden; margin-top: 5px;">
-                                      <div style="background-color: #27c93f; width:${(personaje.HP / personaje.Max_HP) * 100}%;"></div>
-                                      <div class="bg-danger" style="width:${((personaje.Max_HP - personaje.HP) / personaje.Max_HP) * 100}%;"></div>
-                                      <span class="life-text position-absolute w-100 text-center" style="color: white; font-weight: bold; z-index: 1;">
-                                          ${personaje.HP}/${personaje.Max_HP} HP
-                                      </span>
-                                  </div>
-                                 <div class="life-bar d-flex position-relative" style="height: 24px; border-radius: 5px; overflow: hidden; margin-top: 5px;">
-                                      <div class="bg-warning" style="width:${(personaje.dinero / 1000) * 100}%;"></div>
-                                      <div class="bg-dark" style="width:${((1000 - personaje.dinero) / 1000) * 100}%;"></div>
-                                      <span class="life-text position-absolute w-100 text-center" style="color: white; font-weight: bold; z-index: 1;">
-                                          ${personaje.dinero} Gold
-                                      </span>
-                                  </div>
-                              </div>
-
-
-                              <h5 class="text-center pt-3 pb-3 zoneName">Estás en la sala: ${personaje.zona.nombre}</h5>
-                                <div class="info-box d-flex justify-content-between">
-                                    <div class="col-6 pe-2 border-end">
-                                        <p><strong>Descripción:</strong></p>
-                                        <p>${personaje.zona.descripcion}</p>
-                                    </div>
-                                    <div class="col-6 ps-2">
-                                        <p><strong>Otro contenido:</strong></p>
-                                        <p>Aquí podés poner estadísticas, ítems, enemigos, etc.</p>
-                                    </div>
-                                </div>
-                            `;
-
-
-
-                        document.querySelector('.principal').insertAdjacentHTML('beforeend', `
-                            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                                <form action="{{ route('play') }}" method="POST" target="_blank">
-
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="personaje" value="${personaje.id}">
-
-                                    <button type="submit" class="btn btn-jugar">JUGAR</button>
-                                </form>
-
-                                <form action="/deletePj/${personaje.id}" method="POST"">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
-                                </form>
-                            </div>
-                        `);
-
-
-
-                        document.querySelector('#dineroPersonaje').innerHTML = `
-                                  <p class="text-white">${personaje.dinero} Gold</p>
-                              `;
-
-                        document.querySelector('#nivelPersonaje').innerHTML = `
-                              <p class="text-white">${personaje.nivel} lvl</p>`;
-
-                    });
-                });
+                // AUTOSELECCIONAR personaje si fue recién creado
+                @if (session()->has('character'))
+                    const personajeCreadoId = {{ session('character')->id }};
+                    const indexAuto = personajes.findIndex(p => p.id === personajeCreadoId);
+                    if (indexAuto !== -1) {
+                        seleccionarPersonaje(indexAuto);
+                    }
+                @endif
             });
         </script>
     @endif
