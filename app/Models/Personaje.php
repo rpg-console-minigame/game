@@ -31,7 +31,7 @@ class Personaje extends Model
     
     public function objetosInGame()
     {
-        return $this->hasOne('objetoingame');
+        return $this->hasOne('App\Models\objetoInGame');
     }
 
 }
