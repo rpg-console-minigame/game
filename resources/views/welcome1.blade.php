@@ -80,18 +80,11 @@
             padding: 20px;
         }
 
-        /* .fixed-button {
+        .fixed-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 9999;
-        } */
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
         }
 
 
@@ -505,7 +498,7 @@
       <!-- Botón de jugar -->
         <!-- <div class="fixed-button jugar"></div>
         <div class="fixed-button eliminarPersonaje"></div> -->
-        <div class="jugar"></div>
+        <!-- <div class="jugar"></div> -->
 
       <!-- Aside con perfil y logros -->
       <div class="aside-container w-20">
@@ -564,7 +557,7 @@
                               const personaje = personajes[index];
 
                               document.querySelector('.principal').innerHTML = `
-                              <div class="console-header"><h4>${personaje.nombre}</h4></div>
+                                <div class="console-header"><h4>${personaje.nombre}</h4></div>
                               <div class="life-bar-container">
                                   <div class="life-bar d-flex position-relative" style="height: 24px; border-radius: 5px; overflow: hidden; margin-top: 5px;">
                                       <div style="background-color: #27c93f; width:${(personaje.HP / personaje.Max_HP) * 100}%;"></div>
@@ -598,23 +591,20 @@
       
 
 
-                            document.querySelector('.jugar').innerHTML = `
-                                <div class="button-container">
-                                    <form action="{{ route('play') }}" method="POST" target="_blank">
-                                        @csrf
-                                        <input type="hidden" name="personaje" value="${personaje.id}">
-                                        <button type="submit" class="btn btn-jugar">JUGAR</button>
-                                    </form>
-                                    <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="personaje" value="${personaje.id}">
-                                        <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
-                                    </form>
-                                </div>
-                            `;
-
-                            document.querySelector('.eliminarPersonaje').innerHTML = ``; // Vacío porque ya lo metiste junto
-
+                            document.querySelector('.principal').insertAdjacentHTML('beforeend', `
+                            <div class="d-flex justify-content-center gap-4 mt-4">
+                                <form action="{{ route('play') }}" method="POST" target="_blank">
+                                @csrf
+                                    <input type="hidden" name="personaje" value="${personaje.id}">
+                                    <button type="submit" class="btn btn-jugar">JUGAR</button>
+                                </form>
+                                <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
+                                @csrf
+                                    <input type="hidden" name="personaje" value="${personaje.id}">
+                                    <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
+                                </form>
+                            </div>
+                            `);
 
 
                               document.querySelector('#dineroPersonaje').innerHTML = `
