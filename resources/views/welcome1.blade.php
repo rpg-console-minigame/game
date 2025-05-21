@@ -10,421 +10,422 @@
     />
     <style>
       html,
-      body {
-        height: 100%;
-        margin: 0;
-        background-color: #222;
-        color: #ddd;
-        font-family: "Source Code Pro", monospace;
-      }
+        body {
+            height: 100%;
+            margin: 0;
+            background-color: #222;
+            color: #ddd;
+            font-family: "Source Code Pro", monospace;
+        }
 
-      .d-flex {
-        height: 100%;
-        margin-top: 56px;
-        /* espacio para navbar */
-      }
-
-      .console-container {
-        background-color: #333;
-        color: #ddd;
-        height: 100%;
-        border-right: 2px solid #555;
-      }
-
-      .console-header {
-        background-color: #bbb;
-        padding: 8px 12px;
-        border-bottom: 4px solid #bbb;
-        text-align: center;
-      }
-
-      .console-header h4 {
-        margin: 0;
-        color: #222;
-        font-weight: bold;
-      }
-
-      .form-control,
-      select {
-        background-color: #444;
-        color: #ddd;
-        border: none;
-        border-radius: 4px;
-        margin-bottom: 15px;
-      }
-
-      .form-control:focus {
-        background-color: #555;
-        color: #fff;
-        box-shadow: none;
-      }
-
-      .btn-submit {
-        background-color: lightgreen;
-        color: #222;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        width: 100%;
-        padding: 10px;
-      }
-
-      .btn-submit:hover {
-        background-color: #32cd32;
-      }
-
-      .form-container {
-        width: 90%;
-        margin: auto;
-        background-color: #333;
-        padding: 20px;
-      }
-
-      .fixed-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-      }
-
-      .life-bar-container {
-        margin-top: 10px;
-        text-align: center;
-      }
-
-      .life-bar {
-        height: 20px;
-        width: 100%;
-      }
-
-      .gold-text,
-      .life-text {
-        color: #222;
-      }
-
-      .info-box {
-        height: 60%;
-        margin: 2%;
-        overflow-y: auto;
-        padding: 10px;
-        background-color: #444;
-        border-radius: 5px;
-        border: 1px solid #555;
-      }
-
-      .aside-container {
-        width: 250px;
-        background-color: #2c2c2c;
-        border-left: 2px solid #555;
-        padding: 15px;
-        text-align: center;
-      }
-
-      .aside-container img {
-        width: 100px;
-        border-radius: 50%;
-        margin-bottom: 10px;
-      }
-
-      .aside-container h5 {
-        color: lightgreen;
-      }
-
-      .navbar-dark {
-        background-color: #111;
-      }
-
-      .nav-link {
-        color: #ddd !important;
-      }
-
-      .nav-link:hover {
-        color: lightgreen !important;
-      }
-
-      .principal {
-        overflow-y: auto;
-        padding: 15px;
-      }
-
-      /* ESTILOS NAVBAR */
-
-      :root {
-        --principal: #27c93f;
-      }
-
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 10%;
-        background-color: #1e1e1e;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-      }
-
-      nav a {
-        margin: 0 1rem;
-        text-decoration: none;
-        color: #e0e0e0;
-        font-weight: bold;
-        position: relative;
-        transition: color 0.3s;
-      }
-
-      nav a::after {
-        content: "";
-        position: absolute;
-        width: 0%;
-        height: 2px;
-        left: 0;
-        bottom: -3px;
-        background-color: var(--principal);
-        transition: width 0.3s ease-in-out;
-      }
-
-      nav a:hover {
-        color: var(--principal);
-      }
-
-      nav a:hover::after {
-        width: 100%;
-      }
-
-      button {
-        padding: 6px 16px;
-        border: 2px solid var(--principal);
-        border-radius: 10px;
-        background-color: var(--principal);
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      button:hover {
-        background-color: transparent;
-        color: white;
-        border-color: white;
-      }
-
-      @media (max-width: 992px) {
         .d-flex {
-          flex-direction: column !important;
+            height: 100%;
+            margin-top: 56px;
+            /* espacio para navbar */
         }
 
         .console-container {
-          width: 100% !important;
-          height: auto !important;
-          border-right: none;
-          border-bottom: 2px solid #555;
+            background-color: #333;
+            color: #ddd;
+            height: 100%;
+            border-right: 2px solid #555;
         }
 
-        .principal {
-          order: 2;
-          width: 100%;
-          padding: 10px;
+        .console-header {
+            background-color: #bbb;
+            padding: 8px 12px;
+            border-bottom: 4px solid #bbb;
+            text-align: center;
         }
 
-        .aside-container {
-          order: 3;
-          width: 100% !important;
-          padding: 10px;
-          border-left: none;
-          border-top: 2px solid #555;
+        .console-header h4 {
+            margin: 0;
+            color: #222;
+            font-weight: bold;
         }
 
-        nav {
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 1rem;
+        .form-control,
+        select {
+            background-color: #444;
+            color: #ddd;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 15px;
         }
 
-        nav a {
-          margin: 0.5rem 0;
+        .form-control:focus {
+            background-color: #555;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .btn-submit {
+            background-color: lightgreen;
+            color: #222;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #32cd32;
         }
 
         .form-container {
-          width: 100% !important;
-        }
-
-        .life-bar-container {
-          padding: 0 10px;
+            width: 90%;
+            margin: auto;
+            background-color: #333;
+            padding: 20px;
         }
 
         .fixed-button {
-          bottom: 10px;
-          right: 10px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
         }
-      }
 
-      @media (max-width: 576px) {
+        .life-bar-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .life-bar {
+            height: 20px;
+            width: 100%;
+        }
+
+        .gold-text,
+        .life-text {
+            color: #222;
+        }
+
+        .info-box {
+            height: 60%;
+            margin: 2%;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+
+        .aside-container {
+            width: 250px;
+            background-color: #2c2c2c;
+            border-left: 2px solid #555;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .aside-container img {
+            width: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .aside-container h5 {
+            color: lightgreen;
+        }
+
+        .navbar-dark {
+            background-color: #111;
+        }
+
+        .nav-link {
+            color: #ddd !important;
+        }
+
+        .nav-link:hover {
+            color: lightgreen !important;
+        }
+
+        .principal {
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        /* ESTILOS NAVBAR */
+
+        :root {
+            --principal: #27c93f;
+        }
+
         nav {
-          padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 10%;
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav a {
-          font-size: 14px;
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            left: 0;
+            bottom: -3px;
+            background-color: var(--principal);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: var(--principal);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        button {
+            padding: 6px 16px;
+            border: 2px solid var(--principal);
+            border-radius: 10px;
+            background-color: var(--principal);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        @media (max-width: 992px) {
+        .d-flex {
+            flex-direction: column !important;
+        }
+
+        .console-container {
+            width: 100% !important;
+            height: auto !important;
+            border-right: none;
+            border-bottom: 2px solid #555;
+        }
+
+        .principal {
+            order: 2;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .aside-container {
+            order: 3;
+            width: 100% !important;
+            padding: 10px;
+            border-left: none;
+            border-top: 2px solid #555;
+        }
+
+        nav {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1rem;
+        }
+
+        nav a {
+            margin: 0.5rem 0;
+        }
+
+        .form-container {
+            width: 100% !important;
+        }
+
+        .life-bar-container {
+            padding: 0 10px;
+        }
+
+        .fixed-button {
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        nav {
+            padding: 0.5rem;
+        }
+
+        nav a {
+            font-size: 14px;
         }
 
         .console-header h4,
         .zoneName {
-          font-size: 16px;
+            font-size: 16px;
         }
 
         .life-bar {
-          height: 18px;
+            height: 18px;
         }
 
         .btn-submit,
         .btn-jugar {
-          font-size: 14px;
-          padding: 8px;
+            font-size: 14px;
+            padding: 8px;
         }
 
         .aside-container img {
-          width: 80px;
+            width: 80px;
         }
-      }
+    }
 
-      .navbar-nav .nav-link {
-        color: #e0e0e0 !important;
-        font-weight: bold;
-        position: relative;
-      }
+    .navbar-nav .nav-link {
+    color: #e0e0e0 !important;
+    font-weight: bold;
+    position: relative;
+}
 
-      .navbar-nav .nav-link:hover {
-        color: #27c93f !important;
-      }
+.navbar-nav .nav-link:hover {
+    color: #27c93f !important;
+}
 
-      .navbar-nav .nav-link::after {
-        content: "";
-        position: absolute;
-        width: 0%;
-        height: 2px;
-        left: 0;
-        bottom: -3px;
-        background-color: #27c93f;
-        transition: width 0.3s ease-in-out;
-      }
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -3px;
+    background-color: #27c93f;
+    transition: width 0.3s ease-in-out;
+}
 
-      .navbar-nav .nav-link:hover::after {
-        width: 100%;
-      }
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
 
-      .navbar-toggler {
-        border-color: #27c93f;
-      }
+.navbar-toggler {
+    border-color: #27c93f;
+}
 
-      .navbar-toggler:focus {
-        box-shadow: none;
-      }
+.navbar-toggler:focus {
+    box-shadow: none;
+}
 
-      footer a {
-        position: relative;
-        text-decoration: none;
-        color: #e0e0e0;
-        transition: color 0.3s;
-      }
-
-      footer a::after {
-        content: "";
-        position: absolute;
-        width: 0%;
-        height: 2px;
-        left: 0;
-        bottom: -3px;
-        background-color: var(--principal);
-        transition: width 0.3s ease-in-out;
-      }
-
-      footer a:hover {
-        color: var(--principal);
-      }
-
-      footer a:hover::after {
-        width: 100%;
-      }
-
-      @media (max-width: 768px) {
-        footer .row > div {
-          text-align: center !important;
-          margin-bottom: 1.5rem;
+        footer a {
+            position: relative;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: color 0.3s;
+        }
+        
+        footer a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            left: 0;
+            bottom: -3px;
+            background-color: var(--principal);
+            transition: width 0.3s ease-in-out;
+        }
+        
+        footer a:hover {
+            color: var(--principal);
+        }
+        
+        footer a:hover::after {
+            width: 100%;
         }
 
-        footer .text-start {
-          text-align: center !important;
+        @media (max-width: 768px) {
+            footer .row > div {
+                text-align: center !important;
+                margin-bottom: 1.5rem;
+            }
+        
+            footer .text-start {
+                text-align: center !important;
+            }
+        
+            footer ul {
+                padding-left: 0;
+            }
+        
+            footer li {
+                list-style: none;
+            }
         }
 
-        footer ul {
-          padding-left: 0;
+        /* ===== OPCIÓN 1: Botón Jugar más visible, subido desde abajo a la derecha ===== */
+        .fixed-button.jugar {
+            position: fixed;
+            bottom: 80px; /* Subido para hacerlo más visible */
+            right: 20px;
+            z-index: 10000;
+        }
+    
+        .btn-jugar {
+            background-color: #28a745; /* Verde brillante */
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.6);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .btn-jugar:hover {
+            background-color: #218838; /* Verde oscuro */
+            box-shadow: 0 8px 16px rgba(33, 136, 56, 0.8);
         }
 
-        footer li {
-          list-style: none;
-        }
-      }
+        /* ===== OPCIÓN 2: Botón Borrar más visible, subido desde abajo a la derecha ===== */
 
-      /* ===== OPCIÓN 1: Botón Jugar más visible, subido desde abajo a la derecha ===== */
-      .fixed-button.jugar {
-        position: fixed;
-        bottom: 80px; /* Subido para hacerlo más visible */
-        right: 20px;
-        z-index: 10000;
-      }
+        .fixed-button.borrar {
+    position: fixed;
+    bottom: 80px; /* Igual que el botón jugar */
+    right: 140px; /* Separado para que estén paralelos */
+    z-index: 10000;
+}
 
-      .btn-jugar {
-        background-color: #28a745; /* Verde brillante */
-        color: white;
-        font-size: 1.5rem;
-        padding: 15px 30px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(40, 167, 69, 0.6);
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      }
+.btn-borrar {
+    background-color: #dc3545; /* Rojo brillante */
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.6);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-      .btn-jugar:hover {
-        background-color: #218838; /* Verde oscuro */
-        box-shadow: 0 8px 16px rgba(33, 136, 56, 0.8);
-      }
+.btn-borrar:hover {
+    background-color: #c82333; /* Rojo oscuro */
+    box-shadow: 0 8px 16px rgba(200, 35, 51, 0.8);
+}
 
-      /* ===== OPCIÓN 2: Botón Borrar más visible, subido desde abajo a la derecha ===== */
 
-      .fixed-button.borrar {
-        position: fixed;
-        bottom: 80px; /* Igual que el botón jugar */
-        right: 140px; /* Separado para que estén paralelos */
-        z-index: 10000;
-      }
-
-      .btn-borrar {
-        background-color: #dc3545; /* Rojo brillante */
-        color: white;
-        font-size: 1.5rem;
-        padding: 15px 30px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(220, 53, 69, 0.6);
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .btn-borrar:hover {
-        background-color: #c82333; /* Rojo oscuro */
-        box-shadow: 0 8px 16px rgba(200, 35, 51, 0.8);
-      }
-
-      .info-box {
-        background-color: #1e1e1e;
-        padding: 20px;
-        border-radius: 8px;
-        margin-top: 10px;
-        color: #fff;
-        min-height: 150px;
-      }
+.info-box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    color: #fff;
+    min-height: 150px;
+}
     </style>
   </head>
 
@@ -493,6 +494,11 @@
         <!-- Aquí se carga dinámicamente el contenido -->
       </div>
 
+      <!-- Botón de jugar -->
+        <!-- <div class="fixed-button jugar"></div>
+        <div class="fixed-button eliminarPersonaje"></div> -->
+        <div class="jugar"></div>
+
       <!-- Aside con perfil y logros -->
       <div class="aside-container w-20">
         <img src="https://via.placeholder.com/100" alt="Usuario" />
@@ -510,10 +516,6 @@
       </div>
     </div>
 
-    <!-- Botón de jugar -->
-    <div class="fixed-button jugar"></div>
-
-    <div class="fixed-button eliminarPersonaje"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -571,43 +573,38 @@
                                       </span>
                                   </div>
                               </div>
+
+
                               <h5 class="text-center pt-3 pb-3 zoneName">Estás en la sala: ${personaje.zona.nombre}</h5>
-          <div class="info-box d-flex justify-content-between">
-              <div class="col-6 pe-2 border-end">
-                  <p><strong>Descripción:</strong></p>
-                  <p>${personaje.zona.descripcion}</p>
-              </div>
-              <div class="col-6 ps-2">
-                  <p><strong>Otro contenido:</strong></p>
-                  <p>Aquí podés poner estadísticas, ítems, enemigos, etc.</p>
-              </div>
-          </div>
-      `;
+                                <div class="info-box d-flex justify-content-between">
+                                    <div class="col-6 pe-2 border-end">
+                                        <p><strong>Descripción:</strong></p>
+                                        <p>${personaje.zona.descripcion}</p>
+                                    </div>
+                                    <div class="col-6 ps-2">
+                                        <p><strong>Otro contenido:</strong></p>
+                                        <p>Aquí podés poner estadísticas, ítems, enemigos, etc.</p>
+                                    </div>
+                                </div>
+                            `;
+      
 
 
-                              document.querySelector('.jugar').innerHTML = `
-                              <div class="text-center mt-4">
-                                  <div class="d-flex justify-content-center gap-3">
-                                      <form action="{{ route('play') }}" method="POST" target="_blank">
-                                          @csrf
-                                          <input type="hidden" name="personaje" value="${personaje.id}">
-                                          <button type="submit" class="btn btn-jugar">JUGAR</button>
-                                      </form>
-                                  </div>
-                              </div>
-                              `;
+                            document.querySelector('.jugar').innerHTML = `
+                                <div class="d-flex justify-content-center gap-4 mt-4">
+                                    <form action="{{ route('play') }}" method="POST" target="_blank">
+                                        @csrf
+                                        <input type="hidden" name="personaje" value="${personaje.id}">
+                                        <button type="submit" class="btn btn-jugar">JUGAR</button>
+                                    </form>
+                                    <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="personaje" value="${personaje.id}">
+                                        <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
+                                    </form>
+                                </div>
+                            `;
 
-                              document.querySelector('.eliminarPersonaje').innerHTML = `
-                              <div class="text-center mt-4">
-                                  <div class="d-flex justify-content-center gap-3">
-                                      <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
-                                          @csrf
-                                          <input type="hidden" name="personaje" value="${personaje.id}">
-                                          <button type="submit" class="btn btn-borrar">EliminarPersonaje</button>
-                                      </form>
-                                  </div>
-                              </div>
-                              `;
 
                               document.querySelector('#dineroPersonaje').innerHTML = `
                                   <p class="text-white">${personaje.dinero} Gold</p>
