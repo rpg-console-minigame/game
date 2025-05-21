@@ -183,6 +183,21 @@ class PersonajeController extends Controller
             case 'curar50':
                 $this->curar50();
                 break;
+            case 'bolsa10':
+                $this->bolsa10();
+                break;
+            case 'bolsa20':
+                $this->bolsa20();
+                break;
+            case 'bolsa50':
+                $this->bolsa50();
+                break;
+            case "piedraHogar":
+                $this->piedraHogar();
+                break;
+            case "runaVida":
+                $this->runaVida();
+                break;
             default:
                 return response()->json(['error' => 'Invalid object'], 400);
         }
@@ -213,6 +228,44 @@ class PersonajeController extends Controller
         if ($personaje->HP > $personaje->Max_HP) {
             $personaje->HP = $personaje->Max_HP;
         }
+        $personaje->save();
+    }
+    function bolsa10(){
+        session_start();
+        $personaje = session('character');
+        $personaje->dinero += 10;
+        $personaje->save();
+    }
+    function bolsa20(){
+        session_start();
+        $personaje = session('character');
+        $personaje->dinero += 20;
+        $personaje->save();
+    }
+    function bolsa50(){
+        session_start();
+        $personaje = session('character');
+        $personaje->dinero += 50;
+        $personaje->save();
+    }
+    function piedraHogar(){
+        session_start();
+        $personaje = session('character');
+        // buscar la zona de spawn
+        $zona = Zona::where("isSpawn", 1)->first();
+        if ($zona) {
+            $personaje->zona_ID = $zona->id;
+            $personaje->save();
+            session()->put("character", $personaje);
+            return response()->json("ok");
+        } else {
+            return response()->json("no hay zona de spawn", 501);
+        }
+    }
+    function runaVida(){
+        session_start();
+        $personaje = session('character');
+        $personaje->Max_HP ++;
         $personaje->save();
     }
 }
