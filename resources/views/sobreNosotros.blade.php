@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pago - Tienda de Oro</title>
+  <title>Sobre Nosotros - RPG Minigame</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
   <style>
     :root {
       --principal: #27c93f;
@@ -18,7 +21,7 @@
       font-family: "Source Code Pro", monospace;
     }
 
-    nav a {
+    nav a, footer a {
       margin: 0 1rem;
       text-decoration: none;
       color: #e0e0e0;
@@ -27,7 +30,7 @@
       transition: color 0.3s;
     }
 
-    nav a::after {
+    nav a::after, footer a::after {
       content: "";
       position: absolute;
       width: 0%;
@@ -38,90 +41,43 @@
       transition: width 0.3s ease-in-out;
     }
 
-    nav a:hover {
+    nav a:hover, footer a:hover {
       color: var(--principal);
     }
 
-    nav a:hover::after {
+    nav a:hover::after, footer a:hover::after {
       width: 100%;
     }
 
-    .payment-form {
-      max-width: 500px;
-      margin: 4rem auto;
-      padding: 2rem;
+    section {
+      padding: 4rem 1rem;
+    }
+
+    .highlight {
+      color: var(--principal);
+    }
+
+    .team-member {
       background-color: #1f1f1f;
-      border-radius: 10px;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease;
     }
 
-    .form-control {
-      background-color: #121212;
-      border: 1px solid #333;
-      color: white;
+    .team-member:hover {
+      transform: translateY(-8px);
     }
 
-    .form-label {
+    .icon {
+      font-size: 2rem;
       color: var(--principal);
-    }
-
-    button {
-      padding: 6px 16px;
-      border: 2px solid var(--principal);
-      border-radius: 10px;
-      background-color: var(--principal);
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      background-color: transparent;
-      color: white;
-      border-color: white;
-    }
-
-    footer a {
-      position: relative;
-      text-decoration: none;
-      color: #e0e0e0;
-      transition: color 0.3s;
-    }
-
-    footer a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -3px;
-      background-color: var(--principal);
-      transition: width 0.3s ease-in-out;
-    }
-
-    footer a:hover {
-      color: var(--principal);
-    }
-
-    footer a:hover::after {
-      width: 100%;
+      margin-bottom: 1rem;
     }
 
     @media (max-width: 768px) {
       footer .row > div {
         text-align: center !important;
         margin-bottom: 1.5rem;
-      }
-
-      footer .text-start {
-        text-align: center !important;
-      }
-
-      footer ul {
-        padding-left: 0;
-      }
-
-      footer li {
-        list-style: none;
       }
     }
   </style>
@@ -161,38 +117,66 @@
         </div>
     </nav>
 
-  <!-- FORMULARIO DE PAGO -->
-  <div class="payment-form">
-    <h2 class="mb-4">💳 Pago Seguro</h2>
-    <form action="{{ route('pagoRealizado') }}" method="POST">
-    @csrf
-
-    <div class="mb-3">
-        <label class="form-label">Nombre en la tarjeta</label>
-        <input type="text" name="nombre_titular" class="form-control" required />
+  <!-- SOBRE NOSOTROS -->
+  <section data-aos="fade-up">
+    <div class="container text-center">
+      <h1 class="mb-4"><span class="highlight">Sobre Nosotros</span></h1>
+      <p class="lead">RPG Minigame nació de una pasión por los juegos retro y la narrativa inmersiva. Somos un equipo pequeño con grandes sueños, que busca traer de vuelta la magia de los RPG clásicos... con un toque moderno.</p>
     </div>
+  </section>
 
-    <div class="mb-3">
-        <label class="form-label">Número de tarjeta</label>
-        <input type="text" name="numero_tarjeta" class="form-control" maxlength="19" required />
+  <section data-aos="fade-right">
+    <div class="container">
+      <h2 class="highlight mb-4">Nuestra Historia</h2>
+      <p>Todo comenzó en una habitación oscura, llena de cables y café. Un grupo de amigos frustrados por la falta de juegos RPG simples pero profundos decidió crear uno. Así nació *RPG Minigame*, una aventura que combina píxeles, pasión y progreso constante.</p>
     </div>
+  </section>
 
-    <div class="mb-3 row">
-        <div class="col">
-            <label class="form-label">Expira</label>
-            <input type="text" name="expira" class="form-control" placeholder="MM/AA" required />
+  <section>
+  <div class="container">
+    <h2 class="highlight mb-4 text-center">Nuestro Equipo</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+      <div class="col">
+        <div class="team-member text-center">
+          <div class="icon"><i class="bi bi-controller"></i></div>
+          <h5>Alex</h5>
+          <p>Diseñador de niveles y alma creativa.</p>
         </div>
-        <div class="col">
-            <label class="form-label">CVV</label>
-            <input type="text" name="cvv" class="form-control" maxlength="4" required />
+      </div>
+      <div class="col">
+        <div class="team-member text-center">
+          <div class="icon"><i class="bi bi-code-slash"></i></div>
+          <h5>Sara</h5>
+          <p>Desarrolladora principal. Ama el código limpio.</p>
         </div>
+      </div>
+      <div class="col">
+        <div class="team-member text-center">
+          <div class="icon"><i class="bi bi-music-note-beamed"></i></div>
+          <h5>Leo</h5>
+          <p>Compositor de música épica y sonidos envolventes.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="team-member text-center">
+          <div class="icon"><i class="bi bi-palette-fill"></i></div>
+          <h5>Nina</h5>
+          <p>Diseñadora de arte pixelado y UI/UX.</p>
+        </div>
+      </div>
     </div>
-
-    <button type="submit" class="w-100 mt-3">Pagar ahora</button>
-</form>
-
-    
   </div>
+</section>
+
+
+  <section data-aos="fade-up">
+    <div class="container text-center">
+      <h2 class="highlight mb-4">Nuestra Misión</h2>
+      <p>Crear un universo donde cada jugador sienta que su historia importa.</p>
+      <h2 class="highlight mt-5 mb-4">Nuestra Visión</h2>
+      <p>Revolucionar los minijuegos RPG y construir una comunidad vibrante alrededor de ellos.</p>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="bg-dark text-light pt-5 pb-4">
@@ -265,6 +249,14 @@
         </div>
     </footer>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
 </body>
 </html>
