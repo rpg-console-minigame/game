@@ -80,12 +80,20 @@
             padding: 20px;
         }
 
-        .fixed-button {
+        /* .fixed-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 9999;
+        } */
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
         }
+
 
         .life-bar-container {
             margin-top: 10px;
@@ -591,7 +599,7 @@
 
 
                             document.querySelector('.jugar').innerHTML = `
-                                <div class="d-flex justify-content-center gap-4 mt-4">
+                                <div class="button-container">
                                     <form action="{{ route('play') }}" method="POST" target="_blank">
                                         @csrf
                                         <input type="hidden" name="personaje" value="${personaje.id}">
@@ -604,6 +612,9 @@
                                     </form>
                                 </div>
                             `;
+
+                            document.querySelector('.eliminarPersonaje').innerHTML = ``; // Vacío porque ya lo metiste junto
+
 
 
                               document.querySelector('#dineroPersonaje').innerHTML = `
