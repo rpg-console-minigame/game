@@ -6,6 +6,7 @@ use App\Models\objetoInGame;
 use App\Models\User;
 use App\Models\Zona;
 use App\Models\Personaje;
+use App\Models\objetosInGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,6 +60,9 @@ class PersonajeController extends Controller
         $personaje = Personaje::where("id", $request->id)->first();
         if ($personaje) {
             if ($personaje->users_ID == session()->get('user')['id']) {
+
+                $personaje->objetosInGame()->delete();
+                
                 $personaje->delete();
                 
                 session()->put("character", $personaje);
