@@ -574,16 +574,20 @@
                         </div>
 
                         <h5 class="text-center pt-3 pb-3 zoneName">Estás en la sala: ${personaje.zona.nombre}</h5>
+                        
                         <div class="info-box d-flex justify-content-between">
                             <div class="col-6 pe-2 border-end">
                                 <p><strong>Descripción:</strong></p>
                                 <p>${personaje.zona.descripcion}</p>
                             </div>
+                            
                             <div class="col-6 ps-2">
                                 <p><strong>Otro contenido:</strong></p>
-                                <p>Aquí podés poner estadísticas, ítems, enemigos, etc.</p>
+                                <p>${personaje.zona.imagen}</p>
                             </div>
                         </div>
+
+
                         <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
                             <form action="{{ route('play') }}" method="POST" target="_blank">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
