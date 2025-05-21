@@ -173,6 +173,9 @@ class PersonajeController extends Controller
             case "piedraHogar":
                 $this->piedraHogar();
                 break;
+            case "runaVida":
+                $this->runaVida();
+                break;
             default:
                 return response()->json(['error' => 'Invalid object'], 400);
         }
@@ -236,5 +239,11 @@ class PersonajeController extends Controller
         } else {
             return response()->json("no hay zona de spawn", 501);
         }
+    }
+    function runaVida(){
+        session_start();
+        $personaje = session('character');
+        $personaje->Max_HP ++;
+        $personaje->save();
     }
 }
