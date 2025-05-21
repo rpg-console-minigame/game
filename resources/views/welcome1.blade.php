@@ -19,7 +19,6 @@
         }
 
         .d-flex {
-            height: 100%;
             margin-top: 56px;
             /* espacio para navbar */
         }
@@ -618,21 +617,16 @@
 
                             document.querySelector('.principal').insertAdjacentHTML('beforeend', `
                             <div class="d-flex justify-content-center gap-4 mt-4">
-                                @if(isset($personaje))
-                                    <form action="{{ route('play') }}" method="POST" target="_blank">
-                                        @csrf
-                                        <input type="hidden" name="personaje" value="{{ $personaje->id }}">
-                                        <button type="submit" class="btn btn-jugar">JUGAR</button>
-                                    </form>
-                                
-                                    <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="personaje" value="{{ $personaje->id }}">
-                                        <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
-                                    </form>
-                                @else
-                                    <p>No tienes personaje aún. Crea uno para empezar a jugar.</p>
-                                @endif
+                                <form action="{{ route('play') }}" method="POST" target="_blank">
+                                @csrf
+                                    <input type="hidden" name="personaje" value="${personaje.id}">
+                                    <button type="submit" class="btn btn-jugar">JUGAR</button>
+                                </form>
+                                <form action="{{ route('deletePj', $personaje->id) }}" method="POST">
+                                @csrf
+                                    <input type="hidden" name="personaje" value="${personaje.id}">
+                                    <button type="submit" class="btn btn-borrar">Eliminar Personaje</button>
+                                </form>
                             </div>
                             `);
 
