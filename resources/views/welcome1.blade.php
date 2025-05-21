@@ -475,30 +475,37 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg px-4 py-3">
-        <div class="container-fluid">-
-            <!-- Marca a la izquierda -->
-            <a href="{{ route('welcome') }}">CONSOLE MINIGAME</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <div class="container-fluid">
+            <!-- Título -->
+            <a class="navbar-brand fw-bold" href="{{ route('welcome') }}">RPG MINIGAME</a>
 
             <!-- Hamburguesa a la derecha -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+            <button class="navbar-toggler ms-auto border-success" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Menú colapsable -->
-            <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="{{ route('sobreNosotros') }}">Sobre nosotros</a></li>
-                    <!-- <li class="nav-item"><a href="#">Mis logros</a></li> -->
-                    <li class="nav-item"><a href="{{ route('contacto') }}">Contacto</a></li>
-                    <li class="nav-item"><a href="{{ route('map') }}">Mapa</a></li>
-                    <li class="nav-item"><a href="{{ route('tiendaOro') }}">Tienda</a></li>
+            <!-- Enlaces -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Documentacion</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('map') }}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sobreNosotros') }}">Sobre nosotros</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Mis logros</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                    </li>
                 </ul>
-                <div class="d-flex">
-                    <button data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
-                </div>
             </div>
         </div>
     </nav>
