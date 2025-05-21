@@ -19,6 +19,7 @@
         }
 
         .d-flex {
+            height: 100%;
             margin-top: 56px;
             /* espacio para navbar */
         }
