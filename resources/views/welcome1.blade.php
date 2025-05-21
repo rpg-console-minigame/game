@@ -395,38 +395,67 @@
         /* ===== OPCIÓN 2: Botón Borrar más visible, subido desde abajo a la derecha ===== */
 
         .fixed-button.borrar {
-    position: fixed;
-    bottom: 80px; /* Igual que el botón jugar */
-    right: 140px; /* Separado para que estén paralelos */
-    z-index: 10000;
-}
+            position: fixed;
+            bottom: 80px; /* Igual que el botón jugar */
+            right: 140px; /* Separado para que estén paralelos */
+            z-index: 10000;
+        }
 
-.btn-borrar {
-    background-color: #dc3545; /* Rojo brillante */
-    color: white;
-    font-size: 1.5rem;
-    padding: 15px 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.6);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
+        .btn-borrar {
+            background-color: #dc3545; /* Rojo brillante */
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.6);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.btn-borrar:hover {
-    background-color: #c82333; /* Rojo oscuro */
-    box-shadow: 0 8px 16px rgba(200, 35, 51, 0.8);
-}
+        .btn-borrar:hover {
+            background-color: #c82333; /* Rojo oscuro */
+            box-shadow: 0 8px 16px rgba(200, 35, 51, 0.8);
+        }
 
 
-.info-box {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 10px;
-    color: #fff;
-    min-height: 150px;
-}
+        .info-box {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            color: #fff;
+            min-height: 150px;
+        }
+        /* RESPONSIVE DE BOTONES Y ELIMINACION DE ESPACIOS DEBAJO DE ELLOS */
+        /* Contenedor botones: que no deje huecos y sea responsive */
+        .d-flex.justify-content-center.gap-4.mt-4 {
+            flex-wrap: wrap; /* Permite que los botones bajen a la siguiente fila si no caben */
+            gap: 1rem;       /* Separación consistente entre botones */
+            justify-content: center; /* Centra los botones en todas las pantallas */
+            margin-top: 1rem !important;
+        }
+
+        /* Botones: tamaño flexible, sin margenes que generen huecos */
+        .btn-jugar,
+        .btn-borrar {
+        flex: 1 1 150px; /* Crecen y encogen, con mínimo 150px */
+            max-width: 300px; /* Opcional, para que no crezcan demasiado */
+            margin: 0; /* Sin margen para evitar espacios extra */
+            padding: 12px 20px; /* Ajusta el padding para que sean cómodos en móvil */
+            box-sizing: border-box;
+            white-space: nowrap; /* Para evitar que el texto se rompa en dos líneas */
+        }
+
+        /* Ajustes para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+        .btn-jugar,
+        .btn-borrar {
+            flex: 1 1 100%; /* Botones en columna a 100% ancho */
+            max-width: 100%;
+        }
+        }
+
     </style>
   </head>
 
@@ -495,10 +524,6 @@
         <!-- Aquí se carga dinámicamente el contenido -->
       </div>
 
-      <!-- Botón de jugar -->
-        <!-- <div class="fixed-button jugar"></div>
-        <div class="fixed-button eliminarPersonaje"></div> -->
-        <!-- <div class="jugar"></div> -->
 
       <!-- Aside con perfil y logros -->
       <div class="aside-container w-20">
