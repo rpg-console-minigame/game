@@ -319,7 +319,7 @@
             </div>
         </section>
 
-        <div id="miSlider" class="carousel slide" data-bs-ride="carousel">
+        {{-- <div id="miSlider" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#miSlider" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -347,7 +347,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Siguiente</span>
             </button>
-        </div>
+        </div> --}}
 
 
     </main>
