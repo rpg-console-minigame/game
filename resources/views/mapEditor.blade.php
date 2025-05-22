@@ -534,6 +534,8 @@
             </div>
         </table>
     </div>
+                <a href="{{ route('welcome') }}" class="btn btn-primary">Volver</a>
+
 </body>
 
 </html>
