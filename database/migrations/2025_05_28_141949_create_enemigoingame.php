@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enemigo', function (Blueprint $table) {
+        Schema::create('enemigoingame', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('tipo');
             $table->string('descripcion')->nullable();
             $table->integer('ataque');
-            $table->integer('%soltar');
+            $table->integer('%soltar')->default(0);
             $table->unsignedBigInteger('objeto_ID')->nullable();
             $table->foreign('objeto_ID')->references('id')->on('objeto')->nullable();
             $table->unsignedBigInteger('zona_ID');
             $table->foreign('zona_ID')->references('id')->on('zona');
-            $table->integer("minutos");
-            $table->timestamp('last_copied_at')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enemigo');
+        //
     }
 };
