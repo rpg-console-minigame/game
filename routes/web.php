@@ -41,6 +41,7 @@ Route::post('/register', [UserController::class, 'register'])->name('registerEnt
 Route::post('createPj', [PersonajeController::class, 'create'])->name('createPj');
 
 Route::post("/play", [UserController::class, 'play'])->name('play');
+Route::post("/deletePj/{id}", [PersonajeController::class, 'delete'])->name('deletePj');
 
 
 Route::get("/mapInfo", [MapController::class, 'mapInfo']);
@@ -54,4 +55,13 @@ Route::get('/compra', [TiendaController::class, 'show'])->name('tiendaOroShow');
 Route::get('/tiendaObjetos', [TiendaController::class, 'indexObjetos'])->name('tiendaObjetos');
 Route::post('/pagoRealizado', [TiendaController::class, 'showObjeto'])->name('pagoRealizado');
 Route::get('/devolver', [TiendaController::class, 'devolver'])->name('devolver');
+
+
+Route::get('/sobreNosotros', function () {
+    return view('sobreNosotros');
+})->name('sobreNosotros');
+
+Route::get('/contacto', function () {
+    return view('contacto');
+})->name('contacto');
 

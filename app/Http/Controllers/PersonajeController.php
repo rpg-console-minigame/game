@@ -6,6 +6,7 @@ use App\Models\objetoInGame;
 use App\Models\User;
 use App\Models\Zona;
 use App\Models\Personaje;
+use App\Models\objetosInGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,6 +51,27 @@ class PersonajeController extends Controller
             return redirect("/")->with("success", true);
         } else {
             return redirect("/")->with("error", "Es necesario nombre o descripción");
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        session_start();
+        $personaje = Personaje::where("id", $request->id)->first();
+        if ($personaje) {
+            if ($personaje->users_ID == session()->get('user')['id']) {
+
+                $personaje->objetosInGame()->delete();
+                
+                $personaje->delete();
+                
+                session()->put("character", $personaje);
+               return redirect("/")->with("success", true);
+            } else {
+                return response()->json("no tienes permisos para eliminar este personaje", 501);
+            }
+        } else {
+            return response()->json("no existe el personaje", 501);
         }
     }
 
