@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ObjetoController;
 use App\Http\Controllers\TiendaController;
+use App\Mail\ContactFormMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,8 @@ Route::get('/compra', [TiendaController::class, 'show'])->name('tiendaOroShow');
 Route::get('/tiendaObjetos', [TiendaController::class, 'indexObjetos'])->name('tiendaObjetos');
 Route::post('/pagoRealizado', [TiendaController::class, 'showObjeto'])->name('pagoRealizado');
 Route::get('/devolver', [TiendaController::class, 'devolver'])->name('devolver');
+
+Route::post('/enviarMensaje', [ContactController::class,'index'])->name('enviarMensaje');
 
 
 Route::get('/sobreNosotros', function () {

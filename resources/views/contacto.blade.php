@@ -165,7 +165,7 @@
   <!-- CONTACTO -->
   <div class="contact-section">
     <h2 class="mb-4 text-center">📬 Contacta con Nosotros</h2>
-    <form action="" method="POST">
+    <form action="enviarMensaje" method="POST">
       @csrf
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
