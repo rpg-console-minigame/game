@@ -89,7 +89,7 @@ const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
             </li>
           ))
         ) : (
-          <li>No hay enemigos en esta zona.</li>
+          <li></li>
         )}
       </ul>
     </div>
