@@ -5,10 +5,10 @@ const HelpDraggableContent = () => {
         {`
         -"ayuda" : muestra el listado de comandos
         -"mapa" : muestra el mapa
-        -"chat" : muestra el chat              
+        -"chat" : muestra el chat
+        -"info" : muestra la información del personaje              
         -"arriba/abajo/izquierda/derecha" : mueve al personaje
         -"tomar (item)" : toma el item del mapa y lo agrega al inventario
-        -"usar (item)" : usa el item del inventario
         -"inventario" : muestra los objetos que tienes en tu inventario
         `}
       </pre>
