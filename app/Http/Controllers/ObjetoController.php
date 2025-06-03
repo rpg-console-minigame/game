@@ -8,6 +8,7 @@ use App\Models\Zona;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Http\Controllers\EnemigoController;
 
 class ObjetoController extends Controller
 {
@@ -109,6 +110,8 @@ class ObjetoController extends Controller
                 ]);
             }
         }
+        $enemigoController = new EnemigoController();
+        $enemigoController->copiarEnemigos();
 
         return response()->json(['status' => 'Schedule executed']);
     }

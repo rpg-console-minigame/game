@@ -198,6 +198,9 @@ class PersonajeController extends Controller
             case "runaVida":
                 $this->runaVida();
                 break;
+            case "CompasCaminantesPerdidos":
+                $this->CompasCaminantesPerdidos();
+                break;
             default:
                 return response()->json(['error' => 'Invalid object'], 400);
         }
@@ -268,4 +271,34 @@ class PersonajeController extends Controller
         $personaje->Max_HP ++;
         $personaje->save();
     }
+    function CompasCaminantesPerdidos(){
+        // conseguir la zona del personaje
+        session_start();
+        $personaje = session('character');
+        $zona = Zona::where("id", $personaje->zona_ID)->first();
+        // mirar las zonas alrededores si hay objetos
+        $string = "";
+        $objetos = objetoInGame::where("coord_x", $zona->coord_x+1)->where("coord_y", $zona->coord_y)->get();
+        $string .= "Zona Abajo: ";
+        foreach ($objetos as $objeto) {
+            $string .= $objeto->nombre . " ";
+        }
+        $objetos = objetoInGame::where("coord_x", $zona->coord_x-1)->where("coord_y", $zona->coord_y)->get();
+        $string .= "Zona Arriba: ";
+        foreach ($objetos as $objeto) {
+            $string .= $objeto->nombre . " ";
+        }
+        $objetos = objetoInGame::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y+1)->get();
+        $string .= "Zona Derecha: ";
+        foreach ($objetos as $objeto) {
+            $string .= $objeto->nombre . " ";
+        }
+        $objetos = objetoInGame::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y-1)->get();
+        $string .= "Zona Izquierda: ";
+        foreach ($objetos as $objeto) {
+            $string .= $objeto->nombre . " ";
+        }
+        return response()->json($string, 200);
+    }
+
 }
