@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enemigoingame;
 use App\Models\objetoInGame;
 use App\Models\User;
 use App\Models\Zona;
@@ -89,10 +90,23 @@ class PersonajeController extends Controller
         switch ($input) {
             case "abajo":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x + 1)->where("coord_y", $zona->coord_y)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x + 1)->where("coord_y", $zona->coord_y)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -103,10 +117,23 @@ class PersonajeController extends Controller
 
             case "arriba":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x - 1)->where("coord_y", $zona->coord_y)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x - 1)->where("coord_y", $zona->coord_y)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -116,10 +143,23 @@ class PersonajeController extends Controller
 
             case "derecha":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y + 1)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y + 1)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -129,10 +169,23 @@ class PersonajeController extends Controller
 
             case "izquierda":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y - 1)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y - 1)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");

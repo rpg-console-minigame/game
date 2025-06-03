@@ -9,11 +9,11 @@ import ConsoleDraggableContent from "./components/ConsoleDraggableContent"
 import HelpDraggableContent from "./components/HelpDraggableContent"
 import ChatDraggableContent from "./components/ChatDraggableContent"
 import InventarioDraggableContent from "./components/InventarioDraggableContent"
+import InfoDraggableContent from "./components/InfoDraggableContent"
 import "bootstrap/dist/css/bootstrap.min.css"
 
-
 const App = () => {
-  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat", "Inventario"]
+  const cuadros = ["Descripcion", "Mapa", "Consola", "Ayuda", "Chat", "Inventario", "Info"]
   const componentes = [
     DescripcionDraggableContent,
     MapDraggableContent,
@@ -21,6 +21,7 @@ const App = () => {
     HelpDraggableContent,
     ChatDraggableContent,
     InventarioDraggableContent,
+    InfoDraggableContent,
   ]
 
   const [positions, setPositions] = useState(() => {
@@ -46,6 +47,9 @@ const App = () => {
         case "Inventario":
           savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 335, y: 400 }
           break
+        case "Info":
+          savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 980, y: 20 }
+          break
         default:
           savedPositions[cuadro] = saved ? JSON.parse(saved) : { x: 0, y: 0 }
           break
@@ -58,7 +62,7 @@ const App = () => {
     const savedStates = {}
     cuadros.forEach((cuadro) => {
       const saved = localStorage.getItem(`${cuadro}-active`)
-      if (cuadro === "Ayuda" || cuadro === "Chat" || cuadro === "Inventario") {
+      if (cuadro === "Ayuda" || cuadro === "Chat" || cuadro === "Inventario" || cuadro === "Info") {
         savedStates[cuadro] = localStorage.getItem(`${cuadro}-active`) == "true" ? true : false
         if (!localStorage.getItem(`${cuadro}-active`)) localStorage.setItem(`${cuadro}-active`, JSON.stringify(false))
       } else {
@@ -93,7 +97,7 @@ const App = () => {
   }
 
   const handleToggleActive = useCallback((id) => {
-    if (id === "Mapa" || id === "Ayuda" || id === "Chat" || id === "Inventario") {
+    if (id === "Mapa" || id === "Ayuda" || id === "Chat" || id === "Inventario" || id === "Info") {
       setActiveStates((prev) => {
         const newState = {
           ...prev,
@@ -179,6 +183,22 @@ const App = () => {
     bringToFront("Inventario")
   }, [activeStates, bringToFront])
 
+  const handleOpenInfo = useCallback(() => {
+    // Si ya está abierta, solo la ponemos por encima
+    if (activeStates["Info"]) {
+      bringToFront("Info")
+      return
+    }
+
+    // Si no está abierta, la abrimos y la ponemos por encima
+    setActiveStates((prev) => ({
+      ...prev,
+      Info: true,
+    }))
+    localStorage.setItem("Info-active", JSON.stringify(true))
+    bringToFront("Info")
+  }, [activeStates, bringToFront])
+
   const handleFrameClick = useCallback(
     (id) => {
       bringToFront(id)
@@ -204,7 +224,13 @@ const App = () => {
               initialPosition={positions[cuadro]}
               onToggleActive={handleToggleActive}
               isActive={activeStates[cuadro]}
-              canClose={cuadro === "Mapa" || cuadro === "Ayuda" || cuadro === "Chat" || cuadro === "Inventario"}
+              canClose={
+                cuadro === "Mapa" ||
+                cuadro === "Ayuda" ||
+                cuadro === "Chat" ||
+                cuadro === "Inventario" ||
+                cuadro === "Info"
+              }
               onFrameClick={handleFrameClick}
               zIndex={order[cuadro]}
             >
@@ -215,6 +241,7 @@ const App = () => {
                   onOpenHelp={handleOpenHelp}
                   onOpenChat={handleOpenChat}
                   onOpenInventario={handleOpenInventario}
+                  onOpenInfo={handleOpenInfo}
                   onMapUpdate={handleMapUpdate}
                 />
               ) : cuadro === "Mapa" ? (
@@ -223,6 +250,8 @@ const App = () => {
                 <DescripcionDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : cuadro === "Inventario" ? (
                 <InventarioDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
+              ) : cuadro === "Info" ? (
+                <InfoDraggableContent apiUrl={apiUrl} mapUpdateTrigger={mapUpdateTrigger} />
               ) : (
                 <Componente />
               )}

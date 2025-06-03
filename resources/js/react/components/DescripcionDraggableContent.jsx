@@ -57,6 +57,41 @@ const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
           <li>No hay objetos en esta zona.</li>
         )}
       </ul>
+      <h2 style={{ textAlign: "center" }}>Personajes en la zona</h2>
+      <ul style={{ listStyleType: "none", padding: 0, textAlign: "center" }}>
+        {zonaInfo.personajes && zonaInfo.personajes.length > 0 ? (
+          zonaInfo.personajes.map((personaje, index) => (
+            <li key={index} style={{ margin: "5px 0" }}>
+              {personaje.nombre || `Loading...`}
+            </li>
+          ))
+        ) : (
+          <li>No hay personajes en esta zona.</li>
+        )}
+      </ul>
+      <h2 style={{ textAlign: "center" }}>Enemigos en la zona</h2>
+      <ul style={{ listStyleType: "none", padding: 0, textAlign: "center" }}>
+        {/* si hay enemigos mostrar mensaje en rojo con un aviso */}
+        {zonaInfo.enemigos && zonaInfo.enemigos.length > 0 ? (
+          <p style={{ color: "red", textAlign: "center" }}>
+            ¡Cuidado! Al salir de esta zona, recibiras el ataque de los enemigos.
+          </p>
+        ) : (
+          <p style={{ color: "green", textAlign: "center" }}>
+            Zona segura, no hay enemigos.
+          </p>
+        )}
+        {zonaInfo.enemigos && zonaInfo.enemigos.length > 0 ? (
+          zonaInfo.enemigos.map((enemigo, index) => (
+            <li key={index} style={{ margin: "5px 0" }}>
+              {enemigo.nombre || `Loading...`}
+              {enemigo.ataque ? ` - Ataque: ${enemigo.ataque}` : ""}
+            </li>
+          ))
+        ) : (
+          <li></li>
+        )}
+      </ul>
     </div>
   )
 }
