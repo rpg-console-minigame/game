@@ -85,6 +85,7 @@ const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
           zonaInfo.enemigos.map((enemigo, index) => (
             <li key={index} style={{ margin: "5px 0" }}>
               {enemigo.nombre || `Loading...`}
+              {enemigo.tipo ? ` (${enemigo.tipo})` : ""}
               {enemigo.ataque ? ` - Ataque: ${enemigo.ataque}` : ""}
               {enemigo.descripcion ? (
                 <div style={{ fontSize: "0.8em", color: "#666" }}>
