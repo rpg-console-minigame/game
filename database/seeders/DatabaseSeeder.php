@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Zona::factory()->create([
-            'id' => 4,
+            'id' => 2,
             'nombre' => 'Paso de las Agujas Dobles [2-1]',
             'imagen' => '----------------------------------------------------------------------------------
 |                                                                                |
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Zona::factory()->create([
-            'id' => 7,
+            'id' => 3,
             'nombre' => 'Torres de la Niebla[3-1]',
             'imagen' => '----------------------------------------------------------------------------------
 |                          |>>>                        |>>>                      |
@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Zona::factory()->create([
-            'id' => 2,
+            'id' => 4,
             'nombre' => 'Claros del Vínculo Eterno [1-2]',
             'imagen' => <<<EOT
                 '----------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Zona::factory()->create([
-            'id' => 8,
+            'id' => 6,
             'nombre' => 'El Santuario del Silencio [3-2]',
             'imagen' => <<<EOT
 '----------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ EOT,
         ]);
 
         Zona::factory()->create([
-            'id' => 3,
+            'id' => 7,
             'nombre' => 'Ruinas de Velmora [1-3]',
             'imagen' => '----------------------------------------------------------------------------------
 |                        ccee88oo        ⢠⣤⣶⣶⣶⠋⠁                              |
@@ -214,7 +214,7 @@ EOT,
         ]);
 
         Zona::factory()->create([
-            'id' => 6,
+            'id' => 8,
             'nombre' => 'Selva Esmeralda [2-3]',
             'imagen' => '----------------------------------------------------------------------------------
 |                                                                                |
