@@ -2,7 +2,15 @@
 
 import { useState, useEffect, useCallback } from "react"
 
-const ConsoleDraggableContent = ({ apiUrl, onOpenMap, onOpenHelp, onOpenChat, onOpenInventario, onMapUpdate }) => {
+const ConsoleDraggableContent = ({
+  apiUrl,
+  onOpenMap,
+  onOpenHelp,
+  onOpenChat,
+  onOpenInventario,
+  onOpenInfo,
+  onMapUpdate,
+}) => {
   const [input, setInput] = useState("")
   const [nombre, setNombre] = useState("user@PC:~$")
   const [error, setError] = useState("")
@@ -37,6 +45,9 @@ const ConsoleDraggableContent = ({ apiUrl, onOpenMap, onOpenHelp, onOpenChat, on
         setInput("")
       } else if (input.toLowerCase() === "inventario") {
         onOpenInventario()
+        setInput("")
+      } else if (input.toLowerCase() === "info") {
+        onOpenInfo()
         setInput("")
       } else if (["derecha", "izquierda", "arriba", "abajo"].includes(input.toLowerCase())) {
         try {
@@ -78,44 +89,17 @@ const ConsoleDraggableContent = ({ apiUrl, onOpenMap, onOpenHelp, onOpenChat, on
 
           const data = await response.json()
           console.log("Objeto tomado:", data)
-          // si data es null, no se ha podido tomar el objeto
-          if (data === null) throw new Error("No se ha podido tomar el objeto")
           setInput("")
           onMapUpdate() // Usar onMapUpdate en lugar de updateZonaInfo
         } catch (error) {
           console.error("Error tomando objeto:", error)
           setError("Error al tomar el objeto. Por favor, intenta de nuevo.")
         }
-      }else if (input.toLowerCase().startsWith("usar")){
-        try {
-          // const objeto  todo sin la palabra usar y el primer espacio (contar que el nombre puede contener espacios)
-          const objeto = input.substring(5).trim()
-          const response = await fetch(`${apiUrl}/input`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ input: "usar", objeto: objeto }),
-          })
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
-          }
-
-          const data = await response.json()
-          console.log("Objeto usado:", data)
-          setInput("")
-          onMapUpdate() // Usar onMapUpdate en lugar de updateZonaInfo
-        } catch (error) {
-          console.error("Error usando objeto:", error)
-          setError("Error al usar el objeto. Por favor, intenta de nuevo.")
-        }
-      } 
-      else {
+      } else {
         setError("Comando no reconocido. Usa 'ayuda' para ver los comandos disponibles.")
       }
     },
-    [input, onOpenMap, onOpenHelp, onOpenChat, onOpenInventario, onMapUpdate, apiUrl],
+    [input, onOpenMap, onOpenHelp, onOpenChat, onOpenInventario, onOpenInfo, onMapUpdate, apiUrl],
   )
 
   return (
