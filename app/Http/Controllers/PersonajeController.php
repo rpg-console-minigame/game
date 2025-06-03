@@ -251,9 +251,6 @@ class PersonajeController extends Controller
             case "runaVida":
                 $this->runaVida();
                 break;
-            case "CompasCaminantesPerdidos":
-                $this->CompasCaminantesPerdidos();
-                break;
             case "espada":
                 $this->matar("Humanoide");
             default:
