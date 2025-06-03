@@ -86,6 +86,15 @@ const DescripcionDraggableContent = ({ apiUrl, mapUpdateTrigger }) => {
             <li key={index} style={{ margin: "5px 0" }}>
               {enemigo.nombre || `Loading...`}
               {enemigo.ataque ? ` - Ataque: ${enemigo.ataque}` : ""}
+              {enemigo.descripcion ? (
+                <div style={{ fontSize: "0.8em", color: "#666" }}>
+                  {enemigo.descripcion}
+                </div>
+              ) : (
+                <div style={{ fontSize: "0.8em", color: "#666" }}>
+                  Descripción no disponible.
+                </div>
+              )}
             </li>
           ))
         ) : (
