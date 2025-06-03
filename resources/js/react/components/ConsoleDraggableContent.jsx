@@ -95,7 +95,30 @@ const ConsoleDraggableContent = ({
           console.error("Error tomando objeto:", error)
           setError("Error al tomar el objeto. Por favor, intenta de nuevo.")
         }
-      } else {
+      }else if (input.toLowerCase().startsWith("usar")) {
+        try {
+          // const objeto  todo sin la palabra usar y el primer espacio (contar que el nombre puede contener espacios)
+          const objeto = input.substring(4).trim()
+          const response = await fetch(`${apiUrl}/input`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ input: "usar", objeto: objeto }),
+          })
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          const data = await response.json()
+          console.log("Objeto usado:", data)
+          setInput("")
+          onMapUpdate() // Usar onMapUpdate en lugar de updateZonaInfo
+        } catch (error) {
+          console.error("Error usando objeto:", error)
+          setError("Error al usar el objeto. Por favor, intenta de nuevo.")
+        }
+      }
+      else {
         setError("Comando no reconocido. Usa 'ayuda' para ver los comandos disponibles.")
       }
     },
