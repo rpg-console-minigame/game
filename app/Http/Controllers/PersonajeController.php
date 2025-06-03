@@ -228,22 +228,22 @@ class PersonajeController extends Controller
     function use($string){
         switch ($string) {
             case 'curar10':
-                $this->curar10();
+                $this->curar(10);
                 break;
             case 'curar20':
-                $this->curar20();
+                $this->curar(20);
                 break;
             case 'curar50':
-                $this->curar50();
+                $this->curar(50);
                 break;
             case 'bolsa10':
-                $this->bolsa10();
+                $this->bolsa(10);
                 break;
             case 'bolsa20':
-                $this->bolsa20();
+                $this->bolsa(20);
                 break;
             case 'bolsa50':
-                $this->bolsa50();
+                $this->bolsa(50);
                 break;
             case "piedraHogar":
                 $this->piedraHogar();
@@ -254,54 +254,37 @@ class PersonajeController extends Controller
             case "CompasCaminantesPerdidos":
                 $this->CompasCaminantesPerdidos();
                 break;
+            case "espada":
+                $this->matar("Humanoide");
             default:
                 return response()->json(['error' => 'Invalid object'], 400);
         }
     }
-
-    function curar10(){
+    function matar($tipo){
+                $zona = Zona::where("id", session()->get("character")["zona_ID"])->first();
+                $enemigo = Enemigoingame::where("zona_ID", $zona->id)
+                    ->where("tipo", $tipo)
+                    ->first();
+                if ($enemigo) {
+                    $enemigo->delete();
+                    return response()->json("Enemigo eliminado", 200);
+                } else {
+                    return response()->json("Has golpeado el suelo", 501);
+                }
+    }
+    function curar($data){
         session_start();
         $personaje = session('character');
-        $personaje->HP += 10;
+        $personaje->HP += $data;
         if ($personaje->HP > $personaje->Max_HP) {
             $personaje->HP = $personaje->Max_HP;
         }
         $personaje->save();
     }
-    function curar20(){
+    function bolsa($data){
         session_start();
         $personaje = session('character');
-        $personaje->HP += 20;
-        if ($personaje->HP > $personaje->Max_HP) {
-            $personaje->HP = $personaje->Max_HP;
-        }
-        $personaje->save();
-    }
-    function curar50(){
-        session_start();
-        $personaje = session('character');
-        $personaje->HP += 50;
-        if ($personaje->HP > $personaje->Max_HP) {
-            $personaje->HP = $personaje->Max_HP;
-        }
-        $personaje->save();
-    }
-    function bolsa10(){
-        session_start();
-        $personaje = session('character');
-        $personaje->dinero += 10;
-        $personaje->save();
-    }
-    function bolsa20(){
-        session_start();
-        $personaje = session('character');
-        $personaje->dinero += 20;
-        $personaje->save();
-    }
-    function bolsa50(){
-        session_start();
-        $personaje = session('character');
-        $personaje->dinero += 50;
+        $personaje->dinero += $data;
         $personaje->save();
     }
     function piedraHogar(){
@@ -324,34 +307,4 @@ class PersonajeController extends Controller
         $personaje->Max_HP ++;
         $personaje->save();
     }
-    function CompasCaminantesPerdidos(){
-        // conseguir la zona del personaje
-        session_start();
-        $personaje = session('character');
-        $zona = Zona::where("id", $personaje->zona_ID)->first();
-        // mirar las zonas alrededores si hay objetos
-        $string = "";
-        $objetos = objetoInGame::where("coord_x", $zona->coord_x+1)->where("coord_y", $zona->coord_y)->get();
-        $string .= "Zona Abajo: ";
-        foreach ($objetos as $objeto) {
-            $string .= $objeto->nombre . " ";
-        }
-        $objetos = objetoInGame::where("coord_x", $zona->coord_x-1)->where("coord_y", $zona->coord_y)->get();
-        $string .= "Zona Arriba: ";
-        foreach ($objetos as $objeto) {
-            $string .= $objeto->nombre . " ";
-        }
-        $objetos = objetoInGame::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y+1)->get();
-        $string .= "Zona Derecha: ";
-        foreach ($objetos as $objeto) {
-            $string .= $objeto->nombre . " ";
-        }
-        $objetos = objetoInGame::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y-1)->get();
-        $string .= "Zona Izquierda: ";
-        foreach ($objetos as $objeto) {
-            $string .= $objeto->nombre . " ";
-        }
-        return response()->json($string, 200);
-    }
-
 }
