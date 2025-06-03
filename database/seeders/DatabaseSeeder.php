@@ -49,60 +49,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Zona::factory()->create([
-            'id' => 2,
-            'nombre' => 'Claros del Vínculo Eterno [1-2]',
-            'imagen' => <<<EOT
-                '----------------------------------------------------------------------------------
-                |                                 ,@@@@@@,                                       |
-                |                        ,,,.   ,@@@@@@/@@,  .oo8888o.                           |
-                |                    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o                          |
-                |                    ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88                       |
-                |                    %&&%&%&/%&&%@\\@@/ /@@@88888\\88888                         |
-                |                    %&&%/ %&%%&&@@\\ V /@@' \`88\\8 88                          |
-                |                     &%\\ \` /%&'  |.|       \\ '|8'                            |
-                |                        |o|        | |         | |                              |
-                |                        |.|        | |         | |                              |
-                |                       \\ //_/,\\_//__\\__/   \\_//__/                          |
-                |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                           |
-                ----------------------------------------------------------------------------------
-            EOT,
-            'descripcion' => 'Entre la niebla del bosque, se abre un claro donde tres árboles gigantescos se alzan...',
-            'up_door' => true,
-            'down_door' => true,
-            'left_door' => true,
-            'right_door' => true,
-            'coord_x' => 1,
-            'coord_y' => 0,
-            'isSpawn' => false,
-        ]);
-
-        Zona::factory()->create([
-            'id' => 3,
-            'nombre' => 'Ruinas de Velmora [1-3]',
-            'imagen' => '----------------------------------------------------------------------------------
-|                        ccee88oo        ⢠⣤⣶⣶⣶⠋⠁                              |
-|                     C8O8O8Q8PoOb o8oo  ⠙⠻⢿⣿⣿⣶⣶⣦⣤⣄                          |
-|                  dOB69QO8PdUOpugoO9bD  ⣀⣤⣤⣤⣽⣿⣿⣿⣿⣿⡿⠇                       |
-|                 CgggbU8OU qOp qOdoUOdcb⣿⣿⣿⣿⡿⠛⠛⠋⠉                           |
-|                     6OuU  /p u gcoUodpP⢿⣿⣿⣷⣶⣶⣦⣤⣤⣄⡀  ⠀⠀⠀                   |
-|                       \\\//  /douUP ⠛⠿⢶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣷⠀                     |
-|                         \\\////     ⢀⣀⣤⣾⣿⣿⢿⣿⣿⢟⣡⣼⣿⠟                       |
-|                          |||/    ⣠⣶⣿⣿⣿⠟⣡⣾⣿⣿⣿⣿⡿⠋⠁                         |
-|                          |||   ⢰⣿⣿⠹⣿⣿⣄⠻⣿⣿⣿⠻⣿⣿⣦⣄⣀⠀⠀                      |
-|                          |||  ⢰⣿⣿⢰⣄⠹⣿⣿⢰⣄⠹⢰⣄⠹⣿⣿⣿⠟                        |
-|                   , -=-~  .-^- _, -=-~  .-^- _, -=-~  .-^- _                   |
-----------------------------------------------------------------------------------',
-            'descripcion' => 'A medida que atraviesas la espesura del bosque, la naturaleza comienza a mezclarse...',
-            'up_door' => true,
-            'down_door' => true,
-            'left_door' => true,
-            'right_door' => true,
-            'coord_x' => 2,
-            'coord_y' => 0,
-            'isSpawn' => false,
-        ]);
-
-        Zona::factory()->create([
             'id' => 4,
             'nombre' => 'Paso de las Agujas Dobles [2-1]',
             'imagen' => '----------------------------------------------------------------------------------
@@ -124,55 +70,6 @@ class DatabaseSeeder extends Seeder
             'left_door' => true,
             'right_door' => true,
             'coord_x' => 0,
-            'coord_y' => 1,
-            'isSpawn' => false,
-        ]);
-
-        Zona::factory()->create([
-            'id' => 5,
-            'nombre' => 'Casa del Valle Silencioso [2-2]',
-            'imagen' => '----------------------------------------------------------------------------------
-|                                                                                |
-|                                /＾＾＾＾＾＾\                                   |
-|                              /    |    |    \                                  |
-|                            /      |    |      \                                |
-|                           /_______|____|_______\                               |
-|                           |                    |                               |
-|                           |  [□]    [□]        |                               |
-|                           |       ___          |                               |
-|                           |______|_"_|_________|                               |
-|                                                                                |
-----------------------------------------------------------------------------------',
-            'descripcion' => 'Una acogedora y sencilla casa construida con madera firme y tejas antiguas...',
-            'up_door' => true,
-            'down_door' => true,
-            'left_door' => true,
-            'right_door' => true,
-            'coord_x' => 1,
-            'coord_y' => 1,
-            'isSpawn' => false,
-        ]);
-
-        Zona::factory()->create([
-            'id' => 6,
-            'nombre' => 'Selva Esmeralda [2-3]',
-            'imagen' => '----------------------------------------------------------------------------------
-|                                                                                |
-|      &&&     &&&    &&&      &&&     &&&    &&&     &&&      &&&    &&&        |
-|     &&&&&   &&&&&  &&&&&    &&&&&   &&&&&  &&&&&   &&&&&    &&&&&  &&&&&       |
-|    &&&&&&& &&&&&&&&&&&&&&  &&&&&&& &&&&&&&&&&&&&& &&&&&&&  &&&&&&&&&&&&&&      |
-|      |||     |||    |||      |||     |||    |||     |||      |||    |||        |
-|      |||     |||    |||      |||     |||    |||     |||      |||    |||        |
-|      |||     |||    |||      |||     |||    |||     |||      |||    |||        |
-|                                                                                |
-|                                                                                |
-|________________________________________________________________________________|',
-            'descripcion' => 'Un denso y vibrante bosque tropical donde la luz del sol apenas logra atravesar...',
-            'up_door' => true,
-            'down_door' => true,
-            'left_door' => true,
-            'right_door' => true,
-            'coord_x' => 2,
             'coord_y' => 1,
             'isSpawn' => false,
         ]);
@@ -210,6 +107,59 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Zona::factory()->create([
+            'id' => 2,
+            'nombre' => 'Claros del Vínculo Eterno [1-2]',
+            'imagen' => <<<EOT
+                '----------------------------------------------------------------------------------
+                |                                 ,@@@@@@,                                       |
+                |                        ,,,.   ,@@@@@@/@@,  .oo8888o.                           |
+                |                    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o                          |
+                |                    ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88                       |
+                |                    %&&%&%&/%&&%@\\@@/ /@@@88888\\88888                         |
+                |                    %&&%/ %&%%&&@@\\ V /@@' \`88\\8 88                          |
+                |                     &%\\ \` /%&'  |.|       \\ '|8'                            |
+                |                        |o|        | |         | |                              |
+                |                        |.|        | |         | |                              |
+                |                       \\ //_/,\\_//__\\__/   \\_//__/                          |
+                |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                           |
+                ----------------------------------------------------------------------------------
+            EOT,
+            'descripcion' => 'Entre la niebla del bosque, se abre un claro donde tres árboles gigantescos se alzan...',
+            'up_door' => true,
+            'down_door' => true,
+            'left_door' => true,
+            'right_door' => true,
+            'coord_x' => 1,
+            'coord_y' => 0,
+            'isSpawn' => false,
+        ]);
+
+        Zona::factory()->create([
+            'id' => 5,
+            'nombre' => 'Casa del Valle Silencioso [2-2]',
+            'imagen' => '----------------------------------------------------------------------------------
+|                                                                                |
+|                                /＾＾＾＾＾＾\                                   |
+|                              /    |    |    \                                  |
+|                            /      |    |      \                                |
+|                           /_______|____|_______\                               |
+|                           |                    |                               |
+|                           |  [□]    [□]        |                               |
+|                           |       ___          |                               |
+|                           |______|_"_|_________|                               |
+|                                                                                |
+----------------------------------------------------------------------------------',
+            'descripcion' => 'Una acogedora y sencilla casa construida con madera firme y tejas antiguas...',
+            'up_door' => true,
+            'down_door' => true,
+            'left_door' => true,
+            'right_door' => true,
+            'coord_x' => 1,
+            'coord_y' => 1,
+            'isSpawn' => false,
+        ]);
+
+        Zona::factory()->create([
             'id' => 8,
             'nombre' => 'El Santuario del Silencio [3-2]',
             'imagen' => <<<EOT
@@ -234,6 +184,56 @@ EOT,
             'right_door' => true,
             'coord_x' => 1,
             'coord_y' => 2,
+            'isSpawn' => false,
+        ]);
+
+        Zona::factory()->create([
+            'id' => 3,
+            'nombre' => 'Ruinas de Velmora [1-3]',
+            'imagen' => '----------------------------------------------------------------------------------
+|                        ccee88oo        ⢠⣤⣶⣶⣶⠋⠁                              |
+|                     C8O8O8Q8PoOb o8oo  ⠙⠻⢿⣿⣿⣶⣶⣦⣤⣄                          |
+|                  dOB69QO8PdUOpugoO9bD  ⣀⣤⣤⣤⣽⣿⣿⣿⣿⣿⡿⠇                       |
+|                 CgggbU8OU qOp qOdoUOdcb⣿⣿⣿⣿⡿⠛⠛⠋⠉                           |
+|                     6OuU  /p u gcoUodpP⢿⣿⣿⣷⣶⣶⣦⣤⣤⣄⡀  ⠀⠀⠀                   |
+|                       \\\//  /douUP ⠛⠿⢶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣷⠀                     |
+|                         \\\////     ⢀⣀⣤⣾⣿⣿⢿⣿⣿⢟⣡⣼⣿⠟                       |
+|                          |||/    ⣠⣶⣿⣿⣿⠟⣡⣾⣿⣿⣿⣿⡿⠋⠁                         |
+|                          |||   ⢰⣿⣿⠹⣿⣿⣄⠻⣿⣿⣿⠻⣿⣿⣦⣄⣀⠀⠀                      |
+|                          |||  ⢰⣿⣿⢰⣄⠹⣿⣿⢰⣄⠹⢰⣄⠹⣿⣿⣿⠟                        |
+|                   , -=-~  .-^- _, -=-~  .-^- _, -=-~  .-^- _                   |
+----------------------------------------------------------------------------------',
+            'descripcion' => 'A medida que atraviesas la espesura del bosque, la naturaleza comienza a mezclarse...',
+            'up_door' => true,
+            'down_door' => true,
+            'left_door' => true,
+            'right_door' => true,
+            'coord_x' => 2,
+            'coord_y' => 0,
+            'isSpawn' => false,
+        ]);
+
+        Zona::factory()->create([
+            'id' => 6,
+            'nombre' => 'Selva Esmeralda [2-3]',
+            'imagen' => '----------------------------------------------------------------------------------
+|                                                                                |
+|      &&&     &&&    &&&      &&&     &&&    &&&     &&&      &&&    &&&        |
+|     &&&&&   &&&&&  &&&&&    &&&&&   &&&&&  &&&&&   &&&&&    &&&&&  &&&&&       |
+|    &&&&&&& &&&&&&&&&&&&&&  &&&&&&& &&&&&&&&&&&&&& &&&&&&&  &&&&&&&&&&&&&&      |
+|      |||     |||    |||      |||     |||    |||     |||      |||    |||        |
+|      |||     |||    |||      |||     |||    |||     |||      |||    |||        |
+|      |||     |||    |||      |||     |||    |||     |||      |||    |||        |
+|                                                                                |
+|                                                                                |
+|________________________________________________________________________________|',
+            'descripcion' => 'Un denso y vibrante bosque tropical donde la luz del sol apenas logra atravesar...',
+            'up_door' => true,
+            'down_door' => true,
+            'left_door' => true,
+            'right_door' => true,
+            'coord_x' => 2,
+            'coord_y' => 1,
             'isSpawn' => false,
         ]);
 
