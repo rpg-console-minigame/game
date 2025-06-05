@@ -7,7 +7,7 @@ use App\Models\objetoInGame;
 use App\Models\User;
 use App\Models\Zona;
 use App\Models\Personaje;
-use App\Models\objetosInGame;
+use App\Models\Objeto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -253,22 +253,47 @@ class PersonajeController extends Controller
                 break;
             case "espada":
                 $this->matar("Humanoide");
+            case "arco":
+                $this->matar("Animal");
+            case "hacha":
+                $this->matar("Arbol");
+            case "pico":
+                $this->matar("Mineral");
             default:
                 return response()->json(['error' => 'Invalid object'], 400);
         }
     }
-    function matar($tipo){
-                $zona = Zona::where("id", session()->get("character")["zona_ID"])->first();
-                $enemigo = Enemigoingame::where("zona_ID", $zona->id)
-                    ->where("tipo", $tipo)
-                    ->first();
-                if ($enemigo) {
-                    $enemigo->delete();
-                    return response()->json("Enemigo eliminado", 200);
-                } else {
-                    return response()->json("Has golpeado el suelo", 501);
-                }
+    function matar($tipo) {
+    $zona = Zona::where("id", session()->get("character")["zona_ID"])->first();
+    $enemigo = Enemigoingame::where("zona_ID", $zona->id)
+        ->where("tipo", $tipo)
+        ->first();
+
+    if ($enemigo) {
+        $probabilidad = rand(1, 100);
+        $probabilidadSoltar = $enemigo['%soltar']; // Acceso correcto
+
+        if ($probabilidad <= $probabilidadSoltar) {
+            $objeto = Objeto::where("id", $enemigo->objeto_ID)->first();
+
+            if ($objeto) {
+                $objetoInGame = new ObjetoInGame(); // Asegúrate que el nombre de clase sea correcto
+                $objetoInGame->nombre = $objeto->nombre;
+                $objetoInGame->descripcion = $objeto->descripcion;
+                $objetoInGame->durabilidad = $objeto->durabilidad;
+                $objetoInGame->function_name = $objeto->function_name;
+                $objetoInGame->zona_ID = $zona->id;
+                $objetoInGame->save();
+            }
+        }
+
+        $enemigo->delete();
+        return response()->json("Enemigo eliminado", 200);
+    } else {
+        return response()->json("Has golpeado el suelo", 501);
     }
+}
+
     function curar($data){
         session_start();
         $personaje = session('character');
