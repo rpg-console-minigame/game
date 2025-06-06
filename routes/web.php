@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\EnemigoController;
 use App\Http\Controllers\ObjetoController;
 use App\Http\Controllers\TiendaController;
+use App\Models\Enemigo;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,9 @@ Route::post('/map/update', [MapController::class, 'update'])->name('update');
 Route::post('/map/createObject', [ObjetoController::class, 'create'])->name('createObject');
 Route::post('/map/editObject/{id}', [ObjetoController::class, 'edit'])->name('editObject');
 Route::post('/map/deleteObject', [ObjetoController::class, 'delete'])->name('deleteObject');
+Route::post('/map/createEnemy', [EnemigoController::class, 'create'])->name('createEnemy');
+Route::post('/map/deleteEnemy', [EnemigoController::class, 'delete'])->name('deleteEnemy');
+Route::post('/map/updateEnemy', [EnemigoController::class, 'update'])->name('updateEnemy');
 
 
 Route::post('/login', [UserController::class, 'login'])->name('loginEnter');
