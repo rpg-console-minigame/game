@@ -546,15 +546,11 @@
         </div>
 
         <div class="aside-container w-20">
-            <img src="https://via.placeholder.com/100" alt="Usuario" />
-            <h5 id="nombreUsuario">nombreUsuario</h5>
+            <h5 style="color: lightgreen;">Publicidad</h5>
             <hr />
-            <p><strong>Logros:</strong></p>
-            <ul class="text-start" style="padding-left: 20px">
-                <li>🗡 Derrotó al jefe final</li>
-                <li id="dineroPersonaje">waiting...</li>
-                <li id="nivelPersonaje">waiting...</li>
-            </ul>
+            <img src="img\100X.png" alt="Publicidad"
+                style="width: 100%; border-radius: 10px;" />
+            <p style="margin-top: 10px;">Tu anuncio aquí</p>
         </div>
     </div>
 
@@ -598,7 +594,7 @@
                             </div>
                             
                             <div class="ascii-container">
-                                <p><strong>Otro contenido:</strong></p>
+                                <p><strong>Imagen de zona:</strong></p>
                                 <pre class="ascii-art">${personaje.zona.imagen}</pre>
                             </div>
                         </div>
