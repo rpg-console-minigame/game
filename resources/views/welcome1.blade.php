@@ -16,6 +16,22 @@
             font-family: "Source Code Pro", monospace;
         }
 
+        .ascii-container {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .ascii-art {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            white-space: pre;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
         .d-flex {
             height: 100%;
             margin-top: 56px;
@@ -546,7 +562,7 @@
 
     @if (isset($personajes))
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const botonesPJ = document.querySelectorAll('.botonPJ');
                 const personajes = @json($personajes);
 
@@ -581,9 +597,9 @@
                                 <p>${personaje.zona.descripcion}</p>
                             </div>
                             
-                            <div class="col-6 ps-2">
+                            <div class="ascii-container">
                                 <p><strong>Otro contenido:</strong></p>
-                                <p>${personaje.zona.imagen}</p>
+                                <pre class="ascii-art">${personaje.zona.imagen}</pre>
                             </div>
                         </div>
 
@@ -601,20 +617,22 @@
                         </div>
                     `;
 
-                    document.querySelector('#dineroPersonaje').innerHTML = `<p class="text-white">${personaje.dinero} Gold</p>`;
-                    document.querySelector('#nivelPersonaje').innerHTML = `<p class="text-white">${personaje.nivel} lvl</p>`;
+                    document.querySelector('#dineroPersonaje').innerHTML =
+                        `<p class="text-white">${personaje.dinero} Gold</p>`;
+                    document.querySelector('#nivelPersonaje').innerHTML =
+                        `<p class="text-white">${personaje.nivel} lvl</p>`;
                 }
 
                 // Evento click en botones
                 botonesPJ.forEach(boton => {
-                    boton.addEventListener('click', function () {
+                    boton.addEventListener('click', function() {
                         const index = boton.getAttribute('data-index');
                         seleccionarPersonaje(index);
                     });
                 });
 
                 // Evento click en "CREAR"
-                document.querySelector('.crear').addEventListener('click', function () {
+                document.querySelector('.crear').addEventListener('click', function() {
                     document.querySelector('.principal').innerHTML = `
                         <div class="console-header"><h4 class="m-0">Crear</h4></div>
                         <div class="form-container">
@@ -672,7 +690,8 @@
                         <a href="{{ route('welcome') }}" class="text-reset text-decoration-none">RPG MINIGAME</a>
                     </p>
                     <p><a href="{{ route('map') }}" class="text-reset text-decoration-none">Mapa</a></p>
-                    <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre Nosotros</a></p>
+                    <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre
+                            Nosotros</a></p>
                 </div>
 
                 <!-- Sección 3: Soporte -->
