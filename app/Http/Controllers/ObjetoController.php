@@ -80,14 +80,13 @@ class ObjetoController extends Controller
             if ($existeSinPersonaje) {
                 continue;
             }
-
             $debeCopiarse = false;
 
-            if (!$objeto->last_copied_at) {
+            if (!$objeto->last_copied_at && $objeto->minutos!=0) {
                 $debeCopiarse = true;
             } else {
                 $ultimo = Carbon::parse($objeto->last_copied_at);
-                if (now()->diffInMinutes($ultimo) >= $objeto->minutos) {
+                if (now()->diffInMinutes($ultimo) >= $objeto->minutos && $objeto->minutos!=0) {
                     $debeCopiarse = true;
                 }
             }
