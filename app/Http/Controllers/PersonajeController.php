@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enemigoingame;
 use App\Models\objetoInGame;
 use App\Models\User;
 use App\Models\Zona;
 use App\Models\Personaje;
-use App\Models\objetosInGame;
+use App\Models\Objeto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -89,10 +90,23 @@ class PersonajeController extends Controller
         switch ($input) {
             case "abajo":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x + 1)->where("coord_y", $zona->coord_y)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x + 1)->where("coord_y", $zona->coord_y)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -103,10 +117,23 @@ class PersonajeController extends Controller
 
             case "arriba":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x - 1)->where("coord_y", $zona->coord_y)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x - 1)->where("coord_y", $zona->coord_y)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -116,10 +143,23 @@ class PersonajeController extends Controller
 
             case "derecha":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y + 1)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y + 1)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -129,10 +169,23 @@ class PersonajeController extends Controller
 
             case "izquierda":
                 $zona = Zona::where("id", $personaje->zona_ID)->first();
-                $zona = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y - 1)->first();
+                $zonanew = Zona::where("coord_x", $zona->coord_x)->where("coord_y", $zona->coord_y - 1)->first();
 
-                if ($zona) {
-                    $personaje->zona_ID = $zona->id;
+                if ($zonanew) {
+                    // si hay enemigos en la zona
+                    $enemigos = Enemigoingame::where("zona_ID", $zona->id)->get();
+                    if ($enemigos->count() > 0) {
+                        // quitar la vida al pj 
+                        foreach ($enemigos as $enemigo) {
+                            $personaje->HP -= $enemigo->ataque;
+                            if ($personaje->HP <= 0) {
+                                // si el personaje muere, eliminarlo y redirigir al spawn
+                                $personaje->delete();
+                                session()->forget("character");
+                            }
+                        }
+                    }
+                    $personaje->zona_ID = $zonanew->id;
                     $personaje->save();
                     session()->put("character", $personaje);
                     return response()->json("ok");
@@ -175,22 +228,22 @@ class PersonajeController extends Controller
     function use($string){
         switch ($string) {
             case 'curar10':
-                $this->curar10();
+                $this->curar(10);
                 break;
             case 'curar20':
-                $this->curar20();
+                $this->curar(20);
                 break;
             case 'curar50':
-                $this->curar50();
+                $this->curar(50);
                 break;
             case 'bolsa10':
-                $this->bolsa10();
+                $this->bolsa(10);
                 break;
             case 'bolsa20':
-                $this->bolsa20();
+                $this->bolsa(20);
                 break;
             case 'bolsa50':
-                $this->bolsa50();
+                $this->bolsa(50);
                 break;
             case "piedraHogar":
                 $this->piedraHogar();
@@ -198,54 +251,62 @@ class PersonajeController extends Controller
             case "runaVida":
                 $this->runaVida();
                 break;
+            case "espada":
+                $this->matar("Humanoide");
+            case "arco":
+                $this->matar("Animal");
+            case "hacha":
+                $this->matar("Arbol");
+            case "pico":
+                $this->matar("Mineral");
             default:
                 return response()->json(['error' => 'Invalid object'], 400);
         }
     }
+    function matar($tipo) {
+    $zona = Zona::where("id", session()->get("character")["zona_ID"])->first();
+    $enemigo = Enemigoingame::where("zona_ID", $zona->id)
+        ->where("tipo", $tipo)
+        ->first();
 
-    function curar10(){
+    if ($enemigo) {
+        $probabilidad = rand(1, 100);
+        $probabilidadSoltar = $enemigo['%soltar']; // Acceso correcto
+
+        if ($probabilidad <= $probabilidadSoltar) {
+            $objeto = Objeto::where("id", $enemigo->objeto_ID)->first();
+
+            if ($objeto) {
+                $objetoInGame = new ObjetoInGame(); // Asegúrate que el nombre de clase sea correcto
+                $objetoInGame->nombre = $objeto->nombre;
+                $objetoInGame->descripcion = $objeto->descripcion;
+                $objetoInGame->durabilidad = $objeto->durabilidad;
+                $objetoInGame->function_name = $objeto->function_name;
+                $objetoInGame->zona_ID = $zona->id;
+                $objetoInGame->save();
+            }
+        }
+
+        $enemigo->delete();
+        return response()->json("Enemigo eliminado", 200);
+    } else {
+        return response()->json("Has golpeado el suelo", 501);
+    }
+}
+
+    function curar($data){
         session_start();
         $personaje = session('character');
-        $personaje->HP += 10;
+        $personaje->HP += $data;
         if ($personaje->HP > $personaje->Max_HP) {
             $personaje->HP = $personaje->Max_HP;
         }
         $personaje->save();
     }
-    function curar20(){
+    function bolsa($data){
         session_start();
         $personaje = session('character');
-        $personaje->HP += 20;
-        if ($personaje->HP > $personaje->Max_HP) {
-            $personaje->HP = $personaje->Max_HP;
-        }
-        $personaje->save();
-    }
-    function curar50(){
-        session_start();
-        $personaje = session('character');
-        $personaje->HP += 50;
-        if ($personaje->HP > $personaje->Max_HP) {
-            $personaje->HP = $personaje->Max_HP;
-        }
-        $personaje->save();
-    }
-    function bolsa10(){
-        session_start();
-        $personaje = session('character');
-        $personaje->dinero += 10;
-        $personaje->save();
-    }
-    function bolsa20(){
-        session_start();
-        $personaje = session('character');
-        $personaje->dinero += 20;
-        $personaje->save();
-    }
-    function bolsa50(){
-        session_start();
-        $personaje = session('character');
-        $personaje->dinero += 50;
+        $personaje->dinero += $data;
         $personaje->save();
     }
     function piedraHogar(){

@@ -8,6 +8,7 @@ use App\Models\Zona;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Http\Controllers\EnemigoController;
 
 class ObjetoController extends Controller
 {
@@ -79,14 +80,13 @@ class ObjetoController extends Controller
             if ($existeSinPersonaje) {
                 continue;
             }
-
             $debeCopiarse = false;
 
-            if (!$objeto->last_copied_at) {
+            if (!$objeto->last_copied_at && $objeto->minutos!=0) {
                 $debeCopiarse = true;
             } else {
                 $ultimo = Carbon::parse($objeto->last_copied_at);
-                if (now()->diffInMinutes($ultimo) >= $objeto->minutos) {
+                if (now()->diffInMinutes($ultimo) >= $objeto->minutos && $objeto->minutos!=0) {
                     $debeCopiarse = true;
                 }
             }
@@ -109,6 +109,8 @@ class ObjetoController extends Controller
                 ]);
             }
         }
+        $enemigoController = new EnemigoController();
+        $enemigoController->copiarEnemigos();
 
         return response()->json(['status' => 'Schedule executed']);
     }

@@ -36,7 +36,8 @@ class MapController extends Controller
 
         $map = \App\Models\Zona::all();
         $items = \App\Models\Objeto::all();
-        return view("mapEditor", ["map" => $map, "items" => $items]);
+        $enemigos = \App\Models\Enemigo::all();
+        return view("mapEditor", ["map" => $map, "enemigos" => $enemigos, "items" => $items]);
     }
 
     // Crea una nueva zona del mapa
@@ -162,6 +163,8 @@ public function create(Request $request)
         $zona = \App\Models\Zona::where("id", $personaje->zona_ID)->first();
         $objetos = \App\Models\objetoInGame::where("zona_ID", $zona->id)->where("personaje_ID", null)->get();
         $inventario = \App\Models\objetoInGame::where("personaje_ID", $personaje->id)->get();
+        $personajesInZona = \App\Models\Personaje::where("zona_ID", $zona->id)->get();
+        $enemigosInZona = \App\Models\Enemigoingame::where("zona_ID", $zona->id)->get();
 
         $zonaInfo = [
             "imagen" => $zona->imagen,
@@ -177,6 +180,9 @@ public function create(Request $request)
             'isSpawn' => $zona->isSpawn,
             'objetos' => $objetos,
             'inventario' => $inventario,
+            'personajes' => $personajesInZona,
+            'enemigos' => $enemigosInZona,
+
         ];
 
         return response()->json($zonaInfo);
