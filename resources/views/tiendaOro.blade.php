@@ -7,6 +7,7 @@
   <title>Tienda de Oro - RPG Minigame</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
   <style>
     :root {
       --principal: #27c93f;
@@ -207,14 +208,34 @@
       </div>
       <div>
         <p class="mb-2 fw-bold">{{ $item->precio }} €</p>
-        <form action="{{ route('tiendaOroShow') }}" method="GET">
+        <form action="{{ route('paypal.checkout') }}" method="POST">
           @csrf
-          <button type="submit" class="buy-button">Comprar</button>
+          <button type="submit" class="buy-button" id="paypal-button-container">Comprar</button>
         </form>
       </div>
     </div>
   @endforeach
 </div>
+
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '10.00' // Precio del producto
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transacción completada por ' + details.payer.name.given_name);
+                    // Aquí puedes redirigir a una vista de éxito o guardar info en DB
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
 
 
 

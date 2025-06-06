@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ObjetoController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\TiendaController;
 use App\Mail\ContactFormMail;
 
@@ -68,4 +69,8 @@ Route::get('/sobreNosotros', function () {
 Route::get('/contacto', function () {
     return view('contacto');
 })->name('contacto');
+
+// web.php
+Route::post('/paypal/checkout', [PayPalController::class, 'paypal'])->name('paypal.checkout');
+
 
