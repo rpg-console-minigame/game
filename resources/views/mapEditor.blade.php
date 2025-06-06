@@ -570,8 +570,8 @@
                         <td>{{ $enemigo->id }}</td>
                         <td>{{ $enemigo->nombre }}</td>
                         <td>{{ $enemigo->ataque }}</td>
-                        <td>{{ $enemigo->$soltar }}</td>
-                        <td>{{ $enemigo->objeto_id }}</td>
+                        <td>{{ $enemigo->{'%soltar'} }}</td>
+                        <td>{{ $enemigo->objeto_ID }}</td>
                         <td>{{ $enemigo->zona_ID }}</td>
 
                         {{-- MODAL EDITAR ENEMIGO --}}
@@ -585,52 +585,65 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     {{-- CAMBIAR RUTA EDITAR ENEMIGO --}}
-                                    <form action="{{ route('editObject', ['id' => $enemigo->id]) }}" method="POST">
+                                    <form action="{{ route('updateEnemy', ['id' => $enemigo->id]) }}" method="POST">
                                         @csrf
                                         <div class="modal-header">
                                             <h4 class="modal-title">Editar Enemigo</h4>
-                                            <button type="button" class="close"
-                                                data-dismiss="modal">&times;</button>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
+
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="nombre">Nombre</label>
-                                                <input type="text" class="form-control form-control-lg"
-                                                    name="nombre" placeholder="Nombre"
-                                                    value="{{ $enemigo->nombre }}">
+                                                <input type="text" class="form-control form-control-lg" name="nombre" placeholder="Nombre" value="{{ $enemigo->nombre }}" required>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="tipo">Tipo</label>
+                                                <input type="text" class="form-control form-control-lg" name="tipo" placeholder="Ej: goblin, esqueleto..." value="{{ $enemigo->tipo }}" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="form-control form-control-lg" name="descripcion" placeholder="Descripción del enemigo..." required>{{ $enemigo->descripcion }}</textarea>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label for="ataque">Ataque</label>
-                                                <input type="number" class="form-control form-control-lg"
-                                                    name="ataque" placeholder="0" value="{{ $enemigo->ataque }}">
+                                                <input type="number" class="form-control form-control-lg" name="ataque" placeholder="0" value="{{ $enemigo->ataque }}" required>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="$soltar">$Soltar</label>
-                                                <input type="number" class="form-control form-control-lg"
-                                                    name="$soltar" placeholder="0" value="{{ $enemigo->$soltar }}">
+                                                <label for="%soltar">%Soltar</label>
+                                                <input type="number" class="form-control form-control-lg" name="%soltar" placeholder="Probabilidad de soltar objeto" value="{{ $enemigo->{'%soltar'} }}" required>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="objeto_id">Objeto_id</label>
-                                                <input type="number" class="form-control form-control-lg"
-                                                    name="objeto_id" placeholder="0"
-                                                    value="{{ $enemigo->$objeto_id }}">
+                                                <label for="objeto_ID">Objeto ID</label>
+                                                <input type="number" class="form-control form-control-lg" name="objeto_ID" placeholder="ID del objeto" value="{{ $enemigo->objeto_ID }}" required>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="zona_ID">Zona ID</label>
-                                                <select class="form-control form-control-lg" name="zona_ID">
+                                                <label for="zona_ID">Zona</label>
+                                                <select class="form-control form-control-lg" name="zona_ID" required>
                                                     @foreach ($map as $zona)
-                                                        <option value="{{ $zona->id }}"
-                                                            @if ($enemigo->zona_ID == $zona->id) selected @endif>
-                                                            {{ $zona->nombre }}</option>
+                                                        <option value="{{ $zona->id }}" @if ($enemigo->zona_ID == $zona->id) selected @endif>
+                                                            {{ $zona->nombre }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="minutos">Minutos</label>
+                                                <input type="number" class="form-control form-control-lg" name="minutos" placeholder="0" value="{{ $enemigo->minutos }}" required>
+                                            </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <input type="hidden" name="id" value="{{ $enemigo->id }}">
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -649,7 +662,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     {{-- CAMBIAR RUTA DELETE ENEMIGO --}}
-                                    <form action="{{ route('deleteObject') }}" method="POST">
+                                    <form action="{{ route('deleteEnemy') }}" method="POST">
                                         @csrf
                                         <div class="modal-header">
                                             <h4 class="modal-title">Eliminar enemigo</h4>
@@ -695,52 +708,72 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
 
-
                         {{-- CAMBIAR RUTA CREAR ENEMIGO --}}
-                        <form action="{{ route('createObject') }}" method="POST">
+                        <form action="{{ route('createEnemy') }}" method="POST">
                             @csrf
                             <div class="modal-header">
                                 <h4 class="modal-title">Crear enemigo</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
+
                             <div class="modal-body">
+
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control form-control-lg" name="nombre"
-                                        placeholder="Nombre" required>
+                                    <input type="text" class="form-control form-control-lg" name="nombre" placeholder="Nombre" required>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="tipo">Tipo</label>
+                                    <input type="text" class="form-control form-control-lg" name="tipo" placeholder="Ej: goblin, esqueleto..." required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción</label>
+                                    <textarea class="form-control form-control-lg" name="descripcion" placeholder="Descripción del enemigo..." required></textarea>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="ataque">Ataque</label>
-                                    <input type="number" class="form-control form-control-lg" name="ataque"
-                                        placeholder="0" required>
+                                    <input type="number" class="form-control form-control-lg" name="ataque" placeholder="0" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="%soltar">%Soltar</label>
-                                    <input type="number" class="form-control form-control-lg" name="%soltar"
-                                        placeholder="0" required>
+                                    <input type="number" class="form-control form-control-lg" name="%soltar" placeholder="Probabilidad de soltar objeto" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="objeto_id">Objeto_id</label>
-                                    <input type="number" class="form-control form-control-lg" name="objeto_id"
-                                        placeholder="Objeto_id" required>
+                                    <label for="objeto_ID">Objeto ID</label>
+                                    <input type="number" class="form-control form-control-lg" name="objeto_ID" placeholder="ID del objeto" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="zona_ID">Zona ID</label>
+                                    <label for="zona_ID">Zona</label>
                                     <select class="form-control form-control-lg" name="zona_ID" required>
                                         @foreach ($map as $zona)
                                             <option value="{{ $zona->id }}">{{ $zona->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="minutos">Minutos</label>
+                                    <input type="number" class="form-control form-control-lg" name="minutos" placeholder="0" required>
+                                </div>
+
                             </div>
+
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success">CREAR ENEMIGO</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
                             </div>
+
                         </form>
                     </div>
                 </div>
             </div>
+
         </table>
     </div>
 
