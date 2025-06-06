@@ -36,7 +36,8 @@ class MapController extends Controller
 
         $map = \App\Models\Zona::all();
         $items = \App\Models\Objeto::all();
-        return view("mapEditor", ["map" => $map, "items" => $items]);
+        $enemigos = \App\Models\Enemigo::all();
+        return view("mapEditor", ["map" => $map, "enemigos" => $enemigos, "items" => $items]);
     }
 
     // Crea una nueva zona del mapa
