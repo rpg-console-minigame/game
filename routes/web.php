@@ -71,7 +71,8 @@ Route::get('/contacto', function () {
 })->name('contacto');
 
 // web.php
-Route::get('/create/{amount}', [PayPalController::class, 'create']);
-Route::post('/complete', [PayPalController::class, 'complete']);
+Route::post('/paypal/create', [PayPalController::class, 'create']);
+Route::post('/paypal/complete', [PayPalController::class, 'complete']);
+
 
 

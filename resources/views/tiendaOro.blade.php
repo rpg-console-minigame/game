@@ -151,20 +151,32 @@
 
         paypal.Buttons({
           createOrder: function () {
-            return fetch(`/create/${amount}`)
-              .then(res => res.text());
-          },
-          onApprove: function () {
-            return fetch("/complete", {
-              method: "post",
+            return fetch("/paypal/create", {
+              method: "POST",
               headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-Token": "{{ csrf_token() }}"
-              }
+              },
+              body: JSON.stringify({ amount: amount })
+            })
+            .then(res => res.json())
+            .then(data => {
+              return data.orderID; // ✅ el backend debe devolver { orderID: '...' }
+            });
+          },
+          onApprove: function (data) {
+            return fetch("/paypal/complete", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": "{{ csrf_token() }}"
+              },
+              body: JSON.stringify({ orderID: data.orderID })
             })
             .then(res => res.json())
             .then(details => {
               alert("¡Gracias por tu compra!");
+              // Aquí podrías redirigir o actualizar la página
             });
           },
           onError: function (err) {
@@ -175,6 +187,7 @@
       });
     });
   </script>
+
 
   <!-- FOOTER -->
   <footer class="bg-dark text-light pt-5 pb-4">

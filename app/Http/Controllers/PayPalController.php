@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
@@ -34,8 +35,10 @@ class PayPalController extends Controller
      * @return string
      */
 
-    public function create(int $amount = 10): string
+    public function create(Request $request)
     {
+        $amount = $request->input('amount', 10); // Recoge el amount desde JSON
+
         $id = (string) Str::uuid();
 
         $headers = [
@@ -50,7 +53,7 @@ class PayPalController extends Controller
                 [
                     "reference_id" => $id,
                     "amount"       => [
-                        "currency_code" => "EUR", // Cambiado a EUR
+                        "currency_code" => "EUR",
                         "value"         => number_format($amount, 2, '.', ''),
                     ]
                 ]
@@ -58,10 +61,10 @@ class PayPalController extends Controller
         ];
 
         $response = Http::withHeaders($headers)
-                ->post(config('paypal.base_url') . '/v2/checkout/orders', $body);
+                        ->post(config('paypal.base_url') . '/v2/checkout/orders', $body);
 
         if ($response->failed()) {
-            throw new \Exception('Error al crear la orden PayPal: ' . $response->body());
+            return response()->json(['error' => 'Error al crear la orden PayPal'], 500);
         }
 
         $responseBody = json_decode($response->body());
@@ -69,7 +72,9 @@ class PayPalController extends Controller
         Session::put('request_id', $id);
         Session::put('order_id', $responseBody->id);
 
-        return $responseBody->id;
+        return response()->json([
+            'orderID' => $responseBody->id
+        ]);
     }
 
 
