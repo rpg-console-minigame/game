@@ -1,86 +1,93 @@
 <?php
-// app/Http/Controllers/PayPalController.php
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Api\{Amount, Item, ItemList, Payer, Payment, PaymentExecution, RedirectUrls, Transaction};
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
 class PayPalController extends Controller
 {
-    private $apiContext;
+    /**
+     * @noinspection PhpMissingReturnTypeInspection
+     */
+    
 
-    public function __construct()
+    /**
+     * @return string
+     */
+    private function getAccessToken(): string
     {
-        $this->apiContext = new ApiContext(
-            new OAuthTokenCredential(
-                config('paypal.client_id'),
-                config('paypal.secret')
-            )
-        );
+        $headers = [
+            'Content-Type'  => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Basic ' . base64_encode(config('paypal.client_id') . ':' . config('paypal.client_secret'))
+        ];
 
-        $this->apiContext->setConfig([
-            'mode' => config('paypal.mode'),
-        ]);
+        $response = Http::withHeaders($headers)
+                        ->withBody('grant_type=client_credentials','application/x-www-form-urlencoded')
+                        ->post(config('paypal.base_url') . '/v1/oauth2/token');
+
+        return json_decode($response->body())->access_token;
     }
 
-    public function checkout()
+    /**
+     * @return string
+     */
+
+    public function create(int $amount = 10): string
     {
-        $payer = new Payer();
-        $payer->setPaymentMethod("paypal");
+        $id = (string) Str::uuid();
 
-        $amount = new Amount();
-        $amount->setCurrency("USD")
-               ->setTotal(10.00); // Precio del producto
+        $headers = [
+            'Content-Type'      => 'application/json',
+            'Authorization'     => 'Bearer ' . $this->getAccessToken(),
+            'PayPal-Request-Id' => $id,
+        ];
 
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-                    ->setDescription("Compra de producto XYZ");
+        $body = [
+            "intent"         => "CAPTURE",
+            "purchase_units" => [
+                [
+                    "reference_id" => $id,
+                    "amount"       => [
+                        "currency_code" => "EUR", // Cambiado a EUR
+                        "value"         => number_format($amount, 2, '.', ''),
+                    ]
+                ]
+            ]
+        ];
 
-        $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl(route('paypal.success'))
-                     ->setCancelUrl(route('paypal.cancel'));
+        $response = Http::withHeaders($headers)
+                ->post(config('paypal.base_url') . '/v2/checkout/orders', $body);
 
-        $payment = new Payment();
-        $payment->setIntent("sale")
-                ->setPayer($payer)
-                ->setRedirectUrls($redirectUrls)
-                ->setTransactions([$transaction]);
-
-        try {
-            $payment->create($this->apiContext);
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors('Error al crear el pago: ' . $e->getMessage());
+        if ($response->failed()) {
+            throw new \Exception('Error al crear la orden PayPal: ' . $response->body());
         }
 
-        // Redirige a PayPal
-        return redirect()->away($payment->getApprovalLink());
+        $responseBody = json_decode($response->body());
+
+        Session::put('request_id', $id);
+        Session::put('order_id', $responseBody->id);
+
+        return $responseBody->id;
     }
 
-    public function success(Request $request)
+
+    /**
+     * @return mixed
+     */
+    public function complete()
     {
-        $paymentId = $request->get('paymentId');
-        $payerId = $request->get('PayerID');
+        $url = config('paypal.base_url') . '/v2/checkout/orders/' . Session::get('order_id') . '/capture';
 
-        $payment = Payment::get($paymentId, $this->apiContext);
-        $execution = new PaymentExecution();
-        $execution->setPayerId($payerId);
+        $headers = [
+            'Content-Type'  => 'application/json',
+            'Authorization' => 'Bearer ' . $this->getAccessToken(),
+        ];
 
-        try {
-            $result = $payment->execute($execution, $this->apiContext);
-            return view('paypal.success', compact('result'));
-        } catch (\Exception $e) {
-            return redirect()->route('paypal.cancel');
-        }
-    }
+        $response = Http::withHeaders($headers)
+                        ->post($url, null);
 
-    public function cancel()
-    {
-        return view('paypal.cancel');
+        return json_decode($response->body());
     }
 }
-
-?>
-

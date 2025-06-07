@@ -71,6 +71,7 @@ Route::get('/contacto', function () {
 })->name('contacto');
 
 // web.php
-Route::post('/paypal/checkout', [PayPalController::class, 'paypal'])->name('paypal.checkout');
+Route::get('/create/{amount}', [PayPalController::class, 'create']);
+Route::post('/complete', [PayPalController::class, 'complete']);
 
 
