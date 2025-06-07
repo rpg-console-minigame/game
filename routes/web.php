@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\EnemigoController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ObjetoController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\TiendaController;
-use App\Models\Enemigo;
+use App\Mail\ContactFormMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,6 @@ Route::post('/map/update', [MapController::class, 'update'])->name('update');
 Route::post('/map/createObject', [ObjetoController::class, 'create'])->name('createObject');
 Route::post('/map/editObject/{id}', [ObjetoController::class, 'edit'])->name('editObject');
 Route::post('/map/deleteObject', [ObjetoController::class, 'delete'])->name('deleteObject');
-Route::post('/map/createEnemy', [EnemigoController::class, 'create'])->name('createEnemy');
-Route::post('/map/deleteEnemy', [EnemigoController::class, 'delete'])->name('deleteEnemy');
-Route::post('/map/updateEnemy', [EnemigoController::class, 'update'])->name('updateEnemy');
 
 
 Route::post('/login', [UserController::class, 'login'])->name('loginEnter');
@@ -61,6 +59,8 @@ Route::get('/tiendaObjetos', [TiendaController::class, 'indexObjetos'])->name('t
 Route::post('/pagoRealizado', [TiendaController::class, 'showObjeto'])->name('pagoRealizado');
 Route::get('/devolver', [TiendaController::class, 'devolver'])->name('devolver');
 
+Route::post('/enviarMensaje', [ContactController::class,'index'])->name('enviarMensaje');
+
 
 Route::get('/sobreNosotros', function () {
     return view('sobreNosotros');
@@ -69,4 +69,10 @@ Route::get('/sobreNosotros', function () {
 Route::get('/contacto', function () {
     return view('contacto');
 })->name('contacto');
+
+// web.php
+Route::post('/paypal/create', [PayPalController::class, 'create']);
+Route::post('/paypal/complete', [PayPalController::class, 'complete']);
+
+
 
