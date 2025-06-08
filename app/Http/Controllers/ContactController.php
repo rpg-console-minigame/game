@@ -4,21 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ContactFormMail;
+use App\Mail\videogameMail;
+
 
 class ContactController extends Controller
 {
     public function index(Request $request)
     {
         $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message,
+            $request->input('nombre'),
+            $request->input('email'),
+            $request->input('asunto'),   
+            $request->input('mensaje')
         ];
 
-        Mail::to('aqp0001@alu.medac.es')->send(new ContactFormMail($data));
+        Mail::to('consoleminigamerpg@gmail.com')->send(
+        new videogameMail(
+            $request->input('nombre'),  
+                $request->input('email'),
+                $request->input('asunto'),  
+                $request->input('mensaje')
+        )
+);
+
 
         return back()->with('success', 'Mensaje enviado correctamente.');
     }
 }
-

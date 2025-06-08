@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto - RPG Minigame</title>
+  <title>Pago - Tienda de Oro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <style>
     :root {
       --principal: #27c93f;
@@ -47,22 +46,22 @@
       width: 100%;
     }
 
-    .contact-section {
-      max-width: 700px;
+    .payment-form {
+      max-width: 500px;
       margin: 4rem auto;
       padding: 2rem;
       background-color: #1f1f1f;
       border-radius: 10px;
     }
 
-    .form-label {
-      color: var(--principal);
-    }
-
     .form-control {
       background-color: #121212;
       border: 1px solid #333;
       color: white;
+    }
+
+    .form-label {
+      color: var(--principal);
     }
 
     button {
@@ -162,29 +161,37 @@
         </div>
     </nav>
 
-  <!-- CONTACTO -->
-  <div class="contact-section">
-    <h2 class="mb-4 text-center">📬 Contacta con Nosotros</h2>
-    <form action="{{ route('enviarMensaje') }}" method="POST">
-      @csrf
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" name="nombre" id="nombre" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Correo Electrónico</label>
-        <input type="email" name="email" id="email" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label for="asunto" class="form-label">Asunto</label>
-        <input type="text" name="asunto" id="asunto" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label for="mensaje" class="form-label">Mensaje</label>
-        <textarea name="mensaje" id="mensaje" rows="5" class="form-control" required></textarea>
-      </div>
-      <button type="submit" class="w-100">Enviar Mensaje</button>
-    </form>
+  <!-- FORMULARIO DE PAGO -->
+  <div class="payment-form">
+    <h2 class="mb-4">💳 Pago Seguro</h2>
+    <form action="{{ route('pagoRealizado') }}" method="POST">
+    @csrf
+
+    <div class="mb-3">
+        <label class="form-label">Nombre en la tarjeta</label>
+        <input type="text" name="nombre_titular" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Número de tarjeta</label>
+        <input type="text" name="numero_tarjeta" class="form-control" maxlength="19" required />
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col">
+            <label class="form-label">Expira</label>
+            <input type="text" name="expira" class="form-control" placeholder="MM/AA" required />
+        </div>
+        <div class="col">
+            <label class="form-label">CVV</label>
+            <input type="text" name="cvv" class="form-control" maxlength="4" required />
+        </div>
+    </div>
+
+    <button type="submit" class="w-100 mt-3">Pagar ahora</button>
+</form>
+
+    
   </div>
 
   <!-- FOOTER -->
