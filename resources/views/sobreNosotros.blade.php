@@ -128,7 +128,7 @@
   <section data-aos="fade-right">
     <div class="container">
       <h2 class="highlight mb-4">Nuestra Historia</h2>
-      <p>Todo comenzó en una habitación oscura, llena de cables y café. Un grupo de amigos frustrados por la falta de juegos RPG simples pero profundos decidió crear uno. Así nació *RPG Minigame*, una aventura que combina píxeles, pasión y progreso constante.</p>
+      <p>Todo comenzó en una habitación oscura, llena de cables y café. Un grupo de amigos de toda la vida frustrados por la falta de juegos RPG simples pero profundos decidió crear uno. Así nació *RPG Minigame*, una aventura que combina píxeles, pasión y progreso constante.</p>
     </div>
   </section>
 
@@ -139,29 +139,29 @@
       <div class="col">
         <div class="team-member text-center">
           <div class="icon"><i class="bi bi-controller"></i></div>
-          <h5>Alex</h5>
-          <p>Diseñador de niveles y alma creativa.</p>
+          <h5>Alejandro Jiménez Leyva</h5>
+          <p>Encargado de llevar todo hacia delante</p>
         </div>
       </div>
       <div class="col">
         <div class="team-member text-center">
           <div class="icon"><i class="bi bi-code-slash"></i></div>
-          <h5>Sara</h5>
-          <p>Desarrolladora principal. Ama el código limpio.</p>
+          <h5>Alejandro Quintero Pérez</h5>
+          <p>Encargado de Base de Datos y de los Servicios en Producción.</p>
         </div>
       </div>
       <div class="col">
         <div class="team-member text-center">
           <div class="icon"><i class="bi bi-music-note-beamed"></i></div>
-          <h5>Leo</h5>
-          <p>Compositor de música épica y sonidos envolventes.</p>
+          <h5>Antonio Jesús Reyes Vera</h5>
+          <p>Diseñador Web y encargado de la Documentación.</p>
         </div>
       </div>
       <div class="col">
         <div class="team-member text-center">
           <div class="icon"><i class="bi bi-palette-fill"></i></div>
-          <h5>Nina</h5>
-          <p>Diseñadora de arte pixelado y UI/UX.</p>
+          <h5>Alejandro Moya Montero</h5>
+          <p>Diseñadora Web.</p>
         </div>
       </div>
     </div>
