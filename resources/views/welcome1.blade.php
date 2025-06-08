@@ -545,13 +545,13 @@
             <!-- Aquí se carga dinámicamente el contenido -->
         </div>
 
-        <div class="aside-container w-20">
+        <!-- <div class="aside-container w-20">
             <h5 style="color: lightgreen;">Publicidad</h5>
             <hr />
             <img src="img\100X.png" alt="Publicidad"
                 style="width: 100%; border-radius: 10px;" />
             <p style="margin-top: 10px;">Tu anuncio aquí</p>
-        </div>
+        </div> -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -600,7 +600,7 @@
                         </div>
 
 
-                        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                        <div class=" flex-wrap justify-content-center gap-3 mt-4">
                             <form action="{{ route('play') }}" method="POST" target="_blank">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="personaje" value="${personaje.id}">
