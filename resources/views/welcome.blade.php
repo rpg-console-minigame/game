@@ -9,9 +9,13 @@
     <style>
         html {
             scroll-behavior: smooth;
+            height: 100%;
         }
 
         body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
             margin: 0;
             padding: 0;
             background: linear-gradient(rgb(25, 52, 25), rgb(143, 255, 158));
@@ -33,6 +37,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            height: 10vh;
         }
 
         nav a {
@@ -78,6 +83,7 @@
         /* Sección principal */
         main {
             padding: 5% 10%;
+            flex: 1;
         }
 
         /* Hero */
@@ -95,7 +101,7 @@
         }
 
         .dibujo img {
-            max-width: 50%;
+            max-width: 75%;
             height: auto;
         }
 
@@ -271,6 +277,35 @@
         .input-group input:focus::placeholder {
             color: black;
         }
+
+        /* FOOTER ULTIMA HORA */
+        footer {
+            background-color: #1c1a1a;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .footer-left {
+            font-weight: bold;
+        }
+
+        .footer-center a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .footer-center a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-right {
+            font-size: 0.9rem;
+        }
     </style>
 
 </head>
@@ -278,7 +313,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg px-4 py-3">
-        <div class="container-fluid">-
+        <div class="container-fluid">
             <!-- Marca a la izquierda -->
             <a href="{{ route('welcome') }}">CONSOLE MINIGAME</a>
 
@@ -310,45 +345,15 @@
         <section class="info">
             <div class="texto">
                 <h2>RPG Console Minigame, un videojuego web lleno de sorpresas.</h2>
-                <h4 style="color: black;">¡Descubre Ethereal Realms! El nuevo MMO RPG que revoluciona la fantasía online: mundo abierto
+                <h4 style="color: black;">¡Descubre Ethereal Realms! El nuevo MMO RPG que revoluciona la fantasía
+                    online: mundo abierto
                     dinámico, razas únicas, combates épicos y decisiones que forjan tu leyenda. ¿Estás listo?</h4>
                 <button data-bs-toggle="modal" data-bs-target="#registerModal">Registro</button>
             </div>
             <div class="dibujo">
-                <img src="logo.png" alt="">
+                <img src="logo.webp" alt="">
             </div>
         </section>
-
-        {{-- <div id="miSlider" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#miSlider" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#miSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#miSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://via.placeholder.com/1200x500?text=Imagen+1" class="d-block w-100" alt="Imagen 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/1200x500?text=Imagen+2" class="d-block w-100" alt="Imagen 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/1200x500?text=Imagen+3" class="d-block w-100" alt="Imagen 3">
-                </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#miSlider" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#miSlider" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
-        </div> --}}
-
 
     </main>
 
@@ -376,8 +381,7 @@
                             </div>
                             <div class="input-group">
                                 <span>user@password:~$</span>
-                                <input type="password" class="form-control" placeholder="Contraseña"
-                                    name="password">
+                                <input type="password" class="form-control" placeholder="Contraseña" name="password">
                             </div>
                             <button type="submit" class="w-100">Acceder</button>
                         </form>
@@ -445,9 +449,6 @@
                 <!-- Sección 2: Navegación -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Navegación</h6>
-                    <p>
-                        <a href="{{ route('welcome') }}" class="text-reset text-decoration-none">RPG MINIGAME</a>
-                    </p>
                     <p><a href="{{ route('map') }}" class="text-reset text-decoration-none">Mapa</a></p>
                     <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre Nosotros</a></p>
                 </div>
@@ -458,22 +459,15 @@
                     <p>
                         <a href="{{ route('contacto') }}" class="text-reset text-decoration-none">Contacto</a>
                     </p>
-                    <!-- <p>
-                        <a href="#" class="text-reset text-decoration-none">Preguntas Frecuentes</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Términos y condiciones</a>
-                    </p> -->
                 </div>
 
                 <!-- Sección 4: Contacto -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Contacto</h6>
                     <p>
-                        <i class="bi bi-envelope-fill me-2"></i> soporte@rpgminigame.com
+                        <i class="bi bi-envelope-fill me-2"></i>consoleminigamerpg@gmail.com
                     </p>
                     <p><i class="bi bi-github me-2"></i> github.com/rpgminigame</p>
-                    <p><i class="bi bi-globe me-2"></i> www.rpgminigame.com</p>
                 </div>
             </div>
 
@@ -487,14 +481,8 @@
                         © 2025 RPG Minigame. Todos los derechos reservados.
                     </p>
                 </div>
-                <div class="col-md-5 col-lg-4">
-                    <div class="text-center text-md-end">
-                        <a href="#" class="text-reset me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-reset me-3"><i class="bi bi-discord"></i></a>
-                        <a href="#" class="text-reset me-3"><i class="bi bi-youtube"></i></a>
-                    </div>
                 </div>
-            </div>
+        </div>
         </div>
     </footer>
 
