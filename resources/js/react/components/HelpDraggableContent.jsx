@@ -9,6 +9,7 @@ const HelpDraggableContent = () => {
         -"info" : muestra la información del personaje              
         -"arriba/abajo/izquierda/derecha" : mueve al personaje
         -"tomar (item)" : toma el item del mapa y lo agrega al inventario
+        -"usar (item)" : usa el item del inventario
         -"inventario" : muestra los objetos que tienes en tu inventario
         `}
       </pre>
