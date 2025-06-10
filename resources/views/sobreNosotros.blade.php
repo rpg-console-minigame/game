@@ -1,185 +1,291 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sobre Nosotros - RPG Minigame</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Conoce al equipo detrás de RPG Minigame, nuestra historia y misión. Un juego RPG clásico con un toque moderno.">
+    <title>Sobre Nosotros - RPG Minigame | Conoce nuestro equipo e historia</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com">
 
-  <style>
-    :root {
-      --principal: #27c93f;
-    }
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #121212;
-      color: #e0e0e0;
-      font-family: "Source Code Pro", monospace;
-    }
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    </noscript>
 
-    nav a, footer a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #e0e0e0;
-      font-weight: bold;
-      position: relative;
-      transition: color 0.3s;
-    }
+    <style>
+        :root {
+            --principal: rgb(143, 255, 158);
+            --dark-bg: rgb(25, 52, 25);
+            --light-bg: rgb(143, 255, 158);
+            --text-light: whitesmoke;
+            --card-bg: #1f1f1f;
+            --transition-time: 0.3s;
+        }
 
-    nav a::after, footer a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -3px;
-      background-color: var(--principal);
-      transition: width 0.3s ease-in-out;
-    }
+        html {
+            scroll-behavior: smooth;
+            height: 100%;
+        }
 
-    nav a:hover, footer a:hover {
-      color: var(--principal);
-    }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(var(--dark-bg), var(--light-bg));
+            background-attachment: fixed;
+            color: var(--text-light);
+            font-family: "Source Code Pro", monospace;
+            line-height: 1.6;
+        }
 
-    nav a:hover::after, footer a:hover::after {
-      width: 100%;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    section {
-      padding: 4rem 1rem;
-    }
+        /* Barra de navegación */
+        nav {
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 10vh;
+            min-height: fit-content;
+        }
 
-    .highlight {
-      color: var(--principal);
-    }
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: whitesmoke;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s;
+        }
 
-    .team-member {
-      background-color: #1f1f1f;
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: transform 0.3s ease;
-    }
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            left: 0;
+            bottom: -3px;
+            background-color: whitesmoke;
+            transition: width 0.3s ease-in-out;
+        }
 
-    .team-member:hover {
-      transform: translateY(-8px);
-    }
+        nav a:hover::after {
+            width: 100%;
+        }
 
-    .icon {
-      font-size: 2rem;
-      color: var(--principal);
-      margin-bottom: 1rem;
-    }
+        button {
+            padding: 6px 16px;
+            border: 2px solid var(--principal);
+            border-radius: 24px;
+            background-color: var(--principal);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    @media (max-width: 768px) {
-      footer .row > div {
-        text-align: center !important;
-        margin-bottom: 1.5rem;
-      }
-    }
-  </style>
+        button:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--principal);
+        }
+
+        .highlight {
+            color: var(--principal);
+            font-weight: bold;
+        }
+
+        /* Team Cards */
+        .team-member {
+            height: 100%;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all var(--transition-time) ease;
+            border: 1px solid rgba(143, 255, 158, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(143, 255, 158, 0.3);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            color: var(--principal);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            margin-top: auto;
+        }
+
+        footer a {
+            transition: color var(--transition-time);
+        }
+
+        footer a:hover {
+            color: var(--principal) !important;
+            text-decoration: none;
+        }
+
+        .social-icon {
+            font-size: 1.2rem;
+            transition: transform var(--transition-time);
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: var(--principal) !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+
+            .navbar {
+                height: auto;
+            }
+
+            footer .row>div {
+                text-align: center !important;
+                margin-bottom: 2rem;
+            }
+
+            .section-title::after {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-<body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+<body>
+    <nav class="navbar navbar-expand-lg px-4 py-3">
+
         <div class="container-fluid">
-            <!-- Título -->
-            <a class="navbar-brand fw-bold" href="{{ route('welcome') }}">RPG MINIGAME</a>
+            <!-- Marca a la izquierda -->
+            <a href="{{ route('welcome') }}">CONSOLE MINIGAME</a>
 
             <!-- Hamburguesa a la derecha -->
-            <button class="navbar-toggler ms-auto border-success" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Enlaces -->
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Documentacion</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sobreNosotros') }}">Sobre nosotros</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Mis logros</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
-                    </li>
+            <!-- Menú colapsable -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="{{ route('sobreNosotros') }}">Sobre nosotros</a></li>
+                    <!-- <li class="nav-item"><a href="#">Mis logros</a></li> -->
+                    <li class="nav-item"><a href="{{ route('contacto') }}">Contacto</a></li>
+                    <li class="nav-item"><a href="{{ route('map') }}">Mapa</a></li>
+                    <li class="nav-item"><a href="{{ route('tiendaOro') }}">Tienda</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-  <!-- SOBRE NOSOTROS -->
-  <section data-aos="fade-up">
-    <div class="container text-center">
-      <h1 class="mb-4"><span class="highlight">Sobre Nosotros</span></h1>
-      <p class="lead">RPG Minigame nació de una pasión por los juegos retro y la narrativa inmersiva. Somos un equipo pequeño con grandes sueños, que busca traer de vuelta la magia de los RPG clásicos... con un toque moderno.</p>
-    </div>
-  </section>
-
-  <section data-aos="fade-right">
-    <div class="container">
-      <h2 class="highlight mb-4">Nuestra Historia</h2>
-      <p>Todo comenzó en una habitación oscura, llena de cables y café. Un grupo de amigos de toda la vida frustrados por la falta de juegos RPG simples pero profundos decidió crear uno. Así nació *RPG Minigame*, una aventura que combina píxeles, pasión y progreso constante.</p>
-    </div>
-  </section>
-
-  <section>
-  <div class="container">
-    <h2 class="highlight mb-4 text-center">Nuestro Equipo</h2>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-      <div class="col">
-        <div class="team-member text-center">
-          <div class="icon"><i class="bi bi-controller"></i></div>
-          <h5>Alejandro Jiménez Leyva</h5>
-          <p>Encargado de llevar todo hacia delante</p>
-        </div>
-      </div>
-      <div class="col">
-        <div class="team-member text-center">
-          <div class="icon"><i class="bi bi-code-slash"></i></div>
-          <h5>Alejandro Quintero Pérez</h5>
-          <p>Encargado de Base de Datos y de los Servicios en Producción.</p>
-        </div>
-      </div>
-      <div class="col">
-        <div class="team-member text-center">
-          <div class="icon"><i class="bi bi-music-note-beamed"></i></div>
-          <h5>Antonio Jesús Reyes Vera</h5>
-          <p>Diseñador Web y encargado de la Documentación.</p>
-        </div>
-      </div>
-      <div class="col">
-        <div class="team-member text-center">
-          <div class="icon"><i class="bi bi-palette-fill"></i></div>
-          <h5>Alejandro Moya Montero</h5>
-          <p>Diseñadora Web.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" data-aos="fade-up">
+            <div class="container text-center py-5">
+                <h1 class="display-4 mb-4"><span class="highlight text-light">Sobre Nosotros</span></h1>
+                <p class="lead fs-4">RPG Minigame no es solo un juego; es una declaración de amor a los clásicos. Nació
+                    de la pasión por los juegos retro, las tardes de consola compartida y las historias que nos hacían
+                    soñar. Somos un equipo pequeño, sí, pero con una visión tan grande como el universo que estamos
+                    creando.
+                </p>
+            </div>
+        </section>
 
 
-  <section data-aos="fade-up">
-    <div class="container text-center">
-      <h2 class="highlight mb-4">Nuestra Misión</h2>
-      <p>Crear un universo donde cada jugador sienta que su historia importa.</p>
-      <h2 class="highlight mt-5 mb-4">Nuestra Visión</h2>
-      <p>Revolucionar los minijuegos RPG y construir una comunidad vibrante alrededor de ellos.</p>
-    </div>
-  </section>
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="team-member text-center">
+                            <div class="icon"><i class="bi bi-controller"></i></div>
+                            <h4>Alejandro Jiménez Leyva</h4>
+                            <p class="mb-0">Líder del proyecto. Encargado del backend y peticiones a la API
+                                desarrollo.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="team-member text-center">
+                            <div class="icon"><i class="bi bi-code-slash"></i></div>
+                            <h4>Alejandro Quintero Pérez</h4>
+                            <p class="mb-0">Encargado de la base de datos y subida a producción.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="team-member text-center">
+                            <div class="icon"><i class="bi bi-palette-fill"></i></div>
+                            <h4>Antonio Jesús Reyes Vera</h4>
+                            <p class="mb-0">Diseñador Web, encargado de la Documentación.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="team-member text-center">
+                            <div class="icon"><i class="bi bi-palette-fill"></i></div>
+                            <h4>Alejandro Moya Montero</h4>
+                            <p class="mb-0">Diseñador UI/UX. Responsable de bocetos y paleta de colores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-light pt-5 pb-4">
+
+
+    <footer class="bg-dark text-light pt-5 pb-4">
         <div class="container text-md-left">
             <div class="row text-md-left">
                 <!-- Sección 1: Logo y descripción -->
@@ -196,11 +302,9 @@
                 <!-- Sección 2: Navegación -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Navegación</h6>
-                    <p>
-                        <a href="{{ route('welcome') }}" class="text-reset text-decoration-none">RPG MINIGAME</a>
-                    </p>
                     <p><a href="{{ route('map') }}" class="text-reset text-decoration-none">Mapa</a></p>
-                    <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre Nosotros</a></p>
+                    <p><a href="{{ route('sobreNosotros') }}" class="text-reset text-decoration-none">Sobre
+                            Nosotros</a></p>
                 </div>
 
                 <!-- Sección 3: Soporte -->
@@ -209,22 +313,14 @@
                     <p>
                         <a href="{{ route('contacto') }}" class="text-reset text-decoration-none">Contacto</a>
                     </p>
-                    <!-- <p>
-                        <a href="#" class="text-reset text-decoration-none">Preguntas Frecuentes</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset text-decoration-none">Términos y condiciones</a>
-                    </p> -->
                 </div>
 
                 <!-- Sección 4: Contacto -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 fw-bold">Contacto</h6>
-                    <p>
-                        <i class="bi bi-envelope-fill me-2"></i> soporte@rpgminigame.com
+                    <p></i>consoleminigamerpg@gmail.com
                     </p>
-                    <p><i class="bi bi-github me-2"></i> github.com/rpgminigame</p>
-                    <p><i class="bi bi-globe me-2"></i> www.rpgminigame.com</p>
+                    <p>github.com/rpgminigame</p>
                 </div>
             </div>
 
@@ -238,25 +334,36 @@
                         © 2025 RPG Minigame. Todos los derechos reservados.
                     </p>
                 </div>
-                <div class="col-md-5 col-lg-4">
-                    <div class="text-center text-md-end">
-                        <a href="#" class="text-reset me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-reset me-3"><i class="bi bi-discord"></i></a>
-                        <a href="#" class="text-reset me-3"><i class="bi bi-youtube"></i></a>
-                    </div>
-                </div>
             </div>
+        </div>
         </div>
     </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 800,
-      once: true
-    });
-  </script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-out-quad'
+            });
+
+            // Add scroll effect to navbar
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.height = '70px';
+                    navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                } else {
+                    navbar.style.height = '80px';
+                    navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
