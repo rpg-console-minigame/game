@@ -38,6 +38,7 @@
             top: 0;
             z-index: 1000;
             height: 10vh;
+            min-height: fit-content;
         }
 
         nav a {
